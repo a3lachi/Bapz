@@ -8,5 +8,6 @@ router.register(r'bapz', views.BapzView, 'bapz')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/bapz', views.BapzView.as_view({'get': 'list'})),
+    path('api/bapz/<str:category>/', views.BapzCatView.as_view() ),
 ]

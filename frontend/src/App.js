@@ -11,7 +11,7 @@ import {
 
 
 import Home from './pages/Home';
-
+import ProductsPage from './pages/ProductsPage'
 
 
 const App = () => {
@@ -22,6 +22,9 @@ const App = () => {
     <Router>
       <Routes>
           <Route exact path="/"  element={<Home />} />
+      </Routes>
+      <Routes>
+          <Route path="/apparel/:category"  element={<ProductsPage />} />
       </Routes>
 
     </Router>

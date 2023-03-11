@@ -28,6 +28,7 @@ const Left = styled.div`
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
+    margin-right:10px;
     ${mobile({ display: "none" })}
 `;
 
@@ -35,7 +36,6 @@ const SearchContainer = styled.div`
     border: 0.5px solid lightgray;
     display: flex;
     align-items: center;
-    margin-left: 25px;
     padding: 5px;
 
 `;

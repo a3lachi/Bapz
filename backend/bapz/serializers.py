@@ -4,4 +4,4 @@ from .models import Bapz
 class BapzSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bapz
-        fields = ('productname', 'price', 'color', 'size')
+        fields = ('productname', 'category','src','price', 'color', 'size')

@@ -1,42 +1,39 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
+import Product from './Product';
+
+const Container = styled.div`
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+`;
 
 
-const Productz = styled.div`
-    width:100%;
-    margin:0 auto;
-    height: 300px;
-`
-
-
-const Product = styled.div `
-    position:flex;
-    outline : solid;
-    width:100%
-`
 
 
 const Products = ({cat, filters, sort}) =>{
     
     const [data , setData] = useState([])
     const [fetched , setFetched ] = useState([])
-  
+    
     useEffect(()=>{
         axios
-            .get("/api/bapz/")
+            .get(
+                cat 
+                ? `/api/bapz/${cat}`
+                : "/api/bapz")
             .then((res) => setData(res.data))
             .then(setFetched(1))
             .catch((err) => console.log(err));
     }, [fetched])
     
-    if(data[0]) {
+    if(data) {
         return(
-            <Productz className="row" >
-                <Product className="col">
-                    Bapzzzssss {data[0].price}
-                </Product>
-            </Productz>
+            <Container className="row" >
+                {data.slice(0,8).map((item,index) => { return <Product key={index} item={item} /> } )}
+            </Container>
 
         ) 
     }
