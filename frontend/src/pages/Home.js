@@ -1,5 +1,10 @@
 import Navbar from '../components/Navbar';
 import Categories from '../components/Categories';
+import Products from '../components/Products';
+import Slider from '../components/Slider';
+import Announcement from '../components/Announcement';
+import Newsletter from '../components/Newsletter';
+import Footer from '../components/Footer';
 
 
 
@@ -8,9 +13,14 @@ import Categories from '../components/Categories';
 
 const Home = () => {
     return (
-        <div>
+        <div className='col'>
             <Navbar />
+            <Slider />
             <Categories />
+            <Products />
+            <Announcement />
+            <Newsletter/>
+            <Footer />
         </div>
     )
 }
