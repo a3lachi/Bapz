@@ -1,35 +1,27 @@
+import { width } from '@mui/system';
 import React from 'react';
 import styled from "styled-components";
 
 
 const Container = styled.div`
-    border:solid;
-    height:300px;
+    height:500px;
+    margin-top:30px;
     width:100%
     position:flex;
+    justify-content: center;
+
 `
-const sliderItems = [{
-    id: 1,
-    img: "https://i.ibb.co/cXFnLLV/3.png",
-    title: "SUMMER SALE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "c5eee8",
-},
-{
-    id: 2,
-    img: "https://i.ibb.co/DG69bQ4/2.png",
-    title: "AUTUMN COLLECTION",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "f8e0e0",
-},
-{
-    id: 3,
-    img: "https://i.ibb.co/cXFnLLV/3.png",
-    title: "LOUNGEWEAR LOVE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "cfc6da",
-},
-];
+
+const Image = styled.img`
+    height: 500px;
+    display: flex;
+    
+`
+
+const Separator = styled.div `
+    width:30px;
+    display: flex;
+`
 
 
 
@@ -39,7 +31,11 @@ const Slider = () => {
 
 
     return (
-        <Container className='row'>Slider</Container>
+        <Container className='row'>
+            <Image src='/IMG_8591.jpg'/>
+            <Separator />
+            <Image src='/IMG_0005.JPG' />
+        </Container>
     )
 }
 

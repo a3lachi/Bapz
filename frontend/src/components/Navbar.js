@@ -91,7 +91,7 @@ const Navbar = () => {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>Bapz</Logo>
+                    <Logo>ALL-3</Logo>
                 </Center>
                 <Right>
                     <MenuItem>REGISTER</MenuItem>
