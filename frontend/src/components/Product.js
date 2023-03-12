@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {useLocation} from "react-router-dom";
+
 
 
 const Info = styled.div`
@@ -12,7 +14,7 @@ const Info = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
   z-index: 3;
   display: flex;
   align-items: center;
@@ -42,7 +44,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
+  background-color: rgb(89,100,54);
   position: relative;
   &:hover ${Text}{
     opacity: 1;
@@ -77,30 +79,39 @@ const Icon = styled.div`
 `;
 
 const Product = ({item}) => {
-    return (
-        <Container>
-          <Text>{item.productname}</Text>
-            <Image src ={item.src} />
-            
-            <Info>
-                <Icon>
-                    <ShoppingCartOutlined/>
+  const location = useLocation();
+  const name = location.pathname.split("/")
+  var too ="brr"
+  if (name.length>2) {
+    too =  item.productname ;
+  }
+  else {
+    too =  "apparel/" + item.category + "/" + item.productname ;
+  }
+  return (
+      <Container>
+        <Text>{item.productname}</Text>
+          <Image src ={item.src} />
+          
+          <Info>
+              <Icon>
+                  <ShoppingCartOutlined/>
+              </Icon>
+              <Link to={too}>
+                <Icon > 
+                      <SearchOutlined/>
                 </Icon>
-                <Link to={"apparel/"+item.category+"/"+item.productname}>
-                  <Icon > 
-                        <SearchOutlined/>
-                  </Icon>
-                </Link>
-                
-                <Icon>
-                    <FavoriteBorderOutlined/>
-                </Icon>
-                
-            </Info>   
-            
-        </Container>
-        
-    )
+              </Link>
+              
+              <Icon>
+                  <FavoriteBorderOutlined/>
+              </Icon>
+              
+          </Info>   
+          
+      </Container>
+      
+  )
 }
 
 export default Product ;

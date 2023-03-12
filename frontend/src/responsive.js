@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { useEffect } from 'react';
 
 export const mobile = (props) => {
     return css `
@@ -16,3 +17,5 @@ export const tablet = (props) => {
     }
   `;
 };
+
+

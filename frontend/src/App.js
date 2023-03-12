@@ -14,7 +14,6 @@ import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage'
 import Product from './pages/Product'
 
-
 const App = () => {
 
 

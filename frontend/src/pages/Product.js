@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Add, Remove } from '@mui/icons-material';
 import styled from 'styled-components';
 import Announcement from '../components/Announcement';
+import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
@@ -140,27 +141,12 @@ const Product = () => {
     
   
   const product = data[0]
-    // const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
 
   const colorz= ['red','blue','green']
 
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //   const getProduct = async () => {
-    //     try{
-    //         const res = await publicRequest.get("/products/find/"+id);
-    //         setProduct(res.data);
-    //     }catch(err){
-
-    //     }
-    //   }
-    //   getProduct();
-    // },[id]);
 
     const handleQuantity = (type) => {
       if(type === "dec"){
@@ -179,11 +165,11 @@ const Product = () => {
     
     if(product) {
       const productSize = product.size.split(',') 
-      console.log("ha smyaaa ", productSize)
       return (
           <Container>
               <Navbar/>
               <Announcement/>
+              <Categories />
               <Wrapper>
                   <ImgContainer>
                       <Image src={product.src} />
