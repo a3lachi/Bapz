@@ -29,10 +29,16 @@ const Products = ({cat, filters, sort}) =>{
             .catch((err) => console.log(err));
     }, [fetched])
     
+    
+    
+
     if(data) {
         return(
-            <Container className="row" >
-                {data.slice(0,8).map((item,index) => { return <Product key={index} item={item} /> } )}
+            <Container id='brr' className="row">
+                {cat 
+                ? data.map((item,index) => { return <Product key={index} item={item} /> })
+                : data.slice(0,8).map((item,index) => { return <Product key={index} item={item} /> } )}
+                
             </Container>
 
         ) 

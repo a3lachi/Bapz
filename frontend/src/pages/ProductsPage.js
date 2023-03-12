@@ -17,8 +17,6 @@ const ProductPage = () => {
             <Announcement />
             <Navbar/>
             <Products cat={category} />
-            <div>produccczzz of {category}</div>
-
             <Newsletter />
             <Footer />
         </div>

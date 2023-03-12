@@ -75,21 +75,50 @@ const Text = styled.div`
     cursor: pointer;
     text-align:center;
 `;
+const Pradact = ({name,cat}) => {
+  return (
+    <div>
+      BRRRRRRR
+    </div>
+  )
+}
+
+
+function empty(element) {
+  while(element.firstElementChild) {
+     element.firstElementChild.remove();
+  }
+}
+
+const goto = (e) => {
+  var ha = document.getElementById('brr')
+  console.log(e.target.img)
+  // empty(ha)
+  empty(ha)
+  // ha.innerHTML = ""
+
+
+  var tki = Pradact('grrr')
+  if (tki)
+    ha.append(tki)
+
+
+}
 
 
 const Product = ({item}) => {
 
     return (
-        <Container>
+        <Container onClick={goto}>
             <Circle />
             <Image src ={item.src} />
             <Info>
                 <Icon>
                     <ShoppingCartOutlined/>
                 </Icon>
-                <Icon>
-                    <Link to={`/product/${item.color}`}>
-                    <SearchOutlined/>
+                <Icon >
+                    <Link to="/apparel/">
+                      <SearchOutlined/>
                     </Link>
                 </Icon>
                 <Icon>
