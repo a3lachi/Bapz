@@ -16,7 +16,6 @@ const Container = styled.div`
 const Products = ({cat, filters, sort}) =>{
     
     const [data , setData] = useState([])
-    const [fetched , setFetched ] = useState([])
     
     useEffect(()=>{
         axios
@@ -25,9 +24,8 @@ const Products = ({cat, filters, sort}) =>{
                 ? `/api/bapz/${cat}`
                 : "/api/bapz")
             .then((res) => setData(res.data))
-            .then(setFetched(1))
             .catch((err) => console.log(err));
-    }, [fetched])
+    }, [])
     
     
     

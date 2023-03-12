@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import {Link} from 'react-router-dom';
-import { Search, ShoppingCartOutlined } from '@mui/icons-material';
-import { Badge } from '@mui/material';
+import { Opacity, Search, ShoppingCartOutlined } from '@mui/icons-material';
+import { Badge, rgbToHex } from '@mui/material';
+import { red } from '@mui/material/colors';
 
 
 
@@ -72,6 +73,12 @@ const MenuItem = styled.div`
     ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
+const styleLink = {
+    textDecoration: "none",
+    color: "#874800" ,
+    
+}
+
 
 const Navbar = () => {
 
@@ -91,7 +98,9 @@ const Navbar = () => {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>ALL-3</Logo>
+                    <Link style={styleLink} to='/'>
+                        <Logo>ALL-3</Logo>
+                    </Link>
                 </Center>
                 <Right>
                     <MenuItem>REGISTER</MenuItem>

@@ -24,7 +24,7 @@ const Text = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 10%;
+    top: 3%;
     display: flex;
     justify-content: center;
     transition: all 0.5s ease;
@@ -76,47 +76,7 @@ const Icon = styled.div`
   }
 `;
 
-
-const Pradact = ({name,cat}) => {
-  return (
-    <div>
-      BRRRRRRR
-    </div>
-  )
-}
-
-
-function empty(element) {
-  while(element.firstElementChild) {
-     element.firstElementChild.remove();
-  }
-}
-
-const goto = (e) => {
-  var ha = document.getElementById('brr')
-  console.log(e.target.img)
-  // empty(ha)
-  empty(ha)
-  // ha.innerHTML = ""
-
-
-  var tki = Pradact('grrr')
-  if (tki)
-    ha.append(tki)
-
-
-}
-
-
-
-
 const Product = ({item}) => {
-    let navigate = useNavigate(); 
-    const routeChange = () =>{ 
-      let path = `newPath`; 
-      navigate(path);
-    }
-
     return (
         <Container>
           <Text>{item.productname}</Text>
@@ -126,10 +86,11 @@ const Product = ({item}) => {
                 <Icon>
                     <ShoppingCartOutlined/>
                 </Icon>
-                
-                <Icon onClick={goto} > 
-                      <SearchOutlined/>
-                </Icon>
+                <Link to={"apparel/"+item.category+"/"+item.productname}>
+                  <Icon > 
+                        <SearchOutlined/>
+                  </Icon>
+                </Link>
                 
                 <Icon>
                     <FavoriteBorderOutlined/>

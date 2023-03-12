@@ -12,6 +12,7 @@ import {
 
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage'
+import Product from './pages/Product'
 
 
 const App = () => {
@@ -25,6 +26,9 @@ const App = () => {
       </Routes>
       <Routes>
           <Route path="/apparel/:category"  element={<ProductsPage />} />
+      </Routes>
+      <Routes>
+          <Route path="/apparel/:category/:productname"  element={<Product />} />
       </Routes>
 
     </Router>
