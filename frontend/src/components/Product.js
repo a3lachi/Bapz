@@ -1,7 +1,8 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Info = styled.div`
@@ -11,13 +12,26 @@ const Info = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
   cursor: pointer;
+`;
+const Text = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 10%;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    text-align:center;
+    opacity: 0;
+    z-index:2
 `;
 
 const Container = styled.div`
@@ -30,22 +44,19 @@ const Container = styled.div`
   justify-content: center;
   background-color: #f5fbfd;
   position: relative;
+  &:hover ${Text}{
+    opacity: 1;
+    z-index:2
+  }
   &:hover ${Info}{
     opacity: 1;
   }
 `;
 
-const Circle = styled.div`
-  width: 270px;
-  height: 270px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`;
 
 const Image = styled.img`
   height: 75%;
-  z-index: 2;
+  z-index: 1;
 `;
 
 const Icon = styled.div`
@@ -61,20 +72,11 @@ const Icon = styled.div`
   &:hover {
     background-color: #e9f5f5;
     transform: scale(1.2);
+    z-index:5
   }
 `;
 
-const Text = styled.div`
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 10%;
-    display: flex;
-    justify-content: center;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    text-align:center;
-`;
+
 const Pradact = ({name,cat}) => {
   return (
     <div>
@@ -106,25 +108,33 @@ const goto = (e) => {
 }
 
 
+
+
 const Product = ({item}) => {
+    let navigate = useNavigate(); 
+    const routeChange = () =>{ 
+      let path = `newPath`; 
+      navigate(path);
+    }
 
     return (
-        <Container onClick={goto}>
-            <Circle />
+        <Container>
+          <Text>{item.productname}</Text>
             <Image src ={item.src} />
+            
             <Info>
                 <Icon>
                     <ShoppingCartOutlined/>
                 </Icon>
-                <Icon >
-                    <Link to="/apparel/">
+                
+                <Icon onClick={goto} > 
                       <SearchOutlined/>
-                    </Link>
                 </Icon>
+                
                 <Icon>
                     <FavoriteBorderOutlined/>
                 </Icon>
-                <Text>{item.productname}</Text>
+                
             </Info>   
             
         </Container>
