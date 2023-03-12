@@ -9,6 +9,7 @@ import { red } from '@mui/material/colors';
 
 const Container = styled.div`
     height: 60px;
+    margin-bottom:15px;
     ${mobile({ height: "50px" })}
 `;
 
@@ -75,8 +76,7 @@ const MenuItem = styled.div`
 
 const styleLink = {
     textDecoration: "none",
-    color: "#874800" ,
-    
+    color: "#874800" ,    
 }
 
 

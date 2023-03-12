@@ -10,4 +10,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/bapz', views.BapzView.as_view({'get': 'list'})),
     path('api/bapz/<str:category>/', views.BapzCatView.as_view() ),
+    path('api/bapz/<str:category>/<str:name>', views.BapzProduct.as_view() ),
 ]

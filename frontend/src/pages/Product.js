@@ -10,6 +10,8 @@ import {useLocation} from "react-router-dom";
 // import { addProduct } from '../redux/cartRedux';
 // import { useDispatch } from 'react-redux';
 
+import axios from 'axios'
+
 
 const Container = styled.div``;
 
@@ -123,14 +125,28 @@ const Button = styled.button`
 
 const Product = () => {
 
-    const location = useLocation();
-    const id = location.pathname.split("/")[2];
+  const [data , setData] = useState([])
+  const location = useLocation();
+  const name = location.pathname.split("/")[3];
 
-    const [product, setProduct] = useState({});
-    const [quantity, setQuantity] = useState(1);
+  
+  
+  useEffect(()=>{
+      axios
+          .get(`/api/bapz/product/${name}`)
+          .then((res) => setData(res.data))
+          .catch((err) => console.log(err));
+  }, [])
+    
+  
+  const product = data[0]
+    // const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
 
-    const [color, setColor] = useState("");
-    const [size, setSize] = useState("");
+  const colorz= ['red','blue','green']
+
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
 
     // const dispatch = useDispatch();
 
@@ -160,57 +176,62 @@ const Product = () => {
       // dispatch(addProduct({...product, quantity, color, size}));
     };
 
-    return (
-        <Container>
-            <Navbar/>
-            <Announcement/>
-            <Wrapper>
-                <ImgContainer>
-                    <Image src={product.img} />
-                </ImgContainer>
-                <InfoContainer>
-                    <Title>{product.title}</Title>
-                    <Desc>
-                        {product.desc}
-                    </Desc>
-                    <Price>$ {product.price}</Price>
-                    <FilterContainer>
-                        <Filter>
-                            <FilterTitle>Color</FilterTitle>
-                            {product.color?.map((color) => (
-                              <FilterColor 
-                                color= {color} 
-                                key={color} 
-                                onClick={()=>setColor(color)}
-                              />
-                            ))}
-                            
-                        </Filter>
-                        <Filter>
-                            <FilterTitle>Size</FilterTitle>
-                            <FilterSize onChange={(e)=>setSize(e.target.value)}>
-                              {product.size?.map((s)=>(
-                                <FilterSizeOption key={s}>
-                                  {s}
-                                </FilterSizeOption>
+    
+    if(product) {
+      const productSize = product.size.split(',') 
+      console.log("ha smyaaa ", productSize)
+      return (
+          <Container>
+              <Navbar/>
+              <Announcement/>
+              <Wrapper>
+                  <ImgContainer>
+                      <Image src={product.src} />
+                  </ImgContainer>
+                  <InfoContainer>
+                      <Title>{product.productname}</Title>
+                      <Desc>
+                          {product.desc}
+                      </Desc>
+                      <Price>{product.price}</Price>
+                      <FilterContainer>
+                          <Filter>
+                              <FilterTitle>Color</FilterTitle>
+                              {colorz?.map((color) => (
+                                <FilterColor 
+                                  color= {color} 
+                                  key={color} 
+                                  onClick={()=>setColor(color)}
+                                />
                               ))}
-                            </FilterSize>
-                        </Filter>
-                    </FilterContainer>
-                    <AddContainer>
-                        <AmountContainer>
-                            <Remove onClick={() => handleQuantity("dec")}/>
-                            <Amount>{quantity}</Amount>
-                            <Add onClick={() => handleQuantity("inc")}/>
-                        </AmountContainer>
-                        <Button onClick={handleClick}>ADD TO CART</Button>
-                    </AddContainer>
-                </InfoContainer>
-            </Wrapper>
-            <Newsletter/>
-            <Footer/>
-        </Container>
-    )
+                              
+                          </Filter>
+                          <Filter>
+                              <FilterTitle>Size</FilterTitle>
+                              <FilterSize onChange={(e)=>setSize(e.target.value)}>
+                                {productSize?.map((s)=>(
+                                  <FilterSizeOption key={s}>
+                                    {s}
+                                  </FilterSizeOption>
+                                ))}
+                              </FilterSize>
+                          </Filter>
+                      </FilterContainer>
+                      <AddContainer>
+                          <AmountContainer>
+                              <Remove onClick={() => handleQuantity("dec")}/>
+                              <Amount>{quantity}</Amount>
+                              <Add onClick={() => handleQuantity("inc")}/>
+                          </AmountContainer>
+                          <Button onClick={handleClick}>ADD TO CART</Button>
+                      </AddContainer>
+                  </InfoContainer>
+              </Wrapper>
+              <Newsletter/>
+              <Footer/>
+          </Container>
+      )
+    } else return null
 }
 
 export default Product
