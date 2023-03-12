@@ -13,9 +13,11 @@ import {
 
 
 const Container = styled.div`
+    opacity: 0.9;
     display: flex;
     background-color: #874800;
     color:white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     ${mobile({ flexDirection: "column" })}
 `;
 
@@ -23,6 +25,7 @@ const Left = styled.div`
     flex: 1;
     flex-direction: column;
     padding: 20px;
+    
 `;
 
 const Logo = styled.h1``;
@@ -51,6 +54,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
+    
 `;
 
 const Title = styled.h3`
@@ -89,7 +93,7 @@ const Payment = styled.img`
 
 const Footer = () => {
     return (
-        <Container>
+        <Container className='row'>
             <Left>
                 <Logo>Bapz</Logo>
                 <Desc>

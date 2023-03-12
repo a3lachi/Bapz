@@ -60,7 +60,7 @@ const Button = styled.button`
 
 const Newsletter = () => {
     return (
-        <Container>
+        <Container className='row'>
             <Title>Newsletter</Title>
             <Desc>Be the first to know about our future drops.</Desc>
             <InputContainer>

@@ -31,7 +31,7 @@ const Products = ({cat, filters, sort}) =>{
     
 
     if(data) {
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
         return(
             <Container id='brr' className="row">
                 {cat 
@@ -41,6 +41,11 @@ const Products = ({cat, filters, sort}) =>{
             </Container>
 
         ) 
+    }
+    else  {
+        return(
+            <div style="height:1000px" ></div>
+        )
     }
     
   }
