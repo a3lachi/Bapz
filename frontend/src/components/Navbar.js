@@ -54,6 +54,11 @@ const Center = styled.div`
 
 const Logo = styled.h1`
     font-weight: bold;
+    transition: all 0.5s ease;
+    display: inline-block;
+    &:hover {
+        transform: scale(1.3);
+    }
     ${mobile({ fontSize: "22px", whiteSpace: "nowrap", padding:"2px 3px"})}
 `
 
@@ -103,15 +108,19 @@ const Navbar = () => {
                     </Link>
                 </Center>
                 <Right>
+                <Link style={styleLink} to="/register">
                     <MenuItem>REGISTER</MenuItem>
+                </Link>
+                <Link style={styleLink} to="/login">
                     <MenuItem>SIGN IN</MenuItem>
-                    <Link to="/cart">
-                        <MenuItem>
-                            <Badge color="primary" badgeContent={quantity}>
-                                <ShoppingCartOutlined />
-                            </Badge>
-                        </MenuItem>
-                    </Link>
+                </Link>
+                <Link style={styleLink} to="/cart">
+                    <MenuItem>
+                        <Badge color="primary" badgeContent={quantity}>
+                            <ShoppingCartOutlined />
+                        </Badge>
+                    </MenuItem>
+                </Link>
                 </Right>
             </Wrapper>
         </Container>

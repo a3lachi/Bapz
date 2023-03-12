@@ -14,7 +14,8 @@ import {
 
 const Container = styled.div`
     display: flex;
-    background-color: lightgray;
+    background-color: #874800;
+    color:white;
     ${mobile({ flexDirection: "column" })}
 `;
 
@@ -92,7 +93,7 @@ const Footer = () => {
             <Left>
                 <Logo>Bapz</Logo>
                 <Desc>
-                    This text should in no way exhibit a failed humouristic attempt to fill the reader's eyes, I think I should have sticked to Lorep Imsup.
+                    This text should in no way exhibit a failed humouristic attempt to impress the reader's eyes, I should have sticked with Lorep Imsup.
                 </Desc>
                 <SocialContainer>
                     <SocialIcon color="3B5999">

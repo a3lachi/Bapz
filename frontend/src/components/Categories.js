@@ -67,6 +67,7 @@ const Categories = () => {
         }
     }
 
+
     return (
         <Container  className='row'>
             {categories.map((item,idx) => (
