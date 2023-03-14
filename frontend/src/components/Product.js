@@ -95,10 +95,11 @@ const Product = ({item}) => {
   else {
     too =  "apparel/" + item.category + "/" + item.productname ;
   }
+  console.log("haaa ",item.src.split(',')[0])
   return (
       <Container>
         <Text>{item.productname}</Text>
-          <Image src ={item.src} />
+          <Image src ={item.src.split(',')[0]+".jpg"} />
           
           <Info>
               <Icon>

@@ -8,6 +8,7 @@ class Bapz(models.Model):
     price = models.TextField()
     color = models.TextField()
     size = models.TextField()
+    ids  = models.IntegerField()
 
     def _str_(self):
         return self.title

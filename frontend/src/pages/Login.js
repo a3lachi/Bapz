@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import { useState } from "react";
-// import { login } from "../redux/apiCalls";
-// import {useDispatch, useSelector} from "react-redux";
+import Footer from '../components/Footer'
+import { login } from "../redux/apiCalls";
+import {useDispatch, useSelector} from "react-redux";
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -71,37 +72,47 @@ const Error = styled.span`
   color: red;
 `;
 
+// 1 . GET USERNAME/PASSWORD
+// 2. POST to the backend ------->    login(dispatch, {email, password});
+
+
 const Login = () => {
-  const [username, setUsername] = useState("");
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-//   const dispatch = useDispatch();
-//   const {isFetching, error} = useSelector((state)=> state.user);
+  const dispatch = useDispatch();
+  const user = useSelector((state)=> {return state.user});
 
   const handleClick = (e) => {
     e.preventDefault();
-    // login(dispatch, {username, password});
+    login(dispatch, {email, password});
   }
+  console.log(email,password)
   return (
+    <>
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input 
-            placeholder="username" 
-            onChange={(e)=>setUsername(e.target.value)} 
+          <Input type='email'
+            placeholder="email" 
+            onChange={(e)=>setEmail(e.target.value)} 
+            required
           />
           <Input 
             placeholder="password"
             type="password"  
             onChange={(e)=>setPassword(e.target.value)} 
+            required
           />
           <Button onClick={handleClick} >LOGIN</Button>
           {/* {error && <Error>Something went wrong...</Error>} */}
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <Link>Forgot my password</Link>
         </Form>
       </Wrapper>
+     
     </Container>
+     <Footer /></>
   );
 };
 

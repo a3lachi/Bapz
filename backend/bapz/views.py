@@ -22,3 +22,11 @@ class BapzProduct(generics.ListAPIView) :
     def get_queryset(self):
         nam = self.kwargs.get('name')
         return Bapz.objects.filter(productname=nam)
+    
+class PostUser(generics.ListAPIView) :
+    serializer_class = BapzSerializer
+
+    def get_queryset(self):
+        user = self.kwargs.get('user')
+        password = self.kwargs.get('password')
+        return Bapz.objects.filter(productname=nam)
