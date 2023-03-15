@@ -1,9 +1,14 @@
+
+import json
+from django.http import HttpResponse , HttpResponseNotFound , JsonResponse
+from django import forms
 from django.shortcuts import render
 from rest_framework import viewsets , generics
 from .serializers import BapzSerializer
 from .serializers import CustomerSerializer
 from .models import Bapz
 from .models import Customer
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 class BapzView(viewsets.ModelViewSet):
@@ -24,15 +29,28 @@ class BapzProduct(generics.ListAPIView) :
     def get_queryset(self):
         nam = self.kwargs.get('name')
         return Bapz.objects.filter(productname=nam)
-    
-class PostUser(generics.ListAPIView) :
+
+
+
+
+class CustomerForm(forms.Form):
+    email = forms.EmailField()
+    pwd = forms.CharField(widget=forms.Textarea)
+
+@csrf_exempt 
+def GetCustomer(request):
     serializer_class = CustomerSerializer
-
-    queryset = Customer.objects.all()
-
-
-class GetCustomer(generics.ListAPIView):
-    serializer_class = CustomerSerializer
-    def post_queryset(self,request):
-        print(request)
-        return Customer.objects.filter()
+    if request.method == 'POST':
+        try: 
+            json_data = json.loads(request.body ) 
+            em = json_data['email']
+            pd = json_data['pwd']
+            print("HAA ")
+            print(em)
+            print(pd)
+            if len(Customer.objects.filter(email=em , pwd=pd))>0 :
+                return JsonResponse({'isUser':"yes"})
+            else :
+                return HttpResponseNotFound("Brr")  
+        except :
+            return HttpResponseNotFound("Brr")  
