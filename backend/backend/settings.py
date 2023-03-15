@@ -80,6 +80,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'customers': {
+        'NAME': 'customers',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'root',
+        'PASSWORD': 'root#12@root'
     }
 }
 

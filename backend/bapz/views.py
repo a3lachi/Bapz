@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from rest_framework import viewsets , generics
 from .serializers import BapzSerializer
+from .serializers import CustomerSerializer
 from .models import Bapz
+from .models import Customer
 # Create your views here.
 
 class BapzView(viewsets.ModelViewSet):
@@ -24,9 +26,13 @@ class BapzProduct(generics.ListAPIView) :
         return Bapz.objects.filter(productname=nam)
     
 class PostUser(generics.ListAPIView) :
-    serializer_class = BapzSerializer
+    serializer_class = CustomerSerializer
 
-    def get_queryset(self):
-        user = self.kwargs.get('user')
-        password = self.kwargs.get('password')
-        return Bapz.objects.filter(productname=nam)
+    queryset = Customer.objects.all()
+
+
+class GetCustomer(generics.ListAPIView):
+    serializer_class = CustomerSerializer
+    def post_queryset(self,request):
+        print(request)
+        return Customer.objects.filter()

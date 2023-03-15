@@ -12,3 +12,12 @@ class Bapz(models.Model):
 
     def _str_(self):
         return self.title
+    
+
+class Customer(models.Model) :
+    email = models.TextField()
+    pwd = models.TextField()
+    ids = models.IntegerField()
+
+    def _str_(self):
+        return self.title
