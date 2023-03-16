@@ -8,7 +8,7 @@ router.register(r'bapz', views.BapzView, 'bapz')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/bapz', views.BapzView.as_view({'get': 'list'})),
+    path('api/bapz', views.BapzView.as_view()),
     path('api/bapz/<str:category>/', views.BapzCatView.as_view() ),
     path('api/bapz/<str:category>/<str:name>', views.BapzProduct.as_view() ),
     # path('api/customer', views.PostUser.as_view() ),

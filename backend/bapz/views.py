@@ -11,7 +11,7 @@ from .models import Customer
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
-class BapzView(viewsets.ModelViewSet):
+class BapzView(generics.ListAPIView):
     serializer_class = BapzSerializer
     queryset = Bapz.objects.all()
 
@@ -43,14 +43,25 @@ def GetCustomer(request):
     if request.method == 'POST':
         try: 
             json_data = json.loads(request.body ) 
-            em = json_data['email']
-            pd = json_data['pwd']
-            print("HAA ")
-            print(em)
-            print(pd)
-            if len(Customer.objects.filter(email=em , pwd=pd))>0 :
-                return JsonResponse({'isUser':"yes"})
-            else :
-                return HttpResponseNotFound("Brr")  
+            if len(json_data)==2 :
+                em = json_data['email']
+                pd = json_data['pwd']
+                print("HAA ")
+                print(em)
+                print(pd)
+                if len(Customer.objects.filter(email=em , pwd=pd))>0 :
+                    return JsonResponse({'isUser':"yes"})
+                else :
+                    return HttpResponseNotFound("Brr")  
+            elif len(json_data)>2 :
+                em = json_data['email']
+                pd = json_data['pwd']
+                if len(Customer.objects.filter(email=em))>0 :
+                    return HttpResponseNotFound("CustomerExist") 
+                else :
+                    print("ADDING TO DB")
+                    Customer.objects.create(email=em , pwd=pd )
+                    return JsonResponse({'info':"new"})
+
         except :
             return HttpResponseNotFound("Brr")  
