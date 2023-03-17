@@ -213,6 +213,10 @@ const Cart = (id) => {
 
     console.log('LKHIIIBRA  ',lkhbr)
 
+    const Hayd = (e) => {
+
+    }
+
     return (
         <>
             <Announcement />
@@ -234,7 +238,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
 
                     </Info>
-                    <Del><Br><RemoveCircleOutlineIcon style={styleDel} onClick={Hayd()} ></RemoveCircleOutlineIcon></Br></Del>
+                    <Del><Br><RemoveCircleOutlineIcon id={idx} style={styleDel} onClick={Hayd()} ></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
