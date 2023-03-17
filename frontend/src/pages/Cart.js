@@ -11,6 +11,8 @@ import { useState , useEffect} from 'react'
 import styled from "styled-components"
 import { mobile } from '../responsive';
 import { Button } from '@mui/material';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+
 
 
 const Container = styled.div`
@@ -23,18 +25,34 @@ const Container = styled.div`
     flex-direction:column;
     ${mobile({flexDirection:"column" })}
 `
-
-const Total = styled.div`
-    position: relative ;
+const Bar = styled.div`
+    position: absolute ;
     top:10vh;
     left : 10vw;
+    height:20vh;
+    width:20vw;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    padding : 20px 10px 10px 10px ;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    
+`
+const Total = styled.div`
+    text-align: center;
+    margin-right:auto;
     padding : 10px 10px 10px 10px ;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    `
+`
+
+const Buttn = styled.button`
+    padding : 5px 10px 5px 10px ;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+`
 const Wrapper = styled.div`
     
     position: relative;
-    left : 40vh;
     width:100%;
     align-items: center;
     display:flex;
@@ -46,7 +64,21 @@ const CartProd = styled.div`
     display:flex;
     flex-direction:row;
     ${mobile({flexDirection:"column" , paddingBottom:"20px" })}
+    
     width:50vw;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    margin-bottom:20px;
+    
+    
+    ${mobile({ textAlign: "center" })}
+`
+
+const CartPro = styled.div`
+    display:flex;
+    flex-direction:row;
+    ${mobile({flexDirection:"column" , paddingBottom:"20px" })}
+    width:50vw;
+    padding:20px 20px 20px 20px ;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     margin-bottom:20px;
     
@@ -170,10 +202,10 @@ const Cart = (id) => {
             <Categories />
 
             <Container>
-                {itss.length>0 ? <Total><b>TOTAL:</b> US${tots()}</Total> : <></> }
+                
                 <Wrapper>
             {itss.length>0 ? itss.map((item,idx) => ( 
-                <CartProd id={idx}>
+                <><CartProd id={idx}>
 
                     <Mage ><Image src={getSrc(item[0].src)} ></Image></Mage>
 
@@ -184,10 +216,15 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
 
                     </Info>
+                    <Del><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Del>
 
 
                 </CartProd>
+
+                </>
             )) : <></>}
+
+            <CartPro><Total><b>TOTAL:</b> US${tots()}</Total><Buttn>CHECKOUT</Buttn></CartPro>
             </Wrapper>
             </Container>
             
