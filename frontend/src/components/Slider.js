@@ -9,7 +9,7 @@ const Container = styled.div`
     height:100%;
     position:flex;
     margin:auto ;
-    ${mobile({ paddingTop:"5px"  })}
+    ${mobile({ paddingTop:"5px"})}
 `
 const Wrapper = styled.div`
 
