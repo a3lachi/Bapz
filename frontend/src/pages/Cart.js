@@ -76,6 +76,7 @@ const CartProd = styled.div`
 const CartPro = styled.div`
     display:flex;
     flex-direction:row;
+    position:relative;
     ${mobile({flexDirection:"column" , paddingBottom:"20px" })}
     width:50vw;
     padding:20px 20px 20px 20px ;
@@ -86,7 +87,7 @@ const CartPro = styled.div`
     ${mobile({ textAlign: "center" })}
 `
 const Mage = styled.div`
-    display:"inline-block" ;
+    display:"inline-block" 
     width:300px;
 `
 const Image = styled.img`
@@ -98,6 +99,8 @@ const Image = styled.img`
 
 const Del = styled.div`
     display:"inline-block" ;
+    position:absolute;
+    right: 20px;
     width:300px;
 `
 
@@ -108,6 +111,7 @@ const Info = styled.div`
     padding-top:20px;
     padding-left:20px;
     padding-right:20px;
+    padding-bottom:20px;
     text-align: start;
     display:flex;
     flex-direction:column;
