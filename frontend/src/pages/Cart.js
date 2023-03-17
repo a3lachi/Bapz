@@ -98,9 +98,12 @@ const Image = styled.img`
     ${mobile({display:"inline-block" , marginLeft:"0"})}
 `
 
-
-
-const StyledA = styled(Icon)``
+const Del = styled.div`
+    display:"inline-block" ;
+    width:300px;
+    
+`
+const StyledA = styled(RemoveCircleOutlineIcon)``
 
 const Br = styled.div`
     display: inline-block;
@@ -233,7 +236,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
 
                     </Info>
-                    <Icon><Br><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Br></Icon>
+                    <Del><Br><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
