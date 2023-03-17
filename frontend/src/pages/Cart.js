@@ -108,7 +108,8 @@ const Br = styled.div`
     position:absolute;
     right:10px;
     top: 10px;
-    &:hover + ${RemoveCircleOutlineIcon}  {
+    z-index:3;
+    &:hover ${RemoveCircleOutlineIcon}  {
         background-color:red;
     }
     
