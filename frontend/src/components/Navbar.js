@@ -88,11 +88,8 @@ const styleLink = {
 
 const Navbar = (id) => {
 
-    // use cart in our store useSelector(state => state.cart.quantity);
-    const quantity = useSelector((state) => (state.cart.nbCart))
-    //console.log(state.cart); ---> cart Reducer Initial State (quantity, total, products Array)
-
-    console.log('CART DYALK ',quantity)
+    var itms = useSelector((state) =>  state.cart.itms)
+    itms = itms.length>0 ? itms :  JSON.parse(window.localStorage.getItem('state'));
 
     return (
         <Container >
@@ -122,7 +119,7 @@ const Navbar = (id) => {
                 </Link></> }
                 <Link style={styleLink} to="/cart">
                     <MenuItem>
-                        <Badge color="primary" badgeContent={quantity}>
+                        <Badge color="primary" badgeContent={itms.length }>
                             <ShoppingCartOutlined />
                         </Badge>
                     </MenuItem>

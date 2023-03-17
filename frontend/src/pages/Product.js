@@ -176,10 +176,8 @@ const Product = (id) => {
     
     if(product) {
       const lerz = product.color.split(',')
-      console.log('COLORZ DYALK  ',lerz)
       const actualColor = lerz[0]
       const immg = product.src.split(',') 
-      console.log('PARADACT DYALK  ',immg[0])
       const productSize = product.size.split(',') 
       return (
           <Container>

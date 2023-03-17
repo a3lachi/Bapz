@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 
 const App = () => {
 
-  const user = useSelector((state) =>  state.user.email);
+  const user = useSelector((state) =>  state.user.email) ;
   return (
     <Router>
       <Routes>

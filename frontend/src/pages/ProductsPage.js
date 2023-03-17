@@ -12,7 +12,6 @@ import Categories from '../components/Categories';
 const ProductPage = (id) => {
     const location = useLocation() ;
     const category = location.pathname.split("/")[2] ; 
-    console.log('HAHAWA  ',category)
 
     return (
         <div>

@@ -109,7 +109,6 @@ const Product = ({item}) => {
 
   
   const handleClick =() => {
-    console.log(item.ids)
     store.dispatch(addOne([item.ids]))
   }
 

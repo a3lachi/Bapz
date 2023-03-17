@@ -63,7 +63,6 @@ const Categories = () => {
 
     const location = useLocation();
     const name = location.pathname.split("/")
-    console.log(name);
     const navigate = useNavigate();
 
     const too = (idx) => { return '/apparel/'+categoriesBackend[idx] }

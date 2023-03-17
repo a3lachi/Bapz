@@ -15,20 +15,41 @@ import { Button } from '@mui/material';
 
 const Container = styled.div`
     padding-top:30px;
+    padding-bottom:30px;
     position: relative;
     width:100%;
     align-items: center;
     display:flex;
     flex-direction:column;
+    ${mobile({flexDirection:"column" })}
+`
+
+const Total = styled.div`
+    position: relative ;
+    top:10vh;
+    left : 10vw;
+    padding : 10px 10px 10px 10px ;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    `
+const Wrapper = styled.div`
+    
+    position: relative;
+    left : 40vh;
+    width:100%;
+    align-items: center;
+    display:flex;
+    flex-direction:column;
+    
 `
 
 const CartProd = styled.div`
     display:flex;
     flex-direction:row;
-    ${mobile({flexDirection:"column" })}
-    width:80vw;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    ${mobile({flexDirection:"column" , paddingBottom:"20px" })}
+    width:50vw;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     margin-bottom:20px;
+    
     
     ${mobile({ textAlign: "center" })}
 `
@@ -84,24 +105,36 @@ const Price = styled.div`
 `
 
 const Qtti = styled.div`
-    margin-top:20px;
+    margin-top:10px;
     display:flex;
 `
 
 
 
 const Cart = (id) => {
-    const itms = useSelector((state) =>  state.cart.itms);
+    var itms = useSelector((state) =>  state.cart.itms)
+    itms = itms.length>0 ? itms :  JSON.parse(window.localStorage.getItem('state'));
 
     const [ itss , setItss ] = useState([])
     const addItem = (newItem) => {
         setItss([...itss, newItem]);
       };
 
+    function countOccurrences(MyArray) {
+        const counts = {};
+        MyArray.forEach(element => {
+            counts[element] = (counts[element] || 0) + 1;
+        });
+        const result = Object.entries(counts).map(([element, count]) => ({ element, count }));
+        return result;
+    }
+
+    const lkhbr = countOccurrences(itms) ;
+
     useEffect(() => {
         const fetchItems = async () => {
           try {
-            const promises = itms.map((item) => axios.get(`/api/bapz/${item}`));
+            const promises = lkhbr.map((item) => axios.get(`/api/bapz/${item.element}`));
             const results = await Promise.all(promises);
             const data = results.map((res) => res.data);
             setItss(data);
@@ -115,10 +148,20 @@ const Cart = (id) => {
 
 
     const getSrc = (src) => {
-        console.log('HA SRCCC ',src)
         const sr = src.split(',')
         return sr[0]+'.jpg'
     }
+
+    const tots = () => {
+        var tot = 0 ;
+        itss.forEach((elem)=>(tot+=Number(elem[0].price.split('$')[1])));
+        return tot;
+    }
+    console.log('itss ',itss)
+
+    
+
+    console.log('LKHIIIBRA  ',lkhbr)
 
     return (
         <>
@@ -127,8 +170,10 @@ const Cart = (id) => {
             <Categories />
 
             <Container>
-            {itss ? itss.map((item,idx) => ( 
-                <CartProd class="container" id={idx}>
+                {itss.length>0 ? <Total><b>TOTAL:</b> US${tots()}</Total> : <></> }
+                <Wrapper>
+            {itss.length>0 ? itss.map((item,idx) => ( 
+                <CartProd id={idx}>
 
                     <Mage ><Image src={getSrc(item[0].src)} ></Image></Mage>
 
@@ -136,15 +181,16 @@ const Cart = (id) => {
                     <Name>{item[0].productname}</Name>
                     <Color><Ler> {item[0].color.split(',')[0]} </Ler> </Color>
                     <Price>{item[0].price}</Price>
-                    <Qtti>Quantity : </Qtti>
+                    <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
 
                     </Info>
 
 
                 </CartProd>
             )) : <></>}
-
+            </Wrapper>
             </Container>
+            
             
             <Newsletter />
             <Footer />
