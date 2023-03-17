@@ -225,7 +225,7 @@ const Cart = (id) => {
 
             <Container>
                 
-                <Wrapper className='wrapp'>
+                <Wrapper id='wrapp'>
             {itss.length>0 ? itss.map((item,idx) => ( 
                 <><CartProd id={idx}>
 
