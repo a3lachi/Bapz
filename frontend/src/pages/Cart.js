@@ -100,7 +100,14 @@ const Image = styled.img`
 const Del = styled.div`
     display:"inline-block" ;
     width:300px;
+    
+`
+
+const Br = styled.div`
     display: inline-block;
+    position:absolute;
+    right:10px;
+    top: 10px;
 `
 
 
@@ -222,7 +229,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
 
                     </Info>
-                    <Del><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Del>
+                    <Del><Br><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
