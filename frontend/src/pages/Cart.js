@@ -102,6 +102,7 @@ const Del = styled.div`
     width:300px;
     
 `
+const StyledA = styled(RemoveCircleOutlineIcon)``
 
 const Br = styled.div`
     display: inline-block;
@@ -109,7 +110,7 @@ const Br = styled.div`
     right:10px;
     top: 10px;
     z-index:3;
-    &:hover ${RemoveCircleOutlineIcon}  {
+    &:hover ${StyledA}  {
         background-color:red;
     }
     
