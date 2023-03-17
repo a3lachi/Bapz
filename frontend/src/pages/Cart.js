@@ -235,7 +235,7 @@ const Cart = (id) => {
                     <Name>{item[0].productname}</Name>
                     <Color><Ler> {item[0].color.split(',')[0]} </Ler> </Color>
                     <Price>{item[0].price}</Price>
-                    <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
+                    <Qtti><b>Quantity : <text>{lkhbr[idx].count}</text></b></Qtti>
 
                     </Info>
                     <Del><Br><RemoveCircleOutlineIcon id={idx} style={styleDel} onClick={Hayd()} ></RemoveCircleOutlineIcon></Br></Del>
