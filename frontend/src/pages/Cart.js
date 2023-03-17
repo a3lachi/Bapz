@@ -215,6 +215,8 @@ const Cart = (id) => {
 
     const Hayd = (e) => {
         const wrp = document.getElementById('wrapp')
+        const nodes = wrp.childNodes 
+        // [0].getElementsByTagName('text')[0].innerText=89 
     }
 
     return (
