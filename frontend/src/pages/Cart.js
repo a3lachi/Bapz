@@ -11,7 +11,8 @@ import { useState , useEffect} from 'react'
 import styled from "styled-components"
 import { mobile } from '../responsive';
 import { Button } from '@mui/material';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import RemoveCircleOutlineIcon  from '@mui/icons-material/RemoveCircleOutline';
+import { Icon } from '@mui/material';
 
 
 
@@ -97,12 +98,9 @@ const Image = styled.img`
     ${mobile({display:"inline-block" , marginLeft:"0"})}
 `
 
-const Del = styled.div`
-    display:"inline-block" ;
-    width:300px;
-    
-`
-const StyledA = styled(RemoveCircleOutlineIcon)``
+
+
+const StyledA = styled(Icon)``
 
 const Br = styled.div`
     display: inline-block;
@@ -235,7 +233,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
 
                     </Info>
-                    <Del><Br><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Br></Del>
+                    <Icon><Br><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Br></Icon>
 
 
                 </CartProd>
