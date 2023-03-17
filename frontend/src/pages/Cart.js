@@ -214,7 +214,7 @@ const Cart = (id) => {
     console.log('LKHIIIBRA  ',lkhbr)
 
     const Hayd = (e) => {
-
+        const wrp = document.getElementById('wrapp')
     }
 
     return (
@@ -225,7 +225,7 @@ const Cart = (id) => {
 
             <Container>
                 
-                <Wrapper>
+                <Wrapper className='wrapp'>
             {itss.length>0 ? itss.map((item,idx) => ( 
                 <><CartProd id={idx}>
 
