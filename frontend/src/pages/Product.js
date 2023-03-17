@@ -43,9 +43,6 @@ const Title = styled.h1`
   font-weight: 200;
 `;
 
-const Desc = styled.p`
-  margin: 20px 0px;
-`;
 
 const Price = styled.span`
   font-weight: 100;
@@ -67,16 +64,12 @@ const Filter = styled.div`
 
 const FilterTitle = styled.span`
   font-size: 20px;
-  font-weight: 200;
+  font-weight: 650;
 `;
 
 const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0px 5px;
-  cursor: pointer;
+  width: 100%;
+  height: 100%;
 `;
 
 const FilterSize = styled.select`
@@ -122,9 +115,26 @@ const Button = styled.button`
   }
 `;
 
+const Colorz = styled.div`
+  margin-top:5px;
+  
+`
 
 
-const Product = () => {
+const Color = styled.div`
+  padding:0 10px 0 10px; 
+  outline-style: solid;
+  outline-width:1px;
+  margin-right:10px;
+  cursor:pointer;
+  &:hover {
+    background-color:#f8f4f4;
+  }
+  
+`
+
+
+const Product = (id) => {
 
   const [data , setData] = useState([])
   const location = useLocation();
@@ -163,35 +173,41 @@ const Product = () => {
     };
 
     
+    
     if(product) {
+      const lerz = product.color.split(',')
+      console.log('COLORZ DYALK  ',lerz)
+      const actualColor = lerz[0]
+      const immg = product.src.split(',') 
+      console.log('PARADACT DYALK  ',immg[0])
       const productSize = product.size.split(',') 
       return (
           <Container>
-              <Navbar/>
+              <Navbar id={id.id} />
               <Announcement/>
               <Categories />
               <Wrapper>
                   <ImgContainer>
-                      <Image src={product.src} />
+                      <Image style={{width:"80%"}} src={immg[0]+'.jpg'} />
                   </ImgContainer>
-                  <InfoContainer>
-                      <Title>{product.productname}</Title>
-                      <Desc>
-                          {product.desc}
-                      </Desc>
-                      <Price>{product.price}</Price>
-                      <FilterContainer>
-                          <Filter>
-                              <FilterTitle>Color</FilterTitle>
-                              {colorz?.map((color) => (
-                                <FilterColor 
-                                  color= {color} 
-                                  key={color} 
-                                  onClick={()=>setColor(color)}
-                                />
-                              ))}
+                  <InfoContainer className='col'>
+                      <Title className='row'>{product.productname}</Title>
+
+                      <Price className='row'>{product.price}</Price>
+                      <FilterContainer lassName='row' >
+                        <FilterColor>
+                        <div className='row' style={{position:"relative"}}>
+                              <FilterTitle >COLOR:</FilterTitle>
+                                </div>
                               
-                          </Filter>
+                              <Colorz className='row'>
+                              <Color style={{backgroundColor:"#f8f4f4"}}>{lerz[0]}</Color>
+                              {lerz?.map((color,idx) => ( idx>0 ?
+                                <Color id={idx}>{color}</Color> :<></>
+                              ))}
+                              </Colorz>
+                        
+                              </FilterColor>   
                           <Filter>
                               <FilterTitle>Size</FilterTitle>
                               <FilterSize onChange={(e)=>setSize(e.target.value)}>

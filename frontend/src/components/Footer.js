@@ -13,7 +13,7 @@ import {
 
 
 const Container = styled.div`
-    opacity: 0.7;
+    opacity: 0.9;
     display: flex;
     background-color: #874800;
     color:white;

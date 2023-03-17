@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { Opacity, Search, ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge, rgbToHex } from '@mui/material';
 import { red } from '@mui/material/colors';
+import { useSelector } from "react-redux";
 
 
 
@@ -85,12 +86,13 @@ const styleLink = {
 }
 
 
-const Navbar = () => {
+const Navbar = (id) => {
 
     // use cart in our store useSelector(state => state.cart.quantity);
-    const quantity = null
+    const quantity = useSelector((state) => (state.cart.nbCart))
     //console.log(state.cart); ---> cart Reducer Initial State (quantity, total, products Array)
 
+    console.log('CART DYALK ',quantity)
 
     return (
         <Container >
@@ -108,12 +110,16 @@ const Navbar = () => {
                     </Link>
                 </Center>
                 <Right>
-                <Link style={styleLink} to="/register">
+                {id.id ? 
+                <Link style={styleLink} to="/profil">
+                <MenuItem>PROFIL</MenuItem>
+                </Link>
+                : <><Link style={styleLink} to="/register">
                     <MenuItem>REGISTER</MenuItem>
                 </Link>
                 <Link style={styleLink} to="/login">
                     <MenuItem>SIGN IN</MenuItem>
-                </Link>
+                </Link></> }
                 <Link style={styleLink} to="/cart">
                     <MenuItem>
                         <Badge color="primary" badgeContent={quantity}>

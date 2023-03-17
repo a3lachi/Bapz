@@ -31,6 +31,12 @@ class BapzProduct(generics.ListAPIView) :
         return Bapz.objects.filter(productname=nam)
 
 
+class BapzViewIds(generics.ListAPIView) :
+    serializer_class = BapzSerializer
+    def get_queryset(self) : 
+        id = self.kwargs.get('ids')
+        return Bapz.objects.filter(ids=id)
+
 
 
 class CustomerForm(forms.Form):

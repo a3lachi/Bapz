@@ -1,9 +1,11 @@
+import axios from "axios";
+import { store } from '../redux/store'
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import { useState } from "react";
 import Footer from '../components/Footer'
-import { login } from "../redux/apiCalls";
 import {useDispatch, useSelector} from "react-redux";
+import { logUser , badUser } from "../redux/userSlice";
 
 const Container = styled.div`
   width: 100vw;
@@ -81,13 +83,20 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const user = useSelector((state)=> {return state.user});
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, {email, password});
+    try {
+        axios
+            .post('/api/customer',{email:email , pwd:password})
+            .then((res)=> store.dispatch(logUser(email)))
+            .catch((err) => store.dispatch(badUser()))
+    } catch (err) {
+      store.dispatch(badUser()) ;
+    }
   }
-  console.log(email,password)
+
+
   return (
     <>
     <Container>

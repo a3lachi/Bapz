@@ -9,16 +9,12 @@ import Footer from '../components/Footer';
 
 
 
-
-
-const Home = (id) => {
+const Profil = (id) => {
     return (
         <div className='col'>
             <Announcement />
             <Navbar id={id.id} />
-            <Slider />
-            <Categories />
-            <Products />
+
             <Announcement />
             <Newsletter/>
             <Footer />
@@ -27,4 +23,4 @@ const Home = (id) => {
 }
 
 
-export default Home ;
+export default Profil ;

@@ -25,7 +25,7 @@ const Products = ({cat, filters, sort}) =>{
                 : "/api/bapz")
             .then((res) => setData(res.data))
             .catch((err) => console.log(err));
-    }, [])
+    }, [cat])
     
     
     

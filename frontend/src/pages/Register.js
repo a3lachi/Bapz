@@ -1,5 +1,13 @@
+import { store } from '../redux/store'
+import {useDispatch, useSelector} from "react-redux";
+import { newUser , badUser } from "../redux/userSlice";
+
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import {useState} from "react";
+
+import axios from 'axios'
+
 
 const Container = styled.div`
   width: 100vw;
@@ -58,22 +66,59 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+
+  
+  const [firstname , setFirstname] = useState("") ;
+  const [lastname , setLastname] = useState("") ;
+  const [username , setUsername] = useState("") ;
+  const [email , setEmail] = useState("") ;
+  const [password , setPassword] = useState("") ;
+  const [pwd , setPwd] = useState("") ;
+
+  const dispatch = useDispatch();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    try {
+        axios
+            .post('/api/customer',{email:email , pwd:password , firstname:firstname , lastname:lastname , username:username  })
+            .then((res)=> store.dispatch( newUser(email) ))
+            .catch((err) => store.dispatch(badUser())  )
+    } catch (err) {
+      store.dispatch(badUser())  ;
+    }
+  }
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+          <Input type='text'
+            onChange={(e)=>setFirstname(e.target.value)} 
+            required
+          placeholder="First name" />
+          <Input type='text'
+            onChange={(e)=>setLastname(e.target.value)} 
+            required
+          placeholder="Last name" />
+          <Input type='text'
+            onChange={(e)=>setUsername(e.target.value)} 
+            required placeholder="Username" />
+          <Input type='email'
+            onChange={(e)=>setEmail(e.target.value)} 
+            required placeholder="Email" />
+          <Input type='password'
+            onChange={(e)=>setPassword(e.target.value)} 
+            required placeholder="Password" />
+          <Input type='password'
+            onChange={(e)=>setPwd(e.target.value)} 
+            required placeholder="Confirm password" />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>privacy policy</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleClick}  >CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

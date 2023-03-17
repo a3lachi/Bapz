@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { mobile } from '../responsive';
-import { Link } from "react-router-dom";
+import { Link,Navigate } from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 
@@ -16,15 +16,12 @@ const Item = styled.div`
     transition: all .2s ease-in-out;
 
     :hover{
-        color: black;
-        cursor: none;
-        transform: scale(1.1)
+        color: white;
+        transform: scale(1.2)
     }
     
     
 `
-
-
 const CategoryItem = styled.div`
     height:20px;
     font-weight: bold;
@@ -36,7 +33,6 @@ const CategoryItem = styled.div`
     box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
     :hover {
         opacity: 0.7;
-        cursor: none;
     }
     
 `
@@ -44,6 +40,17 @@ const CategoryItem = styled.div`
 
 
 const styleLink = {
+    zIndex:4,
+    height:'20px',
+    fontWeight: 'bold',
+    display: 'flex',
+    position: 'relative',
+    margin : '5px',
+    justifyContent: 'center',
+    backgroundColor: '#ffcc66',
+    boxShadow: 'rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px',
+   
+    
     textDecoration: "none",
     color: "#874800" ,    
 }
@@ -51,35 +58,28 @@ const styleLink = {
 
 
 const Categories = () => {
-    const categories = ['T-shirt','Sweats','Pant','Sneakers','Hats']
-    const categoriesBackend = ['t-shirts','sweats','pants','sneakers','hats']
+    const categories = ['T-shirt','Hoodie','Pant','Sneakers','Hats','Bags','Watches']
+    const categoriesBackend = ['t-shirt','hoodie','pants','sneakers','hats','bags','watches']
 
     const location = useLocation();
     const name = location.pathname.split("/")
-    console.log(name)
+    console.log(name);
+    const navigate = useNavigate();
 
-    const too = (idx) => {
-        if (name.length>2) {
-            return categoriesBackend[idx];
-        }
-        else {
-            return "apparel/"+categoriesBackend[idx] ;
-        }
-    }
-
+    const too = (idx) => { return '/apparel/'+categoriesBackend[idx] }
 
     return (
         <Container  className='row'>
             {categories.map((item,idx) => (
-                
-                <CategoryItem  key={item} className='col'>
-                    <Link  to={too(idx)} style={styleLink}>
-                    <Item>{item}</Item>
-                    </Link>
-                </CategoryItem>
+                <Link  to={too(idx)} id="lanks" key={item} className='col' style={styleLink}>
+                    
+                        <Item>{item}</Item>
+                    
+                </Link>
                 
             ))}
         </Container>
+        
     )
 }
 

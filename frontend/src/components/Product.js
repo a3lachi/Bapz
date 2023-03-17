@@ -4,6 +4,15 @@ import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {useLocation} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import { store } from '../redux/store'
+import {addOne} from '../redux/cartSlice'
+
+const Smta = styled.div`
+  position: absolute;
+  width: 100%;
+  top:87.3%;
+`
 
 
 
@@ -11,10 +20,8 @@ const Info = styled.div`
   opacity: 0;
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.15);
+  position: relative;
+
   z-index: 3;
   display: flex;
   align-items: center;
@@ -28,6 +35,7 @@ const Text = styled.div`
     position: absolute;
     top: 3%;
     display: flex;
+    font-weight: 600;
     justify-content: center;
     transition: all 0.5s ease;
     cursor: pointer;
@@ -42,6 +50,7 @@ const Container = styled.div`
   min-width: 280px;
   height: 350px;
   display: flex;
+  z-index:5;
   align-items: center;
   justify-content: center;
   background-color: rgb(89,100,54);
@@ -64,8 +73,8 @@ const Image = styled.img`
 `;
 
 const Icon = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   background-color: white;
   display: flex;
@@ -73,9 +82,9 @@ const Icon = styled.div`
   justify-content: center;
   margin: 10px;
   transition: all 0.5s ease;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   &:hover {
-    background-color: #e9f5f5;
-    transform: scale(1.2);
+    transform: scale(1.25);
     z-index:5
   }
 `;
@@ -86,6 +95,8 @@ const styleLink = {
 }
 
 const Product = ({item}) => {
+  const dispatch = useDispatch();
+
   const location = useLocation();
   const name = location.pathname.split("/")
   var too ="brr"
@@ -95,27 +106,52 @@ const Product = ({item}) => {
   else {
     too =  "apparel/" + item.category + "/" + item.productname ;
   }
-  console.log("haaa ",item.src.split(',')[0])
+
+  
+  const handleClick =() => {
+    console.log(item.ids)
+    store.dispatch(addOne([item.ids]))
+  }
+
+  const ara = (ch) => {
+    const brr = item.src.split('@')
+    return brr[0].split(',')[ch]+".jpg"
+  }
+
+
+  const navigate = useNavigate()
+  
+
+
   return (
-      <Container>
-        <Text>{item.productname}</Text>
-          <Image src ={item.src.split(',')[0]+".jpg"} />
-          
-          <Info>
-              <Icon>
-                  <ShoppingCartOutlined/>
-              </Icon>
-              <Link style={styleLink} to={too}>
-                <Icon > 
-                      <SearchOutlined/>
+      <Container id={item.ids} onClick={(e) => navigate(too)}  onMouseEnter={(e) => { document.getElementById(item.ids).children[1].src = ara(1) ; } } onMouseLeave={(e) => { document.getElementById(item.ids).children[1].src = ara(0) ; } }   >
+          <Text>{item.productname}</Text>
+          <Image id='rtr' src ={ara(0)} />
+          <Smta>
+            <Info>
+                <Icon onClick={ (e) => {e.stopPropagation() ;handleClick();}}>
+                    <ShoppingCartOutlined style={{width:'15px'}}/>
                 </Icon>
-              </Link>
-              
-              <Icon>
-                  <FavoriteBorderOutlined/>
-              </Icon>
-              
-          </Info>   
+
+                <Link style={styleLink} to={too}>
+                  <Icon > 
+                        <SearchOutlined style={{width:'15px'}} />
+                  </Icon>
+                </Link>
+                
+                <Icon>
+                    <FavoriteBorderOutlined
+                      onClick={
+                        (e)=>{ e.stopPropagation() ; e.target.style.color=="red" 
+                            ? e.target.style.color="black" 
+                            : e.target.style.color="red" }
+                      }
+                      style={{width:'15px'}}
+                    />
+                </Icon>
+                
+            </Info> 
+          </Smta>  
           
       </Container>
       
