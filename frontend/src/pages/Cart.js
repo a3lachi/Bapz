@@ -103,20 +103,15 @@ const Del = styled.div`
     width:300px;
     
 `
-const StyledA = styled(RemoveCircleOutlineIcon)`
-    z-index:3;
-    color:red;
-`
+const styleDel = {
+    color:"red",
+}
 
 const Br = styled.div`
     display: inline-block;
     position:absolute;
     right:10px;
     top: 10px;
-    
-    &:hover ${StyledA}  {
-        background-color:red;
-    }
     
 `
 
@@ -239,7 +234,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : {lkhbr[idx].count}</b></Qtti>
 
                     </Info>
-                    <Del><Br><RemoveCircleOutlineIcon></RemoveCircleOutlineIcon></Br></Del>
+                    <Del><Br><RemoveCircleOutlineIcon style={styleDel} onClick={Hayd()} ></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
