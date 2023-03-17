@@ -100,6 +100,7 @@ const Image = styled.img`
 const Del = styled.div`
     display:"inline-block" ;
     width:300px;
+    display: inline-block;
 `
 
 
