@@ -63,6 +63,7 @@ const Wrapper = styled.div`
 const CartProd = styled.div`
     display:flex;
     flex-direction:row;
+    position:relative;
     ${mobile({flexDirection:"column" , paddingBottom:"20px" })}
     
     width:50vw;
@@ -76,7 +77,6 @@ const CartProd = styled.div`
 const CartPro = styled.div`
     display:flex;
     flex-direction:row;
-    position:relative;
     ${mobile({flexDirection:"column" , paddingBottom:"20px" })}
     width:50vw;
     padding:20px 20px 20px 20px ;
@@ -99,8 +99,6 @@ const Image = styled.img`
 
 const Del = styled.div`
     display:"inline-block" ;
-    position:absolute;
-    right: 20px;
     width:300px;
 `
 
