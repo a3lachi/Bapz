@@ -104,8 +104,8 @@ const Del = styled.div`
     
 `
 const StyledA = styled(RemoveCircleOutlineIcon)`
-z-index:3;
-background-color:red;
+    z-index:3;
+    color:red;
 `
 
 const Br = styled.div`
