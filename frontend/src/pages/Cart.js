@@ -224,6 +224,7 @@ const Cart = (id) => {
                 if (Number(nodes[i].getElementsByTagName('text')[0].innerText)>1)
                     nodes[i].getElementsByTagName('text')[0].innerText = Number(nodes[i].getElementsByTagName('text')[0].innerText) - 1 ;
                 else {
+                    console.log('rr'+nodes[i].id.toString())
                     document.getElementById('rr'+nodes[i].id.toString()).remove()
                     console.log('att')
                 }
