@@ -214,6 +214,8 @@ const Cart = (id) => {
     console.log('LKHIIIBRA  ',lkhbr)
 
     function Hayd(event){
+        console.log('BRAK')
+        console.log('ID FIN BRK ',event.id)
         const wrp = document.getElementById('wrapp')
         const nodes = wrp.childNodes 
         for (let i=0;i<nodes.length-1;i++){
@@ -248,7 +250,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : <text>{lkhbr[idx].count}</text></b></Qtti>
 
                     </Info>
-                    <Del><Br id={idx} onClick={Hayd()} ><RemoveCircleOutlineIcon  style={styleDel}  ></RemoveCircleOutlineIcon></Br></Del>
+                    <Del><Br id={idx} onClick={Hayd} ><RemoveCircleOutlineIcon  style={styleDel}  ></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
