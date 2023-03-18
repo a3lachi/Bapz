@@ -215,7 +215,7 @@ const Cart = (id) => {
 
     function Hayd(event){
         console.log('BRAK')
-        console.log('ID FIN BRK ',event.id)
+        console.log('ID FIN BRK ',event.target)
         const wrp = document.getElementById('wrapp')
         const nodes = wrp.childNodes 
         for (let i=0;i<nodes.length-1;i++){
