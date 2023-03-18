@@ -105,6 +105,7 @@ const Del = styled.div`
 `
 const styleDel = {
     color:"red",
+    zIndex:5,
 }
 
 const Br = styled.div`
