@@ -250,7 +250,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : <text>{lkhbr[idx].count}</text></b></Qtti>
 
                     </Info>
-                    <Del><Br id={idx} onClick={Hayd} ><RemoveCircleOutlineIcon  style={styleDel}  ></RemoveCircleOutlineIcon></Br></Del>
+                    <Del ><Br   ><RemoveCircleOutlineIcon id={idx} style={styleDel} onClick={Hayd} ></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
