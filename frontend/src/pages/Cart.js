@@ -213,11 +213,11 @@ const Cart = (id) => {
 
     console.log('LKHIIIBRA  ',lkhbr)
 
-    const Hayd = (ev) => {
+    function Hayd(event){
         const wrp = document.getElementById('wrapp')
         const nodes = wrp.childNodes 
         for (let i=0;i<nodes.length-1;i++){
-            if(nodes[i].id == ev.target.id)
+            if(nodes[i].id == event.target.id)
                 if (Number(nodes[i].getElementsByTagName('text')[0].innerText)>1)
                     nodes[i].getElementsByTagName('text')[0].innerText = Number(nodes[i].getElementsByTagName('text')[0].innerText) - 1 ;
                 else {
@@ -248,7 +248,7 @@ const Cart = (id) => {
                     <Qtti><b>Quantity : <text>{lkhbr[idx].count}</text></b></Qtti>
 
                     </Info>
-                    <Del><Br><RemoveCircleOutlineIcon id={idx} style={styleDel} onClick={Hayd()} ></RemoveCircleOutlineIcon></Br></Del>
+                    <Del><Br id={idx} onClick={Hayd()} ><RemoveCircleOutlineIcon  style={styleDel}  ></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
