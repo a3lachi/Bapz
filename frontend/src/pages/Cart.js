@@ -224,6 +224,7 @@ const Cart = (id) => {
                 if (Number(nodes[i].getElementsByTagName('text')[0].innerText)>1)
                     nodes[i].getElementsByTagName('text')[0].innerText = Number(nodes[i].getElementsByTagName('text')[0].innerText) - 1 ;
                 else {
+                    document.getElementById('rr'+nodes[i].id.toString()).remove()
                     console.log('att')
                 }
         }
@@ -240,7 +241,7 @@ const Cart = (id) => {
                 
                 <Wrapper id='wrapp'>
             {itss.length>0 ? itss.map((item,idx) => ( 
-                <><CartProd id={idx}>
+                <><CartProd id={'rr'+idx.toString()}  >
 
                     <Mage ><Image src={getSrc(item[0].src)} ></Image></Mage>
 
