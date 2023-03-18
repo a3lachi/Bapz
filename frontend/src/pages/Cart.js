@@ -213,9 +213,17 @@ const Cart = (id) => {
 
     console.log('LKHIIIBRA  ',lkhbr)
 
-    const Hayd = (e) => {
+    const Hayd = (ev) => {
         const wrp = document.getElementById('wrapp')
         const nodes = wrp.childNodes 
+        for (let i=0;i<nodes.length-1;i++){
+            if(nodes[i].id == ev.target.id)
+                if (Number(nodes[i].getElementsByTagName('text')[0].innerText)>1)
+                    nodes[i].getElementsByTagName('text')[0].innerText = Number(nodes[i].getElementsByTagName('text')[0].innerText) - 1 ;
+                else {
+                    console.log('att')
+                }
+        }
         // [0].getElementsByTagName('text')[0].innerText=89 
     }
 
