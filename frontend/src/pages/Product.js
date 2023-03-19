@@ -127,9 +127,6 @@ const Color = styled.div`
   outline-width:1px;
   margin-right:10px;
   cursor:pointer;
-  &:hover {
-    background-color:#f8f4f4;
-  }
   
 `
 
@@ -143,6 +140,7 @@ const Product = (id) => {
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [ img , setImg ]  = useState([])
+  const [ currimg , setCurrimg ] = useState([])
 
 
 
@@ -155,7 +153,15 @@ const Product = (id) => {
       setData(data[0])
       setColor(data[0].color.split(',')[0])
       setSize(data[0].size.split(',')[0])
-      setImg(data[0].src.split(','))
+      const mage = data[0].src.split('@')
+
+      let rey = []
+      for (let i=0;i<mage.length;i++){
+        if ( mage[i]!="" )
+            rey.push(mage[i])
+      }
+      setImg(rey)
+      setCurrimg(rey[0].split(',') )
     }
   }
   useEffect(()=>{
@@ -167,7 +173,7 @@ const Product = (id) => {
   }, [])
     
   
-
+  console.log('HA LIMGG',img)
   
 
   const handleQuantity = (type) => {
@@ -179,14 +185,23 @@ const Product = (id) => {
   };
 
     const addToCart = () => {
-      dispatch(addOne({...data, quantity, color, size}));
+      dispatch(addOne([data.src, data.productname ,  quantity, color, size]));
     };
     const getColor = (event) => {
       setColor(event.target.innerText)
-      console.log(document.getElementById('wraplerz').childNodes)
-      const aydi = event.target.id.split("ler")[1]
-      console.log('hada ',aydi)
+      const colz = document.getElementById('wraplerz').childNodes
+      console.log(colz)
+      const aydi = event.target.id
+      
+      for (let i=0;i<colz.length;i++){
+          colz[i].style.backgroundColor="white"
+      }
+
+      event.target.style.backgroundColor="#EEE7E7"
+
+      
     }
+
     const lerz = data?.color?.split(',')
 
     useEffect(()=>{
@@ -194,7 +209,7 @@ const Product = (id) => {
         setColor(lerz[0])
     },[])
     
-    console.log('LWYEN',color)
+    console.log('LWYEN',data)
     
     if(data.src) {
       
@@ -209,7 +224,7 @@ const Product = (id) => {
               <Categories />
               <Wrapper>
                   <ImgContainer>
-                      <Image style={{width:"80%"}} src={img[0]+'.jpg'} />
+                      <Image style={{width:"80%"}} src={currimg[0]+'.jpg'} />
                   </ImgContainer>
                   <InfoContainer className='col'>
                       <Title className='row'>{data.productname}</Title>
@@ -222,7 +237,7 @@ const Product = (id) => {
                                 </div>
                               
                               <Colorz  id="wraplerz" className='row'>
-                              <Color onClick={getColor} id="ler0" style={{backgroundColor:"#f8f4f4"}}>{lerz[0]}</Color>
+                              <Color onClick={getColor} id="ler0" style={{backgroundColor:"#EEE7E7"}}>{lerz[0]}</Color>
                               {lerz?.map((color,idx) => ( idx>0 ?
                                 <Color onClick={getColor} key={idx} id={"ler"+idx}>{color}</Color> : <></>
                               ))}
