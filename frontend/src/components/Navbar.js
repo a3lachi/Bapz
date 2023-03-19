@@ -86,12 +86,10 @@ const styleLink = {
 }
 
 
-const Navbar = (id,itmss) => {
+const Navbar = (id) => {
 
     var itms = useSelector((state) =>  state.cart.itms)
-    itms = itms.length>0 ? itms :  JSON.parse(window.localStorage.getItem('state'));
 
-    itms = itmss.length>0 ? itmss : itms 
     return (
         <Container >
             <Wrapper>

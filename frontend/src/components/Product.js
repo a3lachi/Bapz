@@ -128,9 +128,7 @@ const Product = ({item}) => {
           <Image id='rtr' src ={ara(0)} />
           <Smta>
             <Info>
-                <Icon onClick={ (e) => {e.stopPropagation() ;handleClick();}}>
-                    <ShoppingCartOutlined style={{width:'15px'}}/>
-                </Icon>
+                
 
                 <Link style={styleLink} to={too}>
                   <Icon > 

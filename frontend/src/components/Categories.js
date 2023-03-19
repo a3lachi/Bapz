@@ -72,7 +72,7 @@ const Categories = () => {
             {categories.map((item,idx) => (
                 <Link  to={too(idx)} id="lanks" key={item} className='col' style={styleLink}>
                     
-                        <Item>{item}</Item>
+                        <Item key={idx} >{item}</Item>
                     
                 </Link>
                 

@@ -5,19 +5,46 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
     name:"cart",
     initialState: {
-      itms:[]  || JSON.parse(window.localStorage.getItem('state')),
+      itms: [] || JSON.parse(window.localStorage.getItem('state')),
     },
     reducers:{
       addOne: (state , action) => {
-        state.itms = [...state.itms, Number(action.payload)];
-        console.log('HAHAWA  ',state.itms)
+        var indic = 0
+        for (let i=0;i<state.itms.length;i++) {
+          if (state.itms[i].productname == action.payload.productname ) {
+            if ( state.itms[i].color == action.payload.color ) {
+              if ( state.itms[i].size == action.payload.size ) {
+                state.itms[i].quantity += action.payload.quantity
+                indic = 1
+              }
+            }
+            
+          }
+        }
+        if (indic == 0 )
+        {state.itms = [...state.itms, action.payload]; }
         window.localStorage.setItem('state', JSON.stringify(state.itms));
         
+      },
+      delCart:(state,action) => {
+        state.itms = [] 
+        window.localStorage.clear()
+      },
+      updateCart: (state,action) => {
+        state.itms = JSON.parse(window.localStorage.getItem('state')) 
+      },
+      updateQtty : (state,action) => {
+        state.itms[action.payload].quantity -= 1 
+        if ( state.itms[action.payload].quantity == 0 ) {
+          state.itms.splice(action.payload,1)
+        }
+        console.log('NQSSNA',action.payload)
+        window.localStorage.setItem('state', JSON.stringify(state.itms));
       }
     }
   })
   
   
   
-  export const { addOne  } = cartSlice.actions ;
+  export const { addOne , delCart , updateCart , updateQtty } = cartSlice.actions ;
   export default cartSlice.reducer ;

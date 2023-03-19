@@ -8,8 +8,8 @@ import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
 import { mobile } from "../responsive";
 import {useLocation} from "react-router-dom";
-// import { addProduct } from '../redux/cartRedux';
-// import { useDispatch } from 'react-redux';
+import { addOne } from '../redux/cartSlice';
+import { useDispatch } from 'react-redux';
 
 import axios from 'axios'
 
@@ -136,72 +136,95 @@ const Color = styled.div`
 
 const Product = (id) => {
 
+  const dispatch = useDispatch()
+
   const [data , setData] = useState([])
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [ img , setImg ]  = useState([])
+
+
+
   const location = useLocation();
   const name = location.pathname.split("/")[3];
-
   
-  
+  const HandleData = (data) => {
+    
+    if (data[0]) {
+      setData(data[0])
+      setColor(data[0].color.split(',')[0])
+      setSize(data[0].size.split(',')[0])
+      setImg(data[0].src.split(','))
+    }
+  }
   useEffect(()=>{
       axios
           .get(`/api/bapz/product/${name}`)
-          .then((res) => setData(res.data))
+          .then((res) =>(HandleData(res.data)))
+          .then()
           .catch((err) => console.log(err));
   }, [])
     
   
-  const product = data[0]
-  const [quantity, setQuantity] = useState(1);
 
-  const colorz= ['red','blue','green']
+  
 
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const handleQuantity = (type) => {
+    if(type === "dec"){
+      quantity > 1 && setQuantity(quantity-1);
+    }else if(type === "inc") {
+      setQuantity(quantity+1);
+    }
+  };
 
-    const handleQuantity = (type) => {
-      if(type === "dec"){
-        quantity > 1 && setQuantity(quantity-1);
-      }else if(type === "inc") {
-        setQuantity(quantity+1);
-      }
+    const addToCart = () => {
+      dispatch(addOne({...data, quantity, color, size}));
     };
+    const getColor = (event) => {
+      setColor(event.target.innerText)
+      console.log(document.getElementById('wraplerz').childNodes)
+      const aydi = event.target.id.split("ler")[1]
+      console.log('hada ',aydi)
+    }
+    const lerz = data?.color?.split(',')
 
-    const handleClick = () => {
-      //update Cart Using Redux / addProduct Action
-      //dipatch action so the components recognize it s a Redux action
-      // dispatch(addProduct({...product, quantity, color, size}));
-    };
-
+    useEffect(()=>{
+      if (lerz && lerz[0])
+        setColor(lerz[0])
+    },[])
     
+    console.log('LWYEN',color)
     
-    if(product) {
-      const lerz = product.color.split(',')
-      const actualColor = lerz[0]
-      const immg = product.src.split(',') 
-      const productSize = product.size.split(',') 
+    if(data.src) {
+      
+      
+      
+      const productSize = data.size.split(',') 
+      
       return (
           <Container>
-              <Navbar id={id.id} />
+              <Navbar id="brr" />
               <Announcement/>
               <Categories />
               <Wrapper>
                   <ImgContainer>
-                      <Image style={{width:"80%"}} src={immg[0]+'.jpg'} />
+                      <Image style={{width:"80%"}} src={img[0]+'.jpg'} />
                   </ImgContainer>
                   <InfoContainer className='col'>
-                      <Title className='row'>{product.productname}</Title>
+                      <Title className='row'>{data.productname}</Title>
 
-                      <Price className='row'>{product.price}</Price>
+                      <Price className='row'>{data.price}</Price>
                       <FilterContainer lassName='row' >
                         <FilterColor>
                         <div className='row' style={{position:"relative"}}>
-                              <FilterTitle >COLOR:</FilterTitle>
+                              <FilterTitle key='rrr' >COLOR:</FilterTitle>
                                 </div>
                               
-                              <Colorz className='row'>
-                              <Color style={{backgroundColor:"#f8f4f4"}}>{lerz[0]}</Color>
+                              <Colorz  id="wraplerz" className='row'>
+                              <Color onClick={getColor} id="ler0" style={{backgroundColor:"#f8f4f4"}}>{lerz[0]}</Color>
                               {lerz?.map((color,idx) => ( idx>0 ?
-                                <Color id={idx}>{color}</Color> :<></>
+                                <Color onClick={getColor} key={idx} id={"ler"+idx}>{color}</Color> : <></>
                               ))}
                               </Colorz>
                         
@@ -223,7 +246,7 @@ const Product = (id) => {
                               <Amount>{quantity}</Amount>
                               <Add onClick={() => handleQuantity("inc")}/>
                           </AmountContainer>
-                          <Button onClick={handleClick}>ADD TO CART</Button>
+                          <Button onClick={addToCart}>ADD TO CART</Button>
                       </AddContainer>
                   </InfoContainer>
               </Wrapper>

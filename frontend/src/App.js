@@ -18,11 +18,20 @@ import Profil from './pages/Profil'
 import Register from './pages/Register'
 import Cart from './pages/Cart'
 import { useSelector } from "react-redux";
-
+import { updateCart } from './redux/cartSlice';
+import { store } from './redux/store'
 
 const App = () => {
 
   const user = useSelector((state) =>  state.user.email) ;
+  var cart = useSelector((state) =>  state.cart.itms)
+
+  const storedCart =  JSON.parse(window.localStorage.getItem('state')) 
+
+  if (cart?.length == 0 && storedCart?.length>0) {
+    store.dispatch(updateCart())
+  }
+
   return (
     <Router>
       <Routes>

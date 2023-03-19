@@ -4,7 +4,7 @@ import Announcement from '../components/Announcement';
 import Categories from '../components/Categories';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-import { useSelector} from "react-redux";
+import { useSelector , useDispatch} from "react-redux";
 import axios from 'axios';
 import { useState , useEffect} from 'react'
 
@@ -13,6 +13,8 @@ import { mobile } from '../responsive';
 import { Button } from '@mui/material';
 import RemoveCircleOutlineIcon  from '@mui/icons-material/RemoveCircleOutline';
 import { Icon } from '@mui/material';
+import { store } from '../redux/store'
+import { addOne, delCart  , updateCart , updateQtty } from '../redux/cartSlice';
 
 
 
@@ -163,40 +165,13 @@ const Qtti = styled.div`
 
 
 const Cart = (id) => {
-    var itms = useSelector((state) =>  state.cart.itms)
-    itms = itms.length>0 ? itms :  JSON.parse(window.localStorage.getItem('state'));
+    var products = useSelector((state) =>  state.cart.itms) 
 
-    const [ itss , setItss ] = useState([])
-    const addItem = (newItem) => {
-        setItss([...itss, newItem]);
-      };
+    const dispatch = useDispatch() ;
 
-    function countOccurrences(MyArray) {
-        const counts = {};
-        MyArray.forEach(element => {
-            counts[element] = (counts[element] || 0) + 1;
-        });
-        const result = Object.entries(counts).map(([element, count]) => ({ element, count }));
-        return result;
+    const emptyCart = (event) =>{
+        store.dispatch(delCart())
     }
-
-    const lkhbr = countOccurrences(itms) ;
-
-    useEffect(() => {
-        const fetchItems = async () => {
-          try {
-            const promises = lkhbr.map((item) => axios.get(`/api/bapz/${item.element}`));
-            const results = await Promise.all(promises);
-            const data = results.map((res) => res.data);
-            setItss(data);
-          } catch (error) {
-            console.error(error);
-          }
-        };
-      
-        fetchItems();
-      }, []);
-
 
     const getSrc = (src) => {
         const sr = src.split(',')
@@ -205,31 +180,13 @@ const Cart = (id) => {
 
     const tots = () => {
         var tot = 0 ;
-        itss.forEach((elem)=>(tot+=Number(elem[0].price.split('$')[1])));
+        products?.forEach((elem)=>(tot+=Number(elem.price.split('$')[1])*Number(elem.quantity)))
         return tot;
     }
-    console.log('itss ',itss)
 
-    
-
-    console.log('LKHIIIBRA  ',lkhbr)
-
-    function Hayd(event){
-        console.log('BRAK')
-        console.log('ID FIN BRK ',event.target)
-        const wrp = document.getElementById('wrapp')
-        const nodes = wrp.childNodes 
-        for (let i=0;i<nodes.length-1;i++){
-            if(nodes[i].id == event.target.id)
-                if (Number(nodes[i].getElementsByTagName('text')[0].innerText)>1)
-                    nodes[i].getElementsByTagName('text')[0].innerText = Number(nodes[i].getElementsByTagName('text')[0].innerText) - 1 ;
-                else {
-                    console.log('rr'+nodes[i].id.toString())
-                    document.getElementById('rr'+nodes[i].id.toString()).remove()
-                    console.log('att')
-                }
-        }
-        // [0].getElementsByTagName('text')[0].innerText=89 
+    const removeItem = (event) => {
+        const aydi = Number(event.target.parentElement.id)
+        store.dispatch(updateQtty(aydi))
     }
 
     return (
@@ -237,28 +194,30 @@ const Cart = (id) => {
             <Announcement />
             <Navbar id={id.id} />
             <Categories />
-
-            <Container>
+            <button onClick={emptyCart}>CLEAR</button>
+            <Container key="rtret">
                 
-                <Wrapper id='wrapp'>
-            {itss.length>0 ? itss.map((item,idx) => ( 
-                <><CartProd id={'rr'+idx.toString()}  >
+                <Wrapper key="idx" id='wrapp'>
+            {products ? products.map((item,idx) => ( 
+                <><CartProd key={"rr"+idx} id={'rr'+idx.toString()}  >
 
-                    <Mage ><Image src={getSrc(item[0].src)} ></Image></Mage>
+                    <Mage ><Image key={idx} src={getSrc(item.src)} ></Image></Mage>
 
-                    <Info >
-                    <Name>{item[0].productname}</Name>
-                    <Color><Ler> {item[0].color.split(',')[0]} </Ler> </Color>
-                    <Price>{item[0].price}</Price>
-                    <Qtti><b>Quantity : <text>{lkhbr[idx].count}</text></b></Qtti>
+                    <Info key={idx} >
+                    <Name key={idx} >{item.productname}</Name>
+                    <Color><Ler> {item.color} </Ler> </Color>
+                    <Price>{item.price}</Price>
+                    <Qtti><b>Quantity : <span>{item.quantity}</span></b></Qtti>
+                    <Qtti><b>Size : <span>{item.size}</span></b></Qtti>
 
                     </Info>
-                    <Del ><Br   ><RemoveCircleOutlineIcon id={idx} style={styleDel} onClick={Hayd} ></RemoveCircleOutlineIcon></Br></Del>
+                    <Del  id={idx} onClick={removeItem} >< Br id={idx}  ><RemoveCircleOutlineIcon id={idx} style={styleDel} ></RemoveCircleOutlineIcon></Br></Del>
 
 
                 </CartProd>
 
                 </>
+    
             )) : <></>}
 
             <CartPro><Total><b>TOTAL:</b> US${tots()}</Total><Buttn>CHECKOUT</Buttn></CartPro>
