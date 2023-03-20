@@ -173,10 +173,7 @@ const Cart = (id) => {
         store.dispatch(delCart())
     }
 
-    const getSrc = (src) => {
-        const sr = src.split(',')
-        return sr[0]+'.jpg'
-    }
+
 
     const tots = () => {
         var tot = 0 ;
@@ -188,7 +185,7 @@ const Cart = (id) => {
         const aydi = Number(event.target.parentElement.id)
         store.dispatch(updateQtty(aydi))
     }
-
+    // store.dispatch(delCart())
     return (
         <>
             <Announcement />
@@ -201,7 +198,7 @@ const Cart = (id) => {
             {products ? products.map((item,idx) => ( 
                 <><CartProd key={"rr"+idx} id={'rr'+idx.toString()}  >
 
-                    <Mage ><Image key={idx} src={getSrc(item.src)} ></Image></Mage>
+                    <Mage ><Image key={idx} src={item?.src[0]+'.jpg'} ></Image></Mage>
 
                     <Info key={idx} >
                     <Name key={idx} >{item.productname}</Name>

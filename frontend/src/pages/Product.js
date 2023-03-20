@@ -174,6 +174,7 @@ const Product = (id) => {
     
   
   console.log('HA LIMGG',img)
+  console.log('CURR ',currimg)
   
 
   const handleQuantity = (type) => {
@@ -185,14 +186,12 @@ const Product = (id) => {
   };
 
     const addToCart = () => {
-      dispatch(addOne([data.src, data.productname ,  quantity, color, size]));
+      dispatch(addOne({src:currimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size}));
     };
     const getColor = (event) => {
       setColor(event.target.innerText)
       const colz = document.getElementById('wraplerz').childNodes
-      console.log(colz)
-      const aydi = event.target.id
-      
+      const aydi = event.target.id.split("ler")[1]      
       for (let i=0;i<colz.length;i++){
           colz[i].style.backgroundColor="white"
       }
@@ -200,22 +199,25 @@ const Product = (id) => {
       event.target.style.backgroundColor="#EEE7E7"
 
       
+      setCurrimg(img[aydi].split(','))
+
+      
     }
 
     const lerz = data?.color?.split(',')
+    const productSize = data?.size?.split(',') 
+
 
     useEffect(()=>{
       if (lerz && lerz[0])
         setColor(lerz[0])
     },[])
-    
-    console.log('LWYEN',data)
-    
+        
     if(data.src) {
       
       
       
-      const productSize = data.size.split(',') 
+      
       
       return (
           <Container>
