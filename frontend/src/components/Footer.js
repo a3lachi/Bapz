@@ -13,6 +13,9 @@ import {
 
 
 const Container = styled.div`
+    padding-bottom:30px;
+    padding-left:30px;
+    padding-right:20px;
     opacity: 0.9;
     display: flex;
     background-color: #874800;
@@ -77,7 +80,7 @@ const ListItem = styled.li`
 const Right = styled.div`
     flex: 1;
     padding: 20px;
-    ${mobile({ backgroundColor: "#eee" })}
+
 `;
 
 const ContactItem = styled.div`

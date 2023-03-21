@@ -1,7 +1,14 @@
-import { TextField , Input } from '@mui/material';
+import { useState } from 'react';
+import { TextField , Input , Button} from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { useSelector } from "react-redux";
 import styled from 'styled-components'
+import Success from '../components/Success'
+import Navbar from '../components/Navbar';
+import Products from '../components/Products';
+import Announcement from '../components/Announcement';
+import Categories from '../components/Categories';
+import Newsletter from '../components/Newsletter';
 
 
 const Container = styled.div`
@@ -30,6 +37,10 @@ const Proced = styled.div`
 
 
 const Checkout = (products) => {
+
+    // products = products.prods
+
+    const [ pay , setPay ] = useState(false)
     
     const ccCheck = (event) => {
         var texte = event.target.value
@@ -79,31 +90,43 @@ const Checkout = (products) => {
             event.target.value = tex.slice(0,5)
         }
     }
+
+    const cvvCheck = (event) => {
+        var texte = event.target.value
+        event.target.value = texte.slice(0,3)
+    }
     
     const user = useSelector((state)=>state.user)
     products = products.prods
     
     if (products.length>0) {
-        console.log('HAMAAAA' ,products[0].src)
         if (user.email) {
 
             console.log('checkout ',user.email)
-            return (
-                <>
-                <div style={{marginBottom:'20px'}}><b>MY ORDER</b></div>
-                <Container>
-                { products.map((elem,indx)=>(
-                    <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src[0]+'.jpg'} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
-                ))}
-                
-                </Container>
-                <Proced >
-                <ul><Input onChange={(e)=>ccCheck(e)} id={"cc"} placeholder="Credit Card" style={{width:'220px'}} /></ul>
-                <ul><Input onChange={(e)=>edCheck(e)} id={"cvv"} placeholder="Expiry Date" style={{width:'100px' , marginRight:'76px'}} /><span style={{width:'30px'}}></span> <Input id={"cvv"} placeholder="CVV" style={{width:'40px'}} /></ul>
-                <ul><button>PAY</button></ul>
-                </Proced>
-                </>
-            )
+
+            if (!pay) {
+                return (
+                    <>
+                    <div style={{marginBottom:'20px'}}><b>MY ORDER</b></div>
+                    <Container>
+                    { products.map((elem,indx)=>(
+                        <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src[0]+'.jpg'} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
+                    ))}
+                    
+                    </Container>
+                    <Proced >
+                    <ul><Input onChange={(e)=>ccCheck(e)} id={"cc"} placeholder="Credit Card" style={{width:'220px'}} /></ul>
+                    <ul><Input onChange={(e)=>edCheck(e)} id={"cvv"} placeholder="Expiry Date" style={{width:'100px' , marginRight:'76px'}} /><span style={{width:'30px'}}></span> <Input onChange={(e)=>cvvCheck(e)} id={"cvv"} placeholder="CVV" style={{width:'40px'}} /></ul>
+                    <ul><button onClick={(e)=> setPay(true)}>PAY</button></ul>
+                    </Proced>
+                    </>
+                )
+            }
+            else {
+                return(
+                    <Success />
+                )
+            }
         }
         else {
             return(

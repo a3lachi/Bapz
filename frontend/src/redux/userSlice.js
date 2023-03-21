@@ -14,6 +14,7 @@ const userSlice = createSlice({
       console.log('HAHWA DKHEL ILOGI ',action.payload)
       state.email = action.payload
       state.badAttempt = false
+      window.localStorage.setItem('user', JSON.stringify(state.email));
     },
     badUser: (state,action) => {
       console.log('NOT A USER ')
@@ -22,13 +23,17 @@ const userSlice = createSlice({
     newUser:(state,action) => {
       state.email = action.payload
       state.badAttempt = false
+      window.localStorage.setItem('user', JSON.stringify(state.email));
+    },
+    updateUser:(state,action) => {
+      state.email = JSON.parse(window.localStorage.getItem('user'))
     }
   }
 })
 
 
 
-export const { logUser , badUser , newUser } = userSlice.actions ; 
+export const { logUser , badUser , newUser , updateUser} = userSlice.actions ; 
 export default userSlice.reducer ;
 
 

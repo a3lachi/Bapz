@@ -4,7 +4,6 @@ import Announcement from '../components/Announcement';
 import Categories from '../components/Categories';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-import Checkout from '../components/Checkout' ;
 import { useSelector , useDispatch} from "react-redux";
 import axios from 'axios';
 import { useState , useEffect} from 'react'
@@ -16,6 +15,7 @@ import RemoveCircleOutlineIcon  from '@mui/icons-material/RemoveCircleOutline';
 import { Icon } from '@mui/material';
 import { store } from '../redux/store'
 import { addOne, delCart  , updateCart , updateQtty } from '../redux/cartSlice';
+import { Navigate } from 'react-router-dom';
  
 
 
@@ -184,9 +184,7 @@ const Cart = (id) => {
         const aydi = Number(event.target.parentElement.id)
         store.dispatch(updateQtty(aydi))
     }
-    // store.dispatch(delCart())
 
-    console.log('HAHOMA ',products)
     return (
         <>
             <Announcement />
@@ -220,7 +218,7 @@ const Cart = (id) => {
 
             {!chkout && ( products?.length>0 ? <CartPro><Total><b>TOTAL:</b> US${tots()}</Total><Buttn onClick={(e)=>setChkout(true)}>CHECKOUT</Buttn></CartPro> : 
             <><div style={{marginBottom:"20px"}} ><b>YOUR BAG</b></div><div>Your bag currently is empty.</div></>)}
-            { chkout && <Checkout prods={products} />}
+            { chkout &&  <Navigate to="/checkout"  />  }
             </Wrapper>
             </Container>
             
