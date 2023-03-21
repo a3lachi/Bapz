@@ -4,6 +4,7 @@ import Announcement from '../components/Announcement';
 import Categories from '../components/Categories';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
+import Checkout from '../components/Checkout' ;
 import { useSelector , useDispatch} from "react-redux";
 import axios from 'axios';
 import { useState , useEffect} from 'react'
@@ -15,7 +16,7 @@ import RemoveCircleOutlineIcon  from '@mui/icons-material/RemoveCircleOutline';
 import { Icon } from '@mui/material';
 import { store } from '../redux/store'
 import { addOne, delCart  , updateCart , updateQtty } from '../redux/cartSlice';
-
+ 
 
 
 const Container = styled.div`
@@ -67,7 +68,7 @@ const CartProd = styled.div`
     display:flex;
     flex-direction:row;
     position:relative;
-    ${mobile({flexDirection:"column" , paddingBottom:"20px" })}
+    ${mobile({flexDirection:"column" })}
     
     width:50vw;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
@@ -117,9 +118,6 @@ const Br = styled.div`
     top: 10px;
     
 `
-
-
-
 
 const Info = styled.div`
     padding-top:20px;
@@ -173,6 +171,7 @@ const Cart = (id) => {
         store.dispatch(delCart())
     }
 
+    const [ chkout , setChkout ] = useState(false)
 
 
     const tots = () => {
@@ -186,6 +185,8 @@ const Cart = (id) => {
         store.dispatch(updateQtty(aydi))
     }
     // store.dispatch(delCart())
+
+    console.log('HAHOMA ',products)
     return (
         <>
             <Announcement />
@@ -195,7 +196,7 @@ const Cart = (id) => {
             <Container key="rtret">
                 
                 <Wrapper key="idx" id='wrapp'>
-            {products ? products.map((item,idx) => ( 
+            {!chkout && products ? products.map((item,idx) => ( 
                 <><CartProd key={"rr"+idx} id={'rr'+idx.toString()}  >
 
                     <Mage ><Image key={idx} src={item?.src[0]+'.jpg'} ></Image></Mage>
@@ -217,7 +218,9 @@ const Cart = (id) => {
     
             )) : <></>}
 
-            <CartPro><Total><b>TOTAL:</b> US${tots()}</Total><Buttn>CHECKOUT</Buttn></CartPro>
+            {!chkout && ( products?.length>0 ? <CartPro><Total><b>TOTAL:</b> US${tots()}</Total><Buttn onClick={(e)=>setChkout(true)}>CHECKOUT</Buttn></CartPro> : 
+            <><div style={{marginBottom:"20px"}} ><b>YOUR BAG</b></div><div>Your bag currently is empty.</div></>)}
+            { chkout && <Checkout prods={products} />}
             </Wrapper>
             </Container>
             

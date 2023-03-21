@@ -95,10 +95,10 @@ const Navbar = (id) => {
             <Wrapper>
                 <Left>
                     <Language>EN</Language>
-                    <SearchContainer>
+                    {/* <SearchContainer>
                         <Input placeholder="Search"/>
                         <Search style={{ color:"gray", fontSize: "16px" }} />
-                    </SearchContainer>
+                    </SearchContainer> */}
                 </Left>
                 <Center>
                     <Link style={styleLink} to='/'>

@@ -1,6 +1,8 @@
 import { store } from '../redux/store'
 import {useDispatch, useSelector} from "react-redux";
 import { newUser , badUser } from "../redux/userSlice";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer'
 
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -11,7 +13,7 @@ import axios from 'axios'
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 70vh;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -19,12 +21,15 @@ const Container = styled.div`
     url("https://e0.pxfuel.com/wallpapers/397/13/desktop-wallpaper-a-bathing-ape-abc-camo-ape-head-1st-camo-more-green-bape.jpg")
       center;
   background-size: cover;
+  position:relative;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Wrapper = styled.div`
+  position:absolute;
+  top:10%;
   width: 40%;
   padding: 20px;
   background-color: white;
@@ -90,6 +95,8 @@ const Register = () => {
   }
 
   return (
+    <>
+    <Navbar></Navbar>
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
@@ -122,6 +129,8 @@ const Register = () => {
         </Form>
       </Wrapper>
     </Container>
+    <Footer></Footer>
+    </>
   );
 };
 

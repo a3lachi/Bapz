@@ -35,8 +35,8 @@ const Products = ({cat, filters, sort}) =>{
         return(
             <Container id='brr' className="row">
                 {cat 
-                ? data.map((item,index) => { return <Product key={item.ids} item={item} /> })
-                : data.slice(0,8).map((item,index) => { return <Product key={index} item={item} /> } )}
+                ? data.map((item,index) => { return <Product id={index} item={item} /> })
+                : data.slice(0,8).map((item,index) => { return <Product id={index} key={index} item={item} /> } )}
                 
             </Container>
 

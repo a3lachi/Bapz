@@ -94,7 +94,7 @@ const styleLink = {
   color: "#874800" ,    
 }
 
-const Product = ({item}) => {
+const Product = ({id,item}) => {
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -113,31 +113,50 @@ const Product = ({item}) => {
   }
 
   const ara = (ch) => {
-    const brr = item.src.split('@')
-    return brr[0].split(',')[ch]+".jpg"
+    const brr = item.src.split('@')[0]
+    if (ch==1) {
+      const aa = brr.split(',')
+      if (aa.length>1) 
+        return brr.split(',')[1]+".jpg"
+    }
+
+    return brr.split(',')[0]+".jpg"
+    
+
   }
 
 
   const navigate = useNavigate()
   
+  const onMe = (event,payload) => { 
+    const aydi = event.target.id
+    const elems = document.getElementById('brr') 
+    elems.childNodes.forEach((elem)=>{
+      if (elem.id == aydi) {
+        if (payload=='leave')
+          elem.childNodes[1].src=ara(1)
+        else 
+          elem.childNodes[1].src=ara(0)
+      }
+    })
+  }
   
-
   return (
-      <Container id={item.ids} onClick={(e) => navigate(too)}  onMouseEnter={(e) => { document.getElementById(item.ids).children[1].src = ara(1) ; } } onMouseLeave={(e) => { document.getElementById(item.ids).children[1].src = ara(0) ; } }   >
-          <Text>{item.productname}</Text>
-          <Image id='rtr' src ={ara(0)} />
-          <Smta>
-            <Info>
+      <Container id={id} onClick={(e) => navigate(too)}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
+          <Text id={id} >{item.productname}</Text>
+          <Image id={id} src ={ara(0)} />
+          <Smta id={id}>
+            <Info id={id}>
                 
 
-                <Link style={styleLink} to={too}>
-                  <Icon > 
+                <Link id={id} style={styleLink} to={too}>
+                  <Icon id={id}> 
                         <SearchOutlined style={{width:'15px'}} />
                   </Icon>
                 </Link>
                 
-                <Icon>
-                    <FavoriteBorderOutlined
+                <Icon id={id}>
+                    <FavoriteBorderOutlined id={id}
                       onClick={
                         (e)=>{ e.stopPropagation() ; e.target.style.color=="red" 
                             ? e.target.style.color="black" 

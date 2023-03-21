@@ -6,6 +6,8 @@ import { useState } from "react";
 import Footer from '../components/Footer'
 import {useDispatch, useSelector} from "react-redux";
 import { logUser , badUser } from "../redux/userSlice";
+import Navbar from '../components/Navbar';
+
 
 const Container = styled.div`
   width: 100vw;
@@ -99,6 +101,7 @@ const Login = () => {
 
   return (
     <>
+    <Navbar></Navbar>
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>

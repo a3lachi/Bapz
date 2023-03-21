@@ -10,6 +10,8 @@ import { mobile } from "../responsive";
 import {useLocation} from "react-router-dom";
 import { addOne } from '../redux/cartSlice';
 import { useDispatch } from 'react-redux';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 import axios from 'axios'
 
@@ -17,7 +19,7 @@ import axios from 'axios'
 const Container = styled.div``;
 
 const Wrapper = styled.div`
-  padding: 50px;
+  padding: 30px;
   display: flex;
   ${mobile({ padding: "10px", flexDirection:"column" })}
 `;
@@ -28,14 +30,14 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
-  padding: 0px 50px;
+  padding: 40px 50px;
   ${mobile({ padding: "10px" })}
 `;
 
@@ -141,6 +143,7 @@ const Product = (id) => {
   const [quantity, setQuantity] = useState(1);
   const [ img , setImg ]  = useState([])
   const [ currimg , setCurrimg ] = useState([])
+  const [ apprimg , setApparimg ] = useState("")
 
 
 
@@ -162,6 +165,7 @@ const Product = (id) => {
       }
       setImg(rey)
       setCurrimg(rey[0].split(',') )
+      setApparimg(rey[0].split(',')[0])
     }
   }
   useEffect(()=>{
@@ -198,8 +202,8 @@ const Product = (id) => {
 
       event.target.style.backgroundColor="#EEE7E7"
 
-      
       setCurrimg(img[aydi].split(','))
+      setApparimg(img[aydi].split(',')[0])
 
       
     }
@@ -212,7 +216,26 @@ const Product = (id) => {
       if (lerz && lerz[0])
         setColor(lerz[0])
     },[])
-        
+    
+    const leftImg = (event) => {
+      const ids = currimg.indexOf(apprimg)
+      if (ids == currimg.length-1) {
+        setApparimg(currimg[0])
+      }
+      else {
+        setApparimg(currimg[ids+1])
+      }
+    }
+
+    const rightImg = (event) => {
+      const ids = currimg.indexOf(apprimg)
+      if (ids == 0) {
+        setApparimg(currimg[currimg.length-1])
+      }
+      else {
+        setApparimg(currimg[ids-1])
+      }
+    }
     if(data.src) {
       
       
@@ -226,7 +249,9 @@ const Product = (id) => {
               <Categories />
               <Wrapper>
                   <ImgContainer>
-                      <Image style={{width:"80%"}} src={currimg[0]+'.jpg'} />
+                  <KeyboardArrowLeftIcon onClick={leftImg}></KeyboardArrowLeftIcon>
+                      <Image style={{width:"80%"}} src={apprimg+'.jpg'} />
+                      <KeyboardArrowRightIcon onClick={rightImg} ></KeyboardArrowRightIcon>
                   </ImgContainer>
                   <InfoContainer className='col'>
                       <Title className='row'>{data.productname}</Title>

@@ -58,12 +58,9 @@ const styleLink = {
 
 
 const Categories = () => {
-    const categories = ['T-shirt','Hoodie','Pant','Sneakers','Hats','Bags','Watches']
+    const categories = ['T-shirts','Hoodies','Pants','Sneakers','Hats','Bags','Watches']
     const categoriesBackend = ['t-shirt','hoodie','pants','sneakers','hats','bags','watches']
 
-    const location = useLocation();
-    const name = location.pathname.split("/")
-    const navigate = useNavigate();
 
     const too = (idx) => { return '/apparel/'+categoriesBackend[idx] }
 
