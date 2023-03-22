@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/bapz/<str:category>/<str:name>', views.BapzProduct.as_view() ),
     # path('api/customer', views.PostUser.as_view() ),
     path('api/customer', views.GetCustomer),
+    path('api/customer/commands', views.UpdateCommands),
 ]

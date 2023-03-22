@@ -1,19 +1,19 @@
 import requests
+import json
+
+
 
 # Set up the URL and data to be posted
-url = 'http://localhost:8000/api/customer'
-data = {'email': 'a', 'pwd': 'a'}
+url = 'http://localhost:8000/api/customer/commands'
+data = {'cmds': 'BRRRRRR345678'}
 
 
 
-response = requests.post(url, data=data)
+response = requests.post(url, data=json.dumps(data))
 
-# Check the response status code and content
-if response.status_code == 200:
-    print('Data posted successfully.')
-    print(response.content)
-else:
-    print('Error posting data:', response.status_code)
+
+print(response.content)
+
 
 
 

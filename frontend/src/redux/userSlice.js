@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import axios from "axios";
 
 
 const userSlice = createSlice({
@@ -8,6 +8,7 @@ const userSlice = createSlice({
     email:"",
     password:"",
     badAttempt:false,
+    commands:[],
   },
   reducers:{
     logUser: (state,action) => {
@@ -32,13 +33,26 @@ const userSlice = createSlice({
       state.email=" "
       state.password=""
       console.log('mal rbo')
+    },
+    addCommand : (state,action) => {
+      state.commands = [...state.commands, action.payload]
+      // state.commands = action.payload
+      console.log('WILL UPDATE COMMANDS ')
+      try {
+          axios
+              .post('/api/customer/commands',{cmds:action.payload})
+              .then((res)=> console.log(res.data))
+              .catch((err) => console.log('ERR during AXIOS to update commands'))
+      } catch (err) {
+        console.log('ERR during TRY to update commands') ;
+      }
     }
   }
 })
 
 
 
-export const { logUser , badUser , newUser , updateUser , logOutUser} = userSlice.actions ; 
+export const { logUser , badUser , newUser , updateUser , logOutUser , addCommand} = userSlice.actions ; 
 export default userSlice.reducer ;
 
 

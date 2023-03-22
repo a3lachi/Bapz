@@ -156,7 +156,11 @@ const Checkout = (products) => {
             }
             else {
                 return(
+                    <>
+                    <Navbar />
                     <Success />
+                    <Footer />
+                    </>
                 )
             }
         }
