@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const Container = styled.div`
     height: 60px;
     margin-bottom:15px;
+    padding-bottom:20px;
     ${mobile({ height: "50px" })}
 `;
 
@@ -53,13 +54,10 @@ const Center = styled.div`
     text-align: center;
 `;
 
-const Logo = styled.h1`
-    font-weight: bold;
-    transition: all 0.5s ease;
+const Logo = styled.img`
+    width:50px;
     display: inline-block;
-    &:hover {
-        transform: scale(1.3);
-    }
+   
     ${mobile({ fontSize: "22px", whiteSpace: "nowrap", padding:"2px 3px"})}
 `
 
@@ -86,9 +84,10 @@ const styleLink = {
 }
 
 
-const Navbar = (id) => {
+const Navbar = () => {
 
     var itms = useSelector((state) =>  state.cart.itms)
+    const userEmail = useSelector((state) =>  state.user.email)
 
     return (
         <Container >
@@ -102,11 +101,11 @@ const Navbar = (id) => {
                 </Left>
                 <Center>
                     <Link style={styleLink} to='/'>
-                        <Logo>ALL-3</Logo>
+                        <Logo  src='/images/bapelogo.svg' />
                     </Link>
                 </Center>
                 <Right>
-                {id.id ? 
+                {userEmail.length>2 ? 
                 <Link style={styleLink} to="/profil">
                 <MenuItem>PROFIL</MenuItem>
                 </Link>

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import { mobile } from '../responsive';
+import {Link} from 'react-router-dom';
+
 import {
     Facebook,
     Instagram,
@@ -92,28 +94,35 @@ const ContactItem = styled.div`
 const Payment = styled.img`
     width: 50%;
 `;
+const Logos= styled.img`
+    width:90px;
+    display: inline-block;
+   
+    ${mobile({ fontSize: "22px", whiteSpace: "nowrap", padding:"2px 3px"})}
+`
 
+ const Bottom = styled.div`
+ `
 
 const Footer = () => {
     return (
         <Container className='row'>
             <Left>
-                <Logo>Bapz</Logo>
+                <Link to='/'>
+                    <Logos  src='/images/bapelogo.svg' />
+                </Link>
                 <Desc>
                     This text should in no way exhibit a failed humouristic attempt to impress the reader's eyes, I should have sticked with Lorep Imsup.
                 </Desc>
                 <SocialContainer>
-                    <SocialIcon color="3B5999">
+                    <SocialIcon color="none">
                         <Facebook />
                     </SocialIcon>
-                    <SocialIcon color="E4405F">
+                    <SocialIcon color="none">
                         <Instagram />
                     </SocialIcon>
-                    <SocialIcon color="55ACEE">
+                    <SocialIcon color="none">
                         <Twitter />
-                    </SocialIcon>
-                    <SocialIcon color="E60023">
-                        <Pinterest />
                     </SocialIcon>
                 </SocialContainer>
             </Left>
@@ -142,8 +151,8 @@ const Footer = () => {
                 <ContactItem>
                     <MailOutline style={{marginRight:"10px"}} /> contact@bapz.io
                 </ContactItem>
-                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
             </Right>
+            <Bottom></Bottom>
         </Container>
     )
 }

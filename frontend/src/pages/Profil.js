@@ -6,7 +6,12 @@ import Announcement from '../components/Announcement';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
-import styled from 'styled-components'
+import styled from 'styled-components';
+import {logOutUser} from '../redux/userSlice';
+import { store }  from '../redux/store';
+import { useDispatch} from 'react-redux';
+
+import { useEffect } from 'react';
 
 
 const Container = styled.div`
@@ -27,16 +32,19 @@ const Wrapper = styled.div`
 `
 
 const Profil = (id) => {
+    const dispatch = useDispatch()
+
     return (
         <div className='col'>
             <Announcement />
-            <Navbar id={id.id} />
+            <Navbar />
 
             <Container>
 
                 <Wrapper>
                     EMAIL : {id.id}
                 </Wrapper>
+                <button onClick={()=>store.dispatch(logOutUser())} >LOG OUT</button>
             </Container>
 
             <Announcement />

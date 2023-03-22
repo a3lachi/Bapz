@@ -50,12 +50,12 @@ const App = () => {
 
           <Route path="/apparel/:category/:productname"  element={<Product id={user}  />} />
 
-          <Route path="/login" element={  user ? <Navigate to='/' /> : <Login />  }    />
+          <Route path="/login" element={  user.length>2 ? <Navigate to='/' /> : <Login />  }    />
 
           <Route path="/profil"  element={<Profil id={user} />} />
              
 
-          <Route path="/register" element={ user ? <Navigate to='/' /> :  <Register />} />
+          <Route path="/register" element={ user.length>2 ? <Navigate to='/' /> :  <Register />} />
 
           <Route path="/cart" element={ <Cart id={user}  />} />
 

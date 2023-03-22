@@ -27,13 +27,18 @@ const userSlice = createSlice({
     },
     updateUser:(state,action) => {
       state.email = JSON.parse(window.localStorage.getItem('user'))
+    },
+    logOutUser:(state,action) => {
+      state.email=" "
+      state.password=""
+      console.log('mal rbo')
     }
   }
 })
 
 
 
-export const { logUser , badUser , newUser , updateUser} = userSlice.actions ; 
+export const { logUser , badUser , newUser , updateUser , logOutUser} = userSlice.actions ; 
 export default userSlice.reducer ;
 
 

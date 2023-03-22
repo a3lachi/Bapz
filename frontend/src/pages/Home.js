@@ -15,8 +15,8 @@ const Home = (id) => {
     return (
         <div className='col'>
             <Announcement />
-            <Navbar id={id.id} />
-            <Slider />
+            <Navbar />
+            {/* <Slider /> */}
             <Categories />
             <Products />
             <Announcement />
