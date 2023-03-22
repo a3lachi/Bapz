@@ -52,7 +52,7 @@ const App = () => {
 
           <Route path="/login" element={  user.length>2 ? <Navigate to='/' /> : <Login />  }    />
 
-          <Route path="/profil"  element={<Profil id={user} />} />
+          <Route path="/profil"  element={  user.length>2 ?   <Profil id={user} /> : <Navigate to='/' /> } />
              
 
           <Route path="/register" element={ user.length>2 ? <Navigate to='/' /> :  <Register />} />

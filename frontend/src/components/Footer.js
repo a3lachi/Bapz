@@ -102,17 +102,20 @@ const Logos= styled.img`
 `
 
  const Bottom = styled.div`
+    height:10vw;
+    background-color:black;
  `
 
 const Footer = () => {
     return (
+        <>
         <Container className='row'>
             <Left>
                 <Link to='/'>
                     <Logos  src='/images/bapelogo.svg' />
                 </Link>
                 <Desc>
-                    This text should in no way exhibit a failed humouristic attempt to impress the reader's eyes, I should have sticked with Lorep Imsup.
+                © 2023 BAPE Hong Kong Limited
                 </Desc>
                 <SocialContainer>
                     <SocialIcon color="none">
@@ -127,13 +130,11 @@ const Footer = () => {
                 </SocialContainer>
             </Left>
             <Center>
-                <Title>Useful Links</Title>
+                <Title>Explore</Title>
                 <List>
-                    <ListItem>Home</ListItem>
+                    <ListItem>News</ListItem>
                     <ListItem>Cart</ListItem>
-                    <ListItem>Man Fashion</ListItem>
-                    <ListItem>Woman Fashion</ListItem>
-                    <ListItem>Accessories</ListItem>
+                    <ListItem>Fashion</ListItem>
                     <ListItem>My Account</ListItem>
                     <ListItem>Order Tracking</ListItem>
                     <ListItem>Wishlist</ListItem>
@@ -141,19 +142,17 @@ const Footer = () => {
                 </List>
             </Center>
             <Right>
-                <Title>Contact</Title>
+                <Title>Keep in touch</Title>
                 <ContactItem>
-                    <Room style={{marginRight:"10px"}}/> 11 rue de Médecis  , Clermont-Ferrand 63000
-                </ContactItem>
-                <ContactItem>
-                    <Phone style={{marginRight:"10px"}}/> +33 999 666 333
+                    <Room style={{marginRight:"10px"}}/> 22 All. Alan Turing , Clermont-Ferrand 63000
                 </ContactItem>
                 <ContactItem>
                     <MailOutline style={{marginRight:"10px"}} /> contact@bapz.io
                 </ContactItem>
             </Right>
-            <Bottom></Bottom>
+            
         </Container>
+        </>
     )
 }
 

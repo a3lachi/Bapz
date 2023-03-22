@@ -7,6 +7,7 @@ import {useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import { store } from '../redux/store'
 import {addOne} from '../redux/cartSlice'
+import { mobile } from '../responsive';
 
 const Smta = styled.div`
   position: absolute;
@@ -46,8 +47,9 @@ const Text = styled.div`
 
 const Container = styled.div`
   flex: 1;
-  margin: 5px;
-  min-width: 280px;
+  margin: 20px;
+  min-width: 440px;
+  ${mobile({ minWidth: "100%"})}
   height: 350px;
   display: flex;
   z-index:5;

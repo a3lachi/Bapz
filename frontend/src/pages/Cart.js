@@ -223,7 +223,6 @@ const Cart = (id) => {
             </Container>
             
             
-            <Newsletter />
             <Footer />
         </>
     )
