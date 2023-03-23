@@ -19,6 +19,7 @@ class Customer(models.Model) :
     pwd = models.TextField()
     ids = models.IntegerField()
     commands = models.TextField()
+    jwt = models.TextField()
 
     def _str_(self):
         return self.title

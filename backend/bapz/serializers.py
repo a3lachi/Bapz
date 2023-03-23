@@ -11,4 +11,4 @@ class BapzSerializer(serializers.ModelSerializer):
 class CustomerSerializer(serializers.ModelSerializer) :
     class Meta:
         model = Customer
-        fields = ('email','pwd','id','commands')
+        fields = ('email','pwd','id','commands','jwt')

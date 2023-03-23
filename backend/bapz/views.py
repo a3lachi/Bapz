@@ -1,3 +1,4 @@
+import datetime
 
 import json
 from django.http import HttpResponse , HttpResponseNotFound , JsonResponse
@@ -9,7 +10,8 @@ from .serializers import CustomerSerializer
 from .models import Bapz
 from .models import Customer
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
+
+import jwt
 
 class BapzView(generics.ListAPIView):
     serializer_class = BapzSerializer
@@ -54,17 +56,11 @@ def GetCustomer(request):
             if len(json_data)==2 :
                 em = json_data['email']
                 pd = json_data['pwd']
-                print(em)
-                print(pd)
-                if len(Customer.objects.filter(email=em , pwd=pd))>0 :
-                    try :
-                        print('ha blank', csrf_exempt(GetCustomer) )
-                    except:
-                        print('mabghach')
-                    res = JsonResponse({'isUser':"yes"})
-                    res.set_cookie(key='userCookie', value='brrr', max_age=3600)
-                    
-                    return res 
+                usr = Customer.objects.filter(email=em , pwd=pd)
+                if len(usr)>0 :
+                    token = jwt.encode({"email":em , "brr":str(datetime.datetime.now())}, key='secret')  ## added brr to make jwt unique
+                    usr.update(jwt= token)
+                    return JsonResponse({'isUser':"yes" , "jwt":token})
                 else :
                     return JsonResponse({'isUser':"no"})  
                 
@@ -75,7 +71,6 @@ def GetCustomer(request):
                 if len(Customer.objects.filter(email=em))>0 :
                     return JsonResponse({'info':"exist"}) 
                 else :
-                    print("ADDING TO DB")
                     Customer.objects.create(email=em , pwd=pd )
                     return JsonResponse({'info':"new"})
 
