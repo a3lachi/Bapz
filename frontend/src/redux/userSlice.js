@@ -16,6 +16,7 @@ const userSlice = createSlice({
       state.email = action.payload
       state.badAttempt = false
       window.localStorage.setItem('user', JSON.stringify(state.email));
+      document.cookie = "username="+action.payload
     },
     badUser: (state,action) => {
       console.log('NOT A USER ')
@@ -35,12 +36,19 @@ const userSlice = createSlice({
       console.log('mal rbo')
     },
     addCommand : (state,action) => {
-      state.commands = [...state.commands, action.payload]
+      // state.commands = [...state.commands, action.payload]
       // state.commands = action.payload
-      console.log('WILL UPDATE COMMANDS ')
+      
+      const camds = action.payload.cmds
+      console.log('ha chosel',camds[0])
+      var cemds = ""
+      for (let i=0 ; i<camds.length ; i++) {
+        cemds += camds[i].color + ',' + camds[i].size + ',' + camds[i].quantity + ',' + camds[i].ids +'@'
+      }
+      console.log('WILL UPDATE COMMANDS ',cemds)
       try {
           axios
-              .post('/api/customer/commands',{cmds:action.payload})
+              .post('/api/customer/commands',{user:state.email ,cmds:cemds})
               .then((res)=> console.log(res.data))
               .catch((err) => console.log('ERR during AXIOS to update commands'))
       } catch (err) {

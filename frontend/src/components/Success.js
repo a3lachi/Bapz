@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { useSelector , useDispatch } from "react-redux";
 import { delCart } from "../redux/cartSlice";
+import { addCommand } from '../redux/userSlice'
 import { store } from '../redux/store'
 import styled from "styled-components";
 
@@ -36,16 +37,24 @@ const Success = () => {
     
 
     const email = useSelector((state)=>state.user.email)
+    const cart = useSelector((state)=>state.cart.itms)
+
     const [ validpay , setValidpay ] = useState(false)
 
     useEffect(()=>{setTimeout(() => {
         setValidpay(true)
-    }, "4000");}, [])
+    }, "1000");}, [])
       
 
     // if (validpay) {
     //     store.dispatch(delCart())
     // }
+    useEffect(()=>{
+        validpay && store.dispatch(addCommand( { user:email , cmds:cart } ))
+        validpay && store.dispatch(delCart())
+    },[validpay])
+    
+    
     return (
         <>
         <Container>

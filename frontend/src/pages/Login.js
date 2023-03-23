@@ -86,13 +86,22 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
+  const handleLog = (data) => {
+    const instru = data.isUser
+
+    if (instru == "yes") {
+      store.dispatch(logUser(email))
+    }
+    console.log('handleLog',data.isUser)
+  }
+
   const handleClick = (e) => {
     e.preventDefault();
     try {
         axios
             .post('/api/customer',{email:email , pwd:password})
-            .then((res)=> store.dispatch(logUser(email)))
-            .catch((err) => store.dispatch(badUser()))
+            .then((res)=> handleLog(res.data))
+            .catch((err) => store.dispatch(badUser()) )
     } catch (err) {
       store.dispatch(badUser()) ;
     }

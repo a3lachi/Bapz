@@ -49,6 +49,8 @@ def GetCustomer(request):
     if request.method == 'POST':
         try: 
             json_data = json.loads(request.body ) 
+
+            ## Login 
             if len(json_data)==2 :
                 em = json_data['email']
                 pd = json_data['pwd']
@@ -58,6 +60,8 @@ def GetCustomer(request):
                     return JsonResponse({'isUser':"yes"})
                 else :
                     return JsonResponse({'isUser':"no"})  
+                
+            ## Register
             elif len(json_data)>2 :
                 em = json_data['email']
                 pd = json_data['pwd']
@@ -69,23 +73,31 @@ def GetCustomer(request):
                     return JsonResponse({'info':"new"})
 
         except :
-            return JsonResponse({'info':"error"})  
+            return HttpResponseNotFound("Brr")  
     else :
-        return JsonResponse({'info':"error"})  
+        return HttpResponseNotFound("Brr")    
 
 
 
-# @csrf_exempt 
+@csrf_exempt 
 def UpdateCommands(request) :
     serializer_class = CustomerSerializer
     
     if request.method == 'POST':
         try: 
             json_data = json.loads(request.body ) 
-            cmds =  json_data['cmds']
-            print('HA L VIEW',cmds)
+            
+            user =  json_data['user']
+            cmds =  ran = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] 
+
+            usr = Customer.objects.filter(email=user)
+            
+            usr.update(commands= cmds)
+
+
             return JsonResponse({'info':"mrboha"}) 
             
 
         except :
+            print('ZML')
             return JsonResponse({'info':"error"}) 

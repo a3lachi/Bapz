@@ -125,7 +125,7 @@ const Checkout = (products) => {
     const user = useSelector((state)=>state.user)
     products = products.prods
     
-    if (products.length>0) {
+    
         if (user.email) {
 
             console.log('checkout ',user.email)
@@ -138,7 +138,7 @@ const Checkout = (products) => {
                     <Container>
                     <Wrapper>
                     <div style={{marginBottom:'20px'}}><b>MY ORDER</b></div>
-                    { products.map((elem,indx)=>(
+                    { products?.map((elem,indx)=>(
                         <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src[0]+'.jpg'} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
                     ))}
                     
@@ -166,13 +166,18 @@ const Checkout = (products) => {
         }
         else {
             return(
-                <div>You have to register or login.</div>
+                <>
+                    <Navbar />
+                    <Container>
+                        <Wrapper>
+                            <div>You have to register or login.</div>
+                        </Wrapper>
+                    </Container>
+                
+                <Footer /></>
             )
         }
-    }
-    else {
-        return <></>
-    }
+    
 
 }
 

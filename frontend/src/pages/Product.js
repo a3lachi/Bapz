@@ -190,7 +190,7 @@ const Product = (id) => {
   };
 
     const addToCart = () => {
-      dispatch(addOne({src:currimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size}));
+      dispatch(addOne({src:currimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size , ids:data.ids}));
     };
     const getColor = (event) => {
       setColor(event.target.innerText)
