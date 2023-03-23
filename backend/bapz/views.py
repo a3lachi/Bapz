@@ -57,7 +57,14 @@ def GetCustomer(request):
                 print(em)
                 print(pd)
                 if len(Customer.objects.filter(email=em , pwd=pd))>0 :
-                    return JsonResponse({'isUser':"yes"})
+                    try :
+                        print('ha blank', csrf_exempt(GetCustomer) )
+                    except:
+                        print('mabghach')
+                    res = JsonResponse({'isUser':"yes"})
+                    res.set_cookie(key='userCookie', value='brrr', max_age=3600)
+                    
+                    return res 
                 else :
                     return JsonResponse({'isUser':"no"})  
                 

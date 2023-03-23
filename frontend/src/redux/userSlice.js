@@ -15,7 +15,7 @@ const userSlice = createSlice({
       console.log('HAHWA DKHEL ILOGI ',action.payload)
       state.email = action.payload
       state.badAttempt = false
-      window.localStorage.setItem('user', JSON.stringify(state.email));
+      // window.localStorage.setItem('user', JSON.stringify(state.email));
       document.cookie = "username="+action.payload
     },
     badUser: (state,action) => {
@@ -25,10 +25,10 @@ const userSlice = createSlice({
     newUser:(state,action) => {
       state.email = action.payload
       state.badAttempt = false
-      window.localStorage.setItem('user', JSON.stringify(state.email));
+      // window.localStorage.setItem('user', JSON.stringify(state.email));
     },
     updateUser:(state,action) => {
-      state.email = JSON.parse(window.localStorage.getItem('user'))
+      // state.email = JSON.parse(window.localStorage.getItem('user'))
     },
     logOutUser:(state,action) => {
       state.email=" "

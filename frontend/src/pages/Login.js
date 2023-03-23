@@ -76,6 +76,11 @@ const Error = styled.span`
   color: red;
 `;
 
+const Formvalid = styled.div`
+  margin-top:10px;
+  margin-bottom:10px;
+`
+
 // 1 . GET USERNAME/PASSWORD
 // 2. POST to the backend ------->    login(dispatch, {email, password});
 
@@ -84,27 +89,41 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [ validform , setValidform ] = useState(false)
+  const [ usernotfound , setUsernotfound ] = useState(false)
   const dispatch = useDispatch();
 
   const handleLog = (data) => {
-    const instru = data.isUser
-
-    if (instru == "yes") {
-      store.dispatch(logUser(email))
+    if (data.isUser == "no") {
+      setUsernotfound(true)
+      setValidform(false)
     }
-    console.log('handleLog',data.isUser)
+    else {
+      store.dispatch(logUser(email))
+      setUsernotfound(false)
+    }
   }
-
+  
   const handleClick = (e) => {
     e.preventDefault();
-    try {
-        axios
-            .post('/api/customer',{email:email , pwd:password})
-            .then((res)=> handleLog(res.data))
-            .catch((err) => store.dispatch(badUser()) )
-    } catch (err) {
-      store.dispatch(badUser()) ;
+    const setEm = new Set(email)
+    if (setEm.has('@')) {
+      setValidform(false)
+      try {
+          axios
+              .post('/api/customer',{email:email , pwd:password})
+              .then((res)=> handleLog(res.data))
+              .catch((err) => store.dispatch(badUser()) )
+      } catch (err) {
+        store.dispatch(badUser()) ;
+      }
     }
+    else {
+      setValidform(true)
+      setUsernotfound(false)
+    }
+    
   }
 
 
@@ -128,6 +147,8 @@ const Login = () => {
           />
           <Button onClick={handleClick} >LOGIN</Button>
           {/* {error && <Error>Something went wrong...</Error>} */}
+          { validform && <Formvalid>Please check your information. Your email is not well formatted.</Formvalid>}
+          { usernotfound && <Formvalid>Couldn't find user.</Formvalid>}
           <Link>Forgot my password</Link>
         </Form>
       </Wrapper>
