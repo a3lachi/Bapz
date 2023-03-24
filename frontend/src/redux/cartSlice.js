@@ -11,9 +11,9 @@ const cartSlice = createSlice({
       addOne: (state , action) => {
         var indic = 0
         for (let i=0;i<state.itms.length;i++) {
-          if (state.itms[i].productname == action.payload.productname ) {
-            if ( state.itms[i].color == action.payload.color ) {
-              if ( state.itms[i].size == action.payload.size ) {
+          if (state.itms[i].productname === action.payload.productname ) {
+            if ( state.itms[i].color === action.payload.color ) {
+              if ( state.itms[i].size === action.payload.size ) {
                 state.itms[i].quantity += action.payload.quantity
                 indic = 1
               }
@@ -21,7 +21,7 @@ const cartSlice = createSlice({
             
           }
         }
-        if (indic == 0 )
+        if (indic === 0 )
         {state.itms = [...state.itms, action.payload]; }
         window.localStorage.setItem('state', JSON.stringify(state.itms));
         
@@ -35,10 +35,9 @@ const cartSlice = createSlice({
       },
       updateQtty : (state,action) => {
         state.itms[action.payload].quantity -= 1 
-        if ( state.itms[action.payload].quantity == 0 ) {
+        if ( state.itms[action.payload].quantity === 0 ) {
           state.itms.splice(action.payload,1)
         }
-        console.log('NQSSNA',action.payload)
         window.localStorage.setItem('state', JSON.stringify(state.itms));
       }
     }

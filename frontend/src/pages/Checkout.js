@@ -125,7 +125,6 @@ const Checkout = (products) => {
     
         if (user.jwt) {
 
-            console.log('checkout ',user.email)
 
             if (!pay) {
                 return (

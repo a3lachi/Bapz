@@ -98,7 +98,6 @@ const ProductSmall = ({id,item,cat}) => {
   const location = useLocation();
   const name = location.pathname.split("/")
 
-  console.log('555555 ',item)
   var too ="brr"
   if (name.length>2) {
     too =  item[0] ;

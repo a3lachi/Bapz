@@ -1,12 +1,9 @@
 import Navbar from '../components/Navbar';
-import Products from '../components/Products';
 import Announcement from '../components/Announcement';
 import Categories from '../components/Categories';
-import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import { useSelector , useDispatch} from "react-redux";
-import axios from 'axios';
-import { useState , useEffect} from 'react'
+import { useState } from 'react'
 
 import styled from "styled-components"
 import { mobile } from '../responsive';
@@ -170,7 +167,6 @@ const Cart = () => {
     const emptyCart = (event) =>{
         store.dispatch(delCart())
     }
-    console.log('CARTA  ',products)
     const [ chkout , setChkout ] = useState(false)
 
 

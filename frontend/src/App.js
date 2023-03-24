@@ -42,7 +42,6 @@ const App = () => {
   // jwt is found to be equal to "jwt=expiry date" right after deleting the cookie
   if (jwwt.length > jwt.length || jwt.split('=').length>1) {
     store.dispatch(setJwt(jwwt))
-    console.log('fra')
   }
 
   const storedCart =  JSON.parse(window.localStorage.getItem('state')) 
