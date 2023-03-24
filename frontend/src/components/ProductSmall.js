@@ -1,12 +1,9 @@
-import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
+import { FavoriteBorderOutlined, SearchOutlined } from '@mui/icons-material';
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import { store } from '../redux/store'
-import {addOne} from '../redux/cartSlice'
 import { mobile } from '../responsive';
 
 const Smta = styled.div`
@@ -96,11 +93,12 @@ const styleLink = {
   color: "#874800" ,    
 }
 
-const ProductSmall = ({id,item}) => {
-  const dispatch = useDispatch();
+const ProductSmall = ({id,item,cat}) => {
 
   const location = useLocation();
   const name = location.pathname.split("/")
+
+  console.log('555555 ',item)
   var too ="brr"
   if (name.length>2) {
     too =  item[0] ;
@@ -109,9 +107,6 @@ const ProductSmall = ({id,item}) => {
     too =  "apparel/" + item.category + "/" + item.productname ;
   }
   
-  const handleClick =() => {
-    store.dispatch(addOne([item.ids]))
-  }
 
   const ara = (ch) => {
     if (item[1].length>1) 
@@ -127,8 +122,8 @@ const ProductSmall = ({id,item}) => {
     const aydi = event.target.id
     const elems = document.getElementById('brr') 
     elems.childNodes.forEach((elem)=>{
-      if (elem.id == aydi) {
-        if (payload=='leave')
+      if (elem.id === aydi) {
+        if (payload==='leave')
           elem.childNodes[1].src=ara(1)
         else 
           elem.childNodes[1].src=ara(0)
@@ -137,7 +132,7 @@ const ProductSmall = ({id,item}) => {
   }
   
   return (
-      <Container id={id} onClick={(e) => navigate(item[0])}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
+      <Container id={id} onClick={(e) => navigate('/apparel/'+cat + "/" +item[0])}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
           <Text id={id} >{item[0]}</Text>
           <Image id={id} src ={ara(0)} />
           <Smta id={id}>
@@ -153,7 +148,7 @@ const ProductSmall = ({id,item}) => {
                 <Icon id={id}>
                     <FavoriteBorderOutlined id={id}
                       onClick={
-                        (e)=>{ e.stopPropagation() ; e.target.style.color=="red" 
+                        (e)=>{ e.stopPropagation() ; e.target.style.color==="red" 
                             ? e.target.style.color="black" 
                             : e.target.style.color="red" }
                       }

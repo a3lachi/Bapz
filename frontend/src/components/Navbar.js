@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import {Link} from 'react-router-dom';
-import { Opacity, Search, ShoppingCartOutlined } from '@mui/icons-material';
-import { Badge, rgbToHex } from '@mui/material';
-import { red } from '@mui/material/colors';
+import {   ShoppingCartOutlined } from '@mui/icons-material';
+import { Badge } from '@mui/material';
 import { useSelector } from "react-redux";
 
 
@@ -36,18 +35,7 @@ const Language = styled.span`
     ${mobile({ display: "none" })}
 `;
 
-const SearchContainer = styled.div`
-    border: 0.5px solid lightgray;
-    display: flex;
-    align-items: center;
-    padding: 5px;
 
-`;
-
-const Input = styled.input`
-    border: none;
-    ${mobile({ width: "50px"})}
-`
 
 const Center = styled.div`
     flex: 1;

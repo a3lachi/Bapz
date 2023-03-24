@@ -134,14 +134,12 @@ const Color = styled.div`
 
 
 const Product = (id) => {
-
   const dispatch = useDispatch()
 
   const [data , setData] = useState([])
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [ img , setImg ]  = useState([])
   const [ currimg , setCurrimg ] = useState([])
   const [ apprimg , setApparimg ] = useState("")
 
@@ -151,20 +149,17 @@ const Product = (id) => {
   const name = location.pathname.split("/")[3];
 
   const nospaceName = name.split('%20').join(' ')
-  console.log('---LOL--',nospaceName)
   const HandleData = (datax) => {
     
     
     
     const data = JSON.parse(datax.data)[0].fields
     
-    console.log('AXIOS---',data)
     const sources = datax.src.sort().map(element => '/media/images/'+element )
 
     setData(data)
     setColor(data.color.split(',')[0])
     setSize(data.size.split(',')[0])
-    console.log('DATA---DATA-------',sources)
     setCurrimg(sources)
     setApparimg(sources[0])
     
@@ -172,16 +167,15 @@ const Product = (id) => {
     
   }
   useEffect(()=>{
+
+    
       axios
           .post(`/api/bapz/product`,{name:nospaceName} )
           .then((res) =>(HandleData(res.data)))
           .then()
           .catch((err) => console.log(err));
-  }, [])
+  }, [nospaceName])
     
-  
-  console.log('HA LIMGG',img)
-  console.log('CURR ',currimg)
   
 
   const handleQuantity = (type) => {
@@ -204,11 +198,11 @@ const Product = (id) => {
     useEffect(()=>{
       if (lerz && lerz[0])
         setColor(lerz[0])
-    },[])
+    },[lerz])
     
     const leftImg = (event) => {
       const ids = currimg.indexOf(apprimg)
-      if (ids == currimg.length-1) {
+      if (ids === currimg.length-1) {
         setApparimg(currimg[0])
       }
       else {
@@ -218,7 +212,7 @@ const Product = (id) => {
 
     const rightImg = (event) => {
       const ids = currimg.indexOf(apprimg)
-      if (ids == 0) {
+      if (ids === 0) {
         setApparimg(currimg[currimg.length-1])
       }
       else {

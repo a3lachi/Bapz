@@ -29,7 +29,7 @@ const Products = ({cat, filters, sort}) =>{
         return(
             <Container id='brr' className="row">
                 {cat 
-                ? data.map((item,index) => { return <ProductSmall id={index} item={item} /> })
+                ? data.map((item,index) => { return <ProductSmall id={index} item={item} cat={cat}/> })
                 : data.map((item,index) => { return <ProductSmall id={index} key={index} item={item} /> } )}
                 
             </Container>
@@ -38,7 +38,7 @@ const Products = ({cat, filters, sort}) =>{
     }
     else  {
         return(
-            <div style="height:1000px" ></div>
+            <div style={{height:'1000px'}} ></div>
         )
     }
     

@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { TextField , Input , Button} from '@mui/material';
+import {   Input } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { useSelector } from "react-redux";
 import styled from 'styled-components'
 import Success from '../components/Success'
 import Navbar from '../components/Navbar';
-import Products from '../components/Products';
-import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
-import Newsletter from '../components/Newsletter';
 import { mobile , tablet } from '../responsive';
 
 
@@ -73,7 +70,7 @@ const Checkout = (products) => {
         const tol = texte.length
         var tt = ""
         for (let i=0 ; i<tol ; i++) {
-            if (texte[i]!= " ") {
+            if (texte[i]!== " ") {
                 tt+=texte[i]
             }
         }
@@ -82,7 +79,7 @@ const Checkout = (products) => {
         const pol = tt.length
         if (tol>1) {
             for (let i=1 ; i<pol ;i++) {
-                if ((i+1)%4==0) {
+                if ((i+1)%4===0) {
                     tex+=tt[i]+" "
                 }
                 else {
@@ -98,7 +95,7 @@ const Checkout = (products) => {
         const tol = texte.length 
         var tt = ""
         for (let i=0 ; i<tol ; i++) {
-            if (texte[i]!= "/") {
+            if (texte[i]!== "/") {
                 tt+=texte[i]
             }
         }
@@ -106,7 +103,7 @@ const Checkout = (products) => {
         const pol = tt.length
         if (tol>1) {
             for (let i=1 ; i<pol ;i++) {
-                if ((i+1)%2==0) {
+                if ((i+1)%2===0) {
                     tex+=tt[i]+"/"
                 }
                 else {
