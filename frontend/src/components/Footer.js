@@ -7,8 +7,6 @@ import {
     Facebook,
     Instagram,
     MailOutline,
-    Phone,
-    Pinterest,
     Room,
     Twitter,
   } from "@mui/icons-material";
@@ -33,7 +31,6 @@ const Left = styled.div`
     
 `;
 
-const Logo = styled.h1``;
 
 const Desc = styled.p`
   margin: 20px 0px;
@@ -91,9 +88,7 @@ const ContactItem = styled.div`
   align-items: center;
 `;
 
-const Payment = styled.img`
-    width: 50%;
-`;
+
 const Logos= styled.img`
     width:90px;
     display: inline-block;
@@ -101,10 +96,6 @@ const Logos= styled.img`
     ${mobile({ fontSize: "22px", whiteSpace: "nowrap", padding:"2px 3px"})}
 `
 
- const Bottom = styled.div`
-    height:10vw;
-    background-color:black;
- `
 
 const Footer = () => {
     return (
@@ -112,7 +103,7 @@ const Footer = () => {
         <Container className='row'>
             <Left>
                 <Link to='/'>
-                    <Logos  src='/images/bapelogo.svg' />
+                    <Logos  src='/media/images/bapelogo.svg' />
                 </Link>
                 <Desc>
                 © 2023 BAPE Hong Kong Limited
