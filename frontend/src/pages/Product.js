@@ -193,11 +193,7 @@ const Product = (id) => {
   };
 
     const addToCart = () => {
-<<<<<<< HEAD
       dispatch(addOne({src:apprimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size , ids:data.ids}));
-=======
-      dispatch(addOne({src:currimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size , ids:data.ids}));
->>>>>>> cfad037e06fa48db7a161dae2e555dd2bf174c43
     };
 
 
