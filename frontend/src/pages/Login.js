@@ -5,7 +5,7 @@ import {mobile} from "../responsive";
 import { useState } from "react";
 import Footer from '../components/Footer'
 import {useDispatch, useSelector} from "react-redux";
-import { logUser , badUser } from "../redux/userSlice";
+import { logUser , badUser , setJwt} from "../redux/userSlice";
 import Navbar from '../components/Navbar';
 
 
@@ -101,6 +101,7 @@ const Login = () => {
     }
     else {
       store.dispatch(logUser(email))
+      store.dispatch(setJwt(data.jwt))
       setUsernotfound(false)
     }
   }

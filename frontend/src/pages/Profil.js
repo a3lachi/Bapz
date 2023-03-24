@@ -7,11 +7,11 @@ import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
 import styled from 'styled-components';
-import {logOutUser} from '../redux/userSlice';
+import {setJwt , logUser , setCommand}  from '../redux/userSlice';
 import { store }  from '../redux/store';
-import { useDispatch} from 'react-redux';
-
-import { useEffect } from 'react';
+import { useDispatch , useSelector} from 'react-redux';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 
 const Container = styled.div`
@@ -31,8 +31,26 @@ const Wrapper = styled.div`
 
 `
 
-const Profil = (id) => {
+const handleRes = (data,dispatch,setCmds,setEmail) => {
+    if (data.user == "yes") {
+        store.dispatch(logUser(data.email))
+        store.dispatch(setCommand(data.commands))
+        setCmds(data.commands)
+        setEmail(data.email)
+    }
+}
+
+const Profil = () => {
     const dispatch = useDispatch()
+    const jwwt = useSelector((state) =>  state.user.jwt)
+
+    const [ cmds , setCmds ] = useState([])
+    const [ email , setEmail ] = useState("")
+
+    axios
+        .post('/api/customer/token',{jwt:jwwt})
+        .then((res)=> handleRes(res.data,dispatch,setCmds,setEmail))
+        .catch((err) => console.log("Error during fetching customer profil data.") )
 
     return (
         <div className='col'>
@@ -42,9 +60,10 @@ const Profil = (id) => {
             <Container>
 
                 <Wrapper>
-                    EMAIL : {id.id}
+                    <div>EMAIL : {email}</div>
+                    <div>COMMANDS : {cmds}</div>
                 </Wrapper>
-                <button onClick={()=>store.dispatch(logOutUser())} >LOG OUT</button>
+                <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button>
             </Container>
 
             <Announcement />

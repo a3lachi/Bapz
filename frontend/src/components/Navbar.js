@@ -87,7 +87,9 @@ const styleLink = {
 const Navbar = () => {
 
     var itms = useSelector((state) =>  state.cart.itms)
-    const userEmail = useSelector((state) =>  state.user.email)
+    const jwtExist = useSelector((state) =>  state.user.jwt)
+
+    
 
     return (
         <Container >
@@ -105,7 +107,7 @@ const Navbar = () => {
                     </Link>
                 </Center>
                 <Right>
-                {userEmail.length>2 ? 
+                {jwtExist?.length>5 ? 
                 <Link style={styleLink} to="/profil">
                 <MenuItem>PROFIL</MenuItem>
                 </Link>

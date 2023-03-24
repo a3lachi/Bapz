@@ -15,4 +15,5 @@ urlpatterns = [
     # path('api/customer', views.PostUser.as_view() ),
     path('api/customer', views.GetCustomer),
     path('api/customer/commands', views.UpdateCommands),
+    path('api/customer/token', views.getUserJwt),
 ]

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 
 const Container = styled.div`
     padding: 20px;
+    display:flex;
     ${mobile({ padding: "0px", flexDirection:"column" })}
 `
 
@@ -58,8 +59,8 @@ const styleLink = {
 
 
 const Categories = () => {
-    const categories = ['T-shirts','Hoodies','Pants','Sneakers','Hats','Bags','Watches']
-    const categoriesBackend = ['t-shirt','hoodie','pants','sneakers','hats','bags','watches']
+    const categories = ['T-shirts','Hoodies','Shirts','Pants','Shoes','Hats','Bags','Watches']
+    const categoriesBackend = ['t-shirts','sweats','shirts','pants','shoes','hats','bags','watches']
 
 
     const too = (idx) => { return '/apparel/'+categoriesBackend[idx] }

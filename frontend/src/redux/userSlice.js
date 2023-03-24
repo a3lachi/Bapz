@@ -8,6 +8,7 @@ const userSlice = createSlice({
     email:"",
     password:"",
     badAttempt:false,
+    jwt:"",
     commands:[],
   },
   reducers:{
@@ -15,8 +16,6 @@ const userSlice = createSlice({
       console.log('HAHWA DKHEL ILOGI ',action.payload)
       state.email = action.payload
       state.badAttempt = false
-      // window.localStorage.setItem('user', JSON.stringify(state.email));
-      document.cookie = "username="+action.payload
     },
     badUser: (state,action) => {
       console.log('NOT A USER ')
@@ -34,8 +33,12 @@ const userSlice = createSlice({
       state.email=" "
       state.password=""
       console.log('mal rbo')
+      document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     },
-    addCommand : (state,action) => {
+    setCommand: (state,action) => { // after fetch  from database
+      state.commands = action.payload
+    },
+    addCommand : (state,action) => { // add to database
       // state.commands = [...state.commands, action.payload]
       // state.commands = action.payload
       
@@ -54,13 +57,18 @@ const userSlice = createSlice({
       } catch (err) {
         console.log('ERR during TRY to update commands') ;
       }
+    },
+    setJwt : (state,action) => {
+      // console.log('WHAT TO SET JWT TO : ',action.payload)
+      state.jwt = action.payload
+      document.cookie = "jwt="+action.payload+";"
     }
   }
 })
 
 
 
-export const { logUser , badUser , newUser , updateUser , logOutUser , addCommand} = userSlice.actions ; 
+export const { logUser , badUser , newUser , updateUser , logOutUser , addCommand , setJwt , setCommand} = userSlice.actions ; 
 export default userSlice.reducer ;
 
 

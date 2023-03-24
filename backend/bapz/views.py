@@ -71,8 +71,10 @@ def GetCustomer(request):
                 if len(Customer.objects.filter(email=em))>0 :
                     return JsonResponse({'info':"exist"}) 
                 else :
-                    Customer.objects.create(email=em , pwd=pd )
-                    return JsonResponse({'info':"new"})
+                    token = jwt.encode({"email":em , "brr":str(datetime.datetime.now())}, key='secret')
+                    Customer.objects.create(email=em , pwd=pd , jwt=token )
+                    
+                    return JsonResponse({'info':"new" , 'jwt':token})
 
         except :
             return HttpResponseNotFound("Brr")  
@@ -90,7 +92,7 @@ def UpdateCommands(request) :
             json_data = json.loads(request.body ) 
             
             user =  json_data['user']
-            cmds =  ran = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] 
+            cmds  = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] 
 
             usr = Customer.objects.filter(email=user)
             
@@ -103,3 +105,20 @@ def UpdateCommands(request) :
         except :
             print('ZML')
             return JsonResponse({'info':"error"}) 
+
+@csrf_exempt 
+def getUserJwt(request) :
+    if request.method == 'POST':
+        try : 
+            json_data = json.loads(request.body ) 
+            jwwt =  json_data['jwt']
+            cus = Customer.objects.filter(jwt=jwwt)
+            if len(cus)>0 :
+                em = Customer.objects.get(jwt=jwwt).email
+                cmds = Customer.objects.get(jwt=jwwt).commands
+                return JsonResponse({'user':'yes','email':em , 'commands':cmds}) 
+            else : 
+                return JsonResponse({'user':'no'}) 
+
+        except :
+            return HttpResponseNotFound("Brr") 

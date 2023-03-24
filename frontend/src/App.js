@@ -1,5 +1,5 @@
 import './App.css';
-import { Component } from 'react';
+import { Component, useEffect, useState } from 'react';
 import axios from "axios";
 import {
   BrowserRouter as Router,
@@ -17,29 +17,39 @@ import Login from './pages/Login'
 import Profil from './pages/Profil'
 import Register from './pages/Register'
 import Cart from './pages/Cart'
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import { updateCart } from './redux/cartSlice';
-import { updateUser } from './redux/userSlice'
+import { updateUser , setJwt } from './redux/userSlice'
 import { store } from './redux/store'
 import Checkout from './pages/Checkout';
 
+
 const App = () => {
+
+  const dispatch = useDispatch()
 
   const user = useSelector((state) =>  state.user.email) ;
   var cart = useSelector((state) =>  state.cart.itms)
 
+  const jwt = useSelector((state) =>  state.user.jwt)
+
+  
+
+
+  const maybeJwt = document.cookie.split("; ").map(element => element.split('=')).filter(element => element[0]=='jwt')[0]
+  const jwwt = maybeJwt ? maybeJwt[1] : ""
+  
+  // jwt is found to be equal to "jwt=expiry date" right after deleting the cookie
+  if (jwwt.length > jwt.length || jwt.split('=').length>1) {
+    store.dispatch(setJwt(jwwt))
+    console.log('fra')
+  }
+
   const storedCart =  JSON.parse(window.localStorage.getItem('state')) 
-  const storedUser =  JSON.parse(window.localStorage.getItem('user')) 
-
-
-
   if (cart?.length == 0 && storedCart?.length>0) {
     store.dispatch(updateCart())
   }
 
-  if (user?.length == 0 && storedUser?.length>0) {
-    store.dispatch(updateUser())
-  }
 
   return (
     <Router>
@@ -50,16 +60,16 @@ const App = () => {
 
           <Route path="/apparel/:category/:productname"  element={<Product id={user}  />} />
 
-          <Route path="/login" element={  user.length>2 ? <Navigate to='/' /> : <Login />  }    />
+          <Route path="/login" element={  jwt.length>2 ? <Navigate to='/' /> : <Login />  }    />
 
-          <Route path="/profil"  element={  user.length>2 ?   <Profil id={user} /> : <Navigate to='/' /> } />
+          <Route path="/profil"  element={  jwt?.length>5 ?   <Profil /> : <Navigate to='/' /> } />
              
 
-          <Route path="/register" element={ user.length>2 ? <Navigate to='/' /> :  <Register />} />
+          <Route path="/register" element={ jwt.length>2 ? <Navigate to='/' /> :  <Register />} />
 
           <Route path="/cart" element={ <Cart id={user}  />} />
 
-          <Route path="/checkout" element={ <Checkout prods={cart}  />} />
+          <Route path="/checkout" element={ cart?.length>0 ? <Checkout prods={cart}  /> : <Navigate to='/' />  } />
 
       </Routes>
     </Router>

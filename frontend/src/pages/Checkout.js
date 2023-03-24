@@ -126,7 +126,7 @@ const Checkout = (products) => {
     products = products.prods
     
     
-        if (user.email) {
+        if (user.jwt) {
 
             console.log('checkout ',user.email)
 
