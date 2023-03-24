@@ -11,11 +11,12 @@ import { useSelector } from "react-redux";
 const Container = styled.div`
     height: 60px;
     margin-bottom:15px;
+    padding-bottom:20px;
     ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
-    padding: 10px 20px;
+    padding: 10px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,13 +54,10 @@ const Center = styled.div`
     text-align: center;
 `;
 
-const Logo = styled.h1`
-    font-weight: bold;
-    transition: all 0.5s ease;
+const Logo = styled.img`
+    width:50px;
     display: inline-block;
-    &:hover {
-        transform: scale(1.3);
-    }
+   
     ${mobile({ fontSize: "22px", whiteSpace: "nowrap", padding:"2px 3px"})}
 `
 
@@ -86,9 +84,12 @@ const styleLink = {
 }
 
 
-const Navbar = (id) => {
+const Navbar = () => {
 
     var itms = useSelector((state) =>  state.cart.itms)
+    const jwtExist = useSelector((state) =>  state.user.jwt)
+
+    
 
     return (
         <Container >
@@ -102,11 +103,11 @@ const Navbar = (id) => {
                 </Left>
                 <Center>
                     <Link style={styleLink} to='/'>
-                        <Logo>ALL-3</Logo>
+                        <Logo  src='/media/images/bapelogo.svg' />
                     </Link>
                 </Center>
                 <Right>
-                {id.id ? 
+                {jwtExist?.length>5 ? 
                 <Link style={styleLink} to="/profil">
                 <MenuItem>PROFIL</MenuItem>
                 </Link>

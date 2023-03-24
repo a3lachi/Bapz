@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import { mobile } from '../responsive';
+import {Link} from 'react-router-dom';
+
 import {
     Facebook,
     Instagram,
@@ -13,6 +15,9 @@ import {
 
 
 const Container = styled.div`
+    padding-bottom:30px;
+    padding-left:30px;
+    padding-right:20px;
     opacity: 0.9;
     display: flex;
     background-color: #874800;
@@ -77,7 +82,7 @@ const ListItem = styled.li`
 const Right = styled.div`
     flex: 1;
     padding: 20px;
-    ${mobile({ backgroundColor: "#eee" })}
+
 `;
 
 const ContactItem = styled.div`
@@ -89,39 +94,47 @@ const ContactItem = styled.div`
 const Payment = styled.img`
     width: 50%;
 `;
+const Logos= styled.img`
+    width:90px;
+    display: inline-block;
+   
+    ${mobile({ fontSize: "22px", whiteSpace: "nowrap", padding:"2px 3px"})}
+`
 
+ const Bottom = styled.div`
+    height:10vw;
+    background-color:black;
+ `
 
 const Footer = () => {
     return (
+        <>
         <Container className='row'>
             <Left>
-                <Logo>Bapz</Logo>
+                <Link to='/'>
+                    <Logos  src='/images/bapelogo.svg' />
+                </Link>
                 <Desc>
-                    This text should in no way exhibit a failed humouristic attempt to impress the reader's eyes, I should have sticked with Lorep Imsup.
+                © 2023 BAPE Hong Kong Limited
                 </Desc>
                 <SocialContainer>
-                    <SocialIcon color="3B5999">
+                    <SocialIcon color="none">
                         <Facebook />
                     </SocialIcon>
-                    <SocialIcon color="E4405F">
+                    <SocialIcon color="none">
                         <Instagram />
                     </SocialIcon>
-                    <SocialIcon color="55ACEE">
+                    <SocialIcon color="none">
                         <Twitter />
-                    </SocialIcon>
-                    <SocialIcon color="E60023">
-                        <Pinterest />
                     </SocialIcon>
                 </SocialContainer>
             </Left>
             <Center>
-                <Title>Useful Links</Title>
+                <Title>Explore</Title>
                 <List>
-                    <ListItem>Home</ListItem>
+                    <ListItem>News</ListItem>
                     <ListItem>Cart</ListItem>
-                    <ListItem>Man Fashion</ListItem>
-                    <ListItem>Woman Fashion</ListItem>
-                    <ListItem>Accessories</ListItem>
+                    <ListItem>Fashion</ListItem>
                     <ListItem>My Account</ListItem>
                     <ListItem>Order Tracking</ListItem>
                     <ListItem>Wishlist</ListItem>
@@ -129,19 +142,17 @@ const Footer = () => {
                 </List>
             </Center>
             <Right>
-                <Title>Contact</Title>
+                <Title>Keep in touch</Title>
                 <ContactItem>
-                    <Room style={{marginRight:"10px"}}/> 11 rue de Médecis  , Clermont-Ferrand 63000
-                </ContactItem>
-                <ContactItem>
-                    <Phone style={{marginRight:"10px"}}/> +33 999 666 333
+                    <Room style={{marginRight:"10px"}}/> 22 All. Alan Turing , Clermont-Ferrand 63000
                 </ContactItem>
                 <ContactItem>
                     <MailOutline style={{marginRight:"10px"}} /> contact@bapz.io
                 </ContactItem>
-                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
             </Right>
+            
         </Container>
+        </>
     )
 }
 

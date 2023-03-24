@@ -4,7 +4,6 @@ import Announcement from '../components/Announcement';
 import Categories from '../components/Categories';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-import Checkout from '../components/Checkout' ;
 import { useSelector , useDispatch} from "react-redux";
 import axios from 'axios';
 import { useState , useEffect} from 'react'
@@ -16,6 +15,7 @@ import RemoveCircleOutlineIcon  from '@mui/icons-material/RemoveCircleOutline';
 import { Icon } from '@mui/material';
 import { store } from '../redux/store'
 import { addOne, delCart  , updateCart , updateQtty } from '../redux/cartSlice';
+import { Navigate } from 'react-router-dom';
  
 
 
@@ -162,7 +162,7 @@ const Qtti = styled.div`
 
 
 
-const Cart = (id) => {
+const Cart = () => {
     var products = useSelector((state) =>  state.cart.itms) 
 
     const dispatch = useDispatch() ;
@@ -170,7 +170,7 @@ const Cart = (id) => {
     const emptyCart = (event) =>{
         store.dispatch(delCart())
     }
-
+    console.log('CARTA  ',products)
     const [ chkout , setChkout ] = useState(false)
 
 
@@ -184,13 +184,11 @@ const Cart = (id) => {
         const aydi = Number(event.target.parentElement.id)
         store.dispatch(updateQtty(aydi))
     }
-    // store.dispatch(delCart())
 
-    console.log('HAHOMA ',products)
     return (
         <>
             <Announcement />
-            <Navbar id={id.id} />
+            <Navbar  />
             <Categories />
             <button onClick={emptyCart}>CLEAR</button>
             <Container key="rtret">
@@ -199,7 +197,7 @@ const Cart = (id) => {
             {!chkout && products ? products.map((item,idx) => ( 
                 <><CartProd key={"rr"+idx} id={'rr'+idx.toString()}  >
 
-                    <Mage ><Image key={idx} src={item?.src[0]+'.jpg'} ></Image></Mage>
+                    <Mage ><Image key={idx} src={item?.src} ></Image></Mage>
 
                     <Info key={idx} >
                     <Name key={idx} >{item.productname}</Name>
@@ -220,12 +218,11 @@ const Cart = (id) => {
 
             {!chkout && ( products?.length>0 ? <CartPro><Total><b>TOTAL:</b> US${tots()}</Total><Buttn onClick={(e)=>setChkout(true)}>CHECKOUT</Buttn></CartPro> : 
             <><div style={{marginBottom:"20px"}} ><b>YOUR BAG</b></div><div>Your bag currently is empty.</div></>)}
-            { chkout && <Checkout prods={products} />}
+            { chkout &&  <Navigate to="/checkout"  />  }
             </Wrapper>
             </Container>
             
             
-            <Newsletter />
             <Footer />
         </>
     )

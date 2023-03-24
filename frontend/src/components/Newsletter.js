@@ -11,6 +11,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h1`
@@ -41,7 +42,7 @@ const InputContainer = styled.div`
     justify-content: space-between;
     border: 1px solid lightgray;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    ${mobile({ width: "80%" })}
+    
 `;
 
 const Input = styled.input`

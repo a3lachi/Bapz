@@ -149,28 +149,31 @@ const Product = (id) => {
 
   const location = useLocation();
   const name = location.pathname.split("/")[3];
-  
-  const HandleData = (data) => {
-    
-    if (data[0]) {
-      setData(data[0])
-      setColor(data[0].color.split(',')[0])
-      setSize(data[0].size.split(',')[0])
-      const mage = data[0].src.split('@')
 
-      let rey = []
-      for (let i=0;i<mage.length;i++){
-        if ( mage[i]!="" )
-            rey.push(mage[i])
-      }
-      setImg(rey)
-      setCurrimg(rey[0].split(',') )
-      setApparimg(rey[0].split(',')[0])
-    }
+  const nospaceName = name.split('%20').join(' ')
+  console.log('---LOL--',nospaceName)
+  const HandleData = (datax) => {
+    
+    
+    
+    const data = JSON.parse(datax.data)[0].fields
+    
+    console.log('AXIOS---',data)
+    const sources = datax.src.sort().map(element => '/media/images/'+element )
+
+    setData(data)
+    setColor(data.color.split(',')[0])
+    setSize(data.size.split(',')[0])
+    console.log('DATA---DATA-------',sources)
+    setCurrimg(sources)
+    setApparimg(sources[0])
+    
+    
+    
   }
   useEffect(()=>{
       axios
-          .get(`/api/bapz/product/${name}`)
+          .post(`/api/bapz/product`,{name:nospaceName} )
           .then((res) =>(HandleData(res.data)))
           .then()
           .catch((err) => console.log(err));
@@ -190,23 +193,9 @@ const Product = (id) => {
   };
 
     const addToCart = () => {
-      dispatch(addOne({src:currimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size}));
+      dispatch(addOne({src:apprimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size , ids:data.ids}));
     };
-    const getColor = (event) => {
-      setColor(event.target.innerText)
-      const colz = document.getElementById('wraplerz').childNodes
-      const aydi = event.target.id.split("ler")[1]      
-      for (let i=0;i<colz.length;i++){
-          colz[i].style.backgroundColor="white"
-      }
 
-      event.target.style.backgroundColor="#EEE7E7"
-
-      setCurrimg(img[aydi].split(','))
-      setApparimg(img[aydi].split(',')[0])
-
-      
-    }
 
     const lerz = data?.color?.split(',')
     const productSize = data?.size?.split(',') 
@@ -236,7 +225,7 @@ const Product = (id) => {
         setApparimg(currimg[ids-1])
       }
     }
-    if(data.src) {
+    if(data?.price) {
       
       
       
@@ -250,7 +239,7 @@ const Product = (id) => {
               <Wrapper>
                   <ImgContainer>
                   <KeyboardArrowLeftIcon onClick={leftImg}></KeyboardArrowLeftIcon>
-                      <Image style={{width:"80%"}} src={apprimg+'.jpg'} />
+                      <Image style={{width:"80%"}} src={apprimg} />
                       <KeyboardArrowRightIcon onClick={rightImg} ></KeyboardArrowRightIcon>
                   </ImgContainer>
                   <InfoContainer className='col'>
@@ -264,10 +253,7 @@ const Product = (id) => {
                                 </div>
                               
                               <Colorz  id="wraplerz" className='row'>
-                              <Color onClick={getColor} id="ler0" style={{backgroundColor:"#EEE7E7"}}>{lerz[0]}</Color>
-                              {lerz?.map((color,idx) => ( idx>0 ?
-                                <Color onClick={getColor} key={idx} id={"ler"+idx}>{color}</Color> : <></>
-                              ))}
+                              <Color  id="ler0" style={{backgroundColor:"#EEE7E7"}}>{lerz[0]}</Color>
                               </Colorz>
                         
                               </FilterColor>   

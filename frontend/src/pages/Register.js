@@ -1,6 +1,6 @@
 import { store } from '../redux/store'
 import {useDispatch, useSelector} from "react-redux";
-import { newUser , badUser } from "../redux/userSlice";
+import { newUser , badUser , setJwt } from "../redux/userSlice";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer'
 
@@ -82,12 +82,18 @@ const Register = () => {
 
   const dispatch = useDispatch();
 
+  const handleRegister = (data) => {
+    store.dispatch( newUser(email) )
+    store.dispatch(setJwt(data.jwt))
+
+  }
+
   const handleClick = (e) => {
     e.preventDefault();
     try {
         axios
             .post('/api/customer',{email:email , pwd:password , firstname:firstname , lastname:lastname , username:username  })
-            .then((res)=> store.dispatch( newUser(email) ))
+            .then((res)=> handleRegister(res.data) )
             .catch((err) => store.dispatch(badUser())  )
     } catch (err) {
       store.dispatch(badUser())  ;

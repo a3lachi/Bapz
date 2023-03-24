@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-import Product from './Product';
+import ProductSmall from './ProductSmall';
 
 const Container = styled.div`
     padding: 20px;
@@ -19,24 +19,18 @@ const Products = ({cat, filters, sort}) =>{
     
     useEffect(()=>{
         axios
-            .get(
-                cat 
-                ? `/api/bapz/${cat}`
-                : "/api/bapz")
-            .then((res) => setData(res.data))
+            .post(`/api/bapz/apparel`, {cat:cat})
+            .then((res) => setData(res.data.data))
             .catch((err) => console.log(err));
     }, [cat])
     
-    
-    
-
     if(data) {
         // window.scrollTo(0, 0);
         return(
             <Container id='brr' className="row">
                 {cat 
-                ? data.map((item,index) => { return <Product id={index} item={item} /> })
-                : data.slice(0,8).map((item,index) => { return <Product id={index} key={index} item={item} /> } )}
+                ? data.map((item,index) => { return <ProductSmall id={index} item={item} /> })
+                : data.map((item,index) => { return <ProductSmall id={index} key={index} item={item} /> } )}
                 
             </Container>
 

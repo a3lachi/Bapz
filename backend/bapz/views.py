@@ -1,3 +1,4 @@
+import datetime
 
 import json
 from django.http import HttpResponse , HttpResponseNotFound , JsonResponse
@@ -9,33 +10,95 @@ from .serializers import CustomerSerializer
 from .models import Bapz
 from .models import Customer
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
+from django.core import serializers
+
+import jwt
+import os 
+
+DIR_BASE = './media/images/'
 
 class BapzView(generics.ListAPIView):
     serializer_class = BapzSerializer
     queryset = Bapz.objects.all()
 
-
-class BapzCatView(generics.ListAPIView):
+@csrf_exempt 
+def BapzCatView(request):
     serializer_class = BapzSerializer
 
-    def get_queryset(self) : 
-        cat = self.kwargs.get('category')
-        return Bapz.objects.filter(category=cat)
+    if request.method == 'POST':
+        json_data = json.loads(request.body ) 
 
-class BapzProduct(generics.ListAPIView) :
+        try : 
+            cat = json_data['cat']
+        
+            queryset = Bapz.objects.filter(category=cat)
+            data = []
+            for lop in queryset :
+                name = lop.productname 
+                nospacename = ''.join(name.split(' '))
+                res=[]
+                for filename in os.listdir(DIR_BASE) :
+                    cc = filename.split('.jpg')[0]
+                    if cc[:-1] == nospacename : 
+                        res.append(filename)
+                data.append([name,sorted(res)[:2]])
+                        
+            # data = serializers.serialize('json', names)
+            
+            return JsonResponse({'info':"catview" , 'data':data})
+        except KeyError :
+            queryset = Bapz.objects.filter(category='t-shirts')[:2] |  Bapz.objects.filter(category='shoes')[:2] | Bapz.objects.filter(category='pants')[:2] |  Bapz.objects.filter(category='watches')[:2] | Bapz.objects.filter(category='bags')[:2] | Bapz.objects.filter(category='sweats')[:2] 
+            data = []
+            for lop in queryset :
+                name = lop.productname 
+                nospacename = ''.join(name.split(' '))
+                res=[]
+                for filename in os.listdir(DIR_BASE) :
+                    cc = filename.split('.jpg')[0]
+                    if cc[:-1] == nospacename : 
+                        res.append(filename)
+                data.append([name,sorted(res)[:2]])
+
+            
+            return JsonResponse({'lol':"notcat",'data':data})
+    else :
+        return JsonResponse({'lol':"notPOST" })
+
+
+
+@csrf_exempt 
+def BapzProduct(request) :
     serializer_class = BapzSerializer
 
-    def get_queryset(self):
-        nam = self.kwargs.get('name')
-        return Bapz.objects.filter(productname=nam)
+    if request.method == 'POST':
+        json_data = json.loads(request.body ) 
+        nam = json_data['name']
+        kk = ' '.join(nam.split('%20'))
+        v = ''.join(kk.split(' '))
+        a = ''.join(v.split('®'))
+        rr = ''.join(a.split('#'))
+        toAdd = ''.join(rr.split('™')) 
+        print('----',nam)
+        res = []
+        for filename in os.listdir(DIR_BASE) :
+            cc = filename.split('.jpg')[0]
+            if cc[:-1] == toAdd : 
+                res.append(filename)
+    
+        queryset = Bapz.objects.filter(productname=nam)
+        data = serializers.serialize('json', queryset)
+    # data = {'toAdd': toAdd, 'results': queryset}
+        return JsonResponse({'info':"new", 'src':res ,'data':data})
+    else :
+        return JsonResponse({'lol':"notPOST" })
 
 
 class BapzViewIds(generics.ListAPIView) :
     serializer_class = BapzSerializer
+
     def get_queryset(self) : 
         id = self.kwargs.get('ids')
-        return Bapz.objects.filter(ids=id)
+        return Bapz.objects.filter(id=id)
 
 
 
@@ -49,25 +112,74 @@ def GetCustomer(request):
     if request.method == 'POST':
         try: 
             json_data = json.loads(request.body ) 
+
+            ## Login 
             if len(json_data)==2 :
                 em = json_data['email']
                 pd = json_data['pwd']
-                print("HAA ")
-                print(em)
-                print(pd)
-                if len(Customer.objects.filter(email=em , pwd=pd))>0 :
-                    return JsonResponse({'isUser':"yes"})
+                usr = Customer.objects.filter(email=em , pwd=pd)
+                if len(usr)>0 :
+                    token = jwt.encode({"email":em , "brr":str(datetime.datetime.now())}, key='secret')  ## added brr to make jwt unique
+                    usr.update(jwt= token)
+                    return JsonResponse({'isUser':"yes" , "jwt":token})
                 else :
-                    return HttpResponseNotFound("Brr")  
+                    return JsonResponse({'isUser':"no"})  
+                
+            ## Register
             elif len(json_data)>2 :
                 em = json_data['email']
                 pd = json_data['pwd']
                 if len(Customer.objects.filter(email=em))>0 :
-                    return HttpResponseNotFound("CustomerExist") 
+                    return JsonResponse({'info':"exist"}) 
                 else :
-                    print("ADDING TO DB")
-                    Customer.objects.create(email=em , pwd=pd )
-                    return JsonResponse({'info':"new"})
+                    token = jwt.encode({"email":em , "brr":str(datetime.datetime.now())}, key='secret')
+                    Customer.objects.create(email=em , pwd=pd , jwt=token )
+                    
+                    return JsonResponse({'info':"new" , 'jwt':token})
 
         except :
             return HttpResponseNotFound("Brr")  
+    else :
+        return HttpResponseNotFound("Brr")    
+
+
+
+@csrf_exempt 
+def UpdateCommands(request) :
+    serializer_class = CustomerSerializer
+    
+    if request.method == 'POST':
+        try: 
+            json_data = json.loads(request.body ) 
+            
+            user =  json_data['user']
+            cmds  = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] 
+
+            usr = Customer.objects.filter(email=user)
+            
+            usr.update(commands= cmds)
+
+
+            return JsonResponse({'info':"mrboha"}) 
+            
+
+        except :
+            print('ZML')
+            return JsonResponse({'info':"error"}) 
+
+@csrf_exempt 
+def getUserJwt(request) :
+    if request.method == 'POST':
+        try : 
+            json_data = json.loads(request.body ) 
+            jwwt =  json_data['jwt']
+            cus = Customer.objects.filter(jwt=jwwt)
+            if len(cus)>0 :
+                em = Customer.objects.get(jwt=jwwt).email
+                cmds = Customer.objects.get(jwt=jwwt).commands
+                return JsonResponse({'user':'yes','email':em , 'commands':cmds}) 
+            else : 
+                return JsonResponse({'user':'no'}) 
+
+        except :
+            return HttpResponseNotFound("Brr") 

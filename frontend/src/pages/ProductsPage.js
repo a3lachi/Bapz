@@ -21,7 +21,7 @@ const ProductPage = (id) => {
     return (
         <div>
             <Announcement />
-            <Navbar id={id.id} itms={brr} />
+            <Navbar />
             <Categories />
             <Products cat={category} />
             <Newsletter />
