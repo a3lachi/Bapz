@@ -10,12 +10,17 @@ from .serializers import CustomerSerializer
 from .models import Bapz
 from .models import Customer
 from django.views.decorators.csrf import csrf_exempt
+<<<<<<< HEAD
 from django.core import serializers
 
 import jwt
 import os 
 
 DIR_BASE = './media/images/'
+=======
+
+import jwt
+>>>>>>> cfad037e06fa48db7a161dae2e555dd2bf174c43
 
 class BapzView(generics.ListAPIView):
     serializer_class = BapzSerializer

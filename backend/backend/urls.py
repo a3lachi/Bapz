@@ -19,8 +19,12 @@ urlpatterns = [
     path('api/customer', views.GetCustomer),
     path('api/customer/commands', views.UpdateCommands),
     path('api/customer/token', views.getUserJwt),
+<<<<<<< HEAD
 ]
 
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+]
+>>>>>>> cfad037e06fa48db7a161dae2e555dd2bf174c43

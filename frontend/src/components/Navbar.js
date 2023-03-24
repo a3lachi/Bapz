@@ -103,7 +103,11 @@ const Navbar = () => {
                 </Left>
                 <Center>
                     <Link style={styleLink} to='/'>
+<<<<<<< HEAD
                         <Logo  src='/media/images/bapelogo.svg' />
+=======
+                        <Logo  src='/images/bapelogo.svg' />
+>>>>>>> cfad037e06fa48db7a161dae2e555dd2bf174c43
                     </Link>
                 </Center>
                 <Right>

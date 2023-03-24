@@ -139,7 +139,11 @@ const Checkout = (products) => {
                     <Wrapper>
                     <div style={{marginBottom:'20px'}}><b>MY ORDER</b></div>
                     { products?.map((elem,indx)=>(
+<<<<<<< HEAD
                         <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
+=======
+                        <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src[0]+'.jpg'} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
+>>>>>>> cfad037e06fa48db7a161dae2e555dd2bf174c43
                     ))}
                     
                     
