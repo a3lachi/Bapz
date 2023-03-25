@@ -155,9 +155,8 @@ const Product = (id) => {
   const nospaceName = name.split('%20').join(' ')
   
   const HandleData = (datax) => {
-    console.log('ZZZZ',datax)
-    const data = JSON.parse(datax.data)[0].fields
     
+    const data = JSON.parse(datax.data)[0].fields
     const sources = datax.src.sort().map(element => '/media/images/'+element )
 
     setData(data)
@@ -217,6 +216,7 @@ const Product = (id) => {
         setApparimg(currimg[ids-1])
       }
     }
+    console.log('chhal mn mra')
     if(data?.price) {
       
       
