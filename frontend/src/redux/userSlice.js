@@ -49,9 +49,9 @@ const userSlice = createSlice({
           let day = date.getDate();
           let month = date.getMonth() + 1;
           let year = date.getFullYear();
-          const dateE = `${day}${month}${year}`
+          const dateE = `${day}/${month}/${year}`
           axios
-              .post('/api/customer/commands',{jwt:state.jwt ,cmds:cemds})
+              .post('/api/customer/commands',{jwt:state.jwt ,cmds:cemds , date:dateE})
               .then((res)=> console.log(res.data))
               .catch((err) => console.log('ERR during AXIOS to update commands'))
       } catch (err) {
