@@ -193,7 +193,8 @@ def getUserCommandsByJwt(request) :
             if len(cus)>0 :
                 cmds = cus[0].commands
 
-                ids = [  a for a in cmds.split('//') if len(a)>4    ]
+                dates = [  [ b for b in  a.split('|')] for a in cmds.split('//') if len(a)>4    ]
+                print(dates)
                 ids =[ [ int(b.split(',')[-1]) for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
 
                 brb = [ [ b.split(',')[1:-1] for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
