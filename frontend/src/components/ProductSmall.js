@@ -1,9 +1,7 @@
 import { FavoriteBorderOutlined, SearchOutlined } from '@mui/icons-material';
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {useLocation} from "react-router-dom";
 import { mobile } from '../responsive';
 
 const Smta = styled.div`
@@ -93,18 +91,6 @@ const styleLink = {
 
 const ProductSmall = ({id,item,cat}) => {
 
-  const location = useLocation();
-  const name = location.pathname.split("/")
-
-  var too ="brr"
-  if (name.length>2) {
-    too =  item[0] ;
-  }
-  else {
-    too =  "apparel/" + item.category + "/" + item.productname ;
-  }
-  
-
   const ara = (ch) => {
     if (item[1].length>1) 
       return '/media/images/'+item[1][ch]
@@ -113,7 +99,6 @@ const ProductSmall = ({id,item,cat}) => {
   }
 
 
-  const navigate = useNavigate()
   
   const onMe = (event,payload) => { 
     const aydi = event.target.id
@@ -129,14 +114,12 @@ const ProductSmall = ({id,item,cat}) => {
   }
   
   return (
-      <Container id={id} onClick={(e) =>{ cat ? navigate('/apparel/'+cat + "/" +item[0]) : navigate('/apparel/prd/' +item[0]) }}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
+      <Container id={id}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
           <Text id={id} >{item[0]}</Text>
           <Image id={id} src ={ara(0)} />
           <Smta id={id}>
             <Info id={id}>
-                
-
-                <Link id={id} style={styleLink} to={too}>
+                <Link id={id} style={styleLink} to={ cat ? '/apparel/'+cat + "/" +item[0] : '/apparel/prd/' +item[0] }>
                   <Icon id={id}> 
                         <SearchOutlined style={{width:'15px'}} />
                   </Icon>
