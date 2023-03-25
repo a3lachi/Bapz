@@ -19,7 +19,6 @@ import { updateCart } from './redux/cartSlice';
 import {   setJwt } from './redux/userSlice'
 import { store } from './redux/store'
 import Checkout from './pages/Checkout';
-import styled from 'styled-components';
 
 
 const App = () => {
