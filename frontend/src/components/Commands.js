@@ -16,12 +16,10 @@ const Commands = (props) => {
     const dispatch = useDispatch()
 
     const HandleRes = (data,dispatch,setCmds) => {
-        console.log('RAW',data.brr)
-    
-        const str = data.commands.split('//').map((elem)=>(elem.split('@'))).filter((elem)=>elem.length>1)
-        // console.log('HA----',str)
+        console.log('RAW',data.data)
+
        
-        return str 
+        return data.data 
     
     } 
 

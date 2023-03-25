@@ -209,12 +209,12 @@ def getUserCommandsByJwt(request) :
                                 cc = filename.split('.jpg')[0]
                                 if cc[:-1] == rn : 
                                     ch.append(filename)
-                            res.append(sorted(ch)[0])
+                            res.append([cus,sorted(ch)[0]]+brb[i][j])
                         except:
                             pass
-                    src.append(res+brb[i][j])
+                    src.append(res)
 
-                return JsonResponse({'user':'yes', 'commands':cmds,'brr':src}) 
+                return JsonResponse({'user':'yes', 'data':src}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :
