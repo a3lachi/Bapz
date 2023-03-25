@@ -68,12 +68,12 @@ const Profil = () => {
                         : <>
                             <div>EMAIL : {email}</div>
                             <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
-                            <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button>
+                            
                         </>
                     }
                     
                 </Wrapper>
-                
+                    { seecmds ? <></> : <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button> }
             </Container>
 
             <Announcement />
