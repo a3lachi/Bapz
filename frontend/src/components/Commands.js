@@ -6,18 +6,18 @@ const Container = styled.div`
 
 `
 
-const Commands = (cmds) => {
+const Commands = (props) => {
+    const dataStr = props.cmds
 
     const handleClick = () => {
-        console.log('qas hna')
+        props.snd(false)
     }
-
 
 
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
-            <div> BRRR </div>
+            <div> {dataStr} </div>
 
         </Container>
     )
