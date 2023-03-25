@@ -1,19 +1,19 @@
 import { store } from '../redux/store'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import { newUser , badUser , setJwt } from "../redux/userSlice";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer'
 
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import axios from 'axios'
 
 
 const Container = styled.div`
   width: 100vw;
-  height: 60vh;
+  height: 65vh;
   background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -75,6 +75,11 @@ const Containerrr = styled.div`
     display: flex;
     flex-direction: column;
 `
+const Message = styled.div`
+  margin: 20px 0 ;
+  min-width:40vh;
+  color: red;
+`
 
 const Register = () => {
 
@@ -85,7 +90,7 @@ const Register = () => {
   const [email , setEmail] = useState("") ;
   const [password , setPassword] = useState("") ;
   const [pwd , setPwd] = useState("") ;
-
+  const [ pwdmatch , setPwdmatch ] = useState(true)
   const dispatch = useDispatch();
 
   const handleRegister = (data) => {
@@ -95,7 +100,8 @@ const Register = () => {
   }
 
   const handleClick = (e) => {
-    e.preventDefault();
+    console.log('maaaaalk')
+    // e.preventDefault();
     try {
         axios
             .post('/api/customer',{email:email , pwd:password , firstname:firstname , lastname:lastname , username:username  })
@@ -106,6 +112,10 @@ const Register = () => {
     }
   }
 
+  useEffect(()=>{
+    setPwdmatch(pwd === password)
+  },[pwd,password])
+  console.log('HA CHBANLO',pwdmatch)
   return (
     <Containerrr>
     <Navbar></Navbar>
@@ -133,11 +143,14 @@ const Register = () => {
           <Input type='password'
             onChange={(e)=>setPwd(e.target.value)} 
             required placeholder="Confirm password" />
+          
+            { !pwdmatch && pwd.length >= password.length ? <Message>Your passwords don't match.</Message> : ""}
+          
           <Agreement>
             By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>privacy policy</b>
+            data in accordance with the <b>privacy policy</b>.
           </Agreement>
-          <Button onClick={handleClick}  >CREATE</Button>
+          <Button onClick={(e)=>{pwdmatch && handleClick(e)}}  >Register</Button>
         </Form>
       </Wrapper>
     </Container>

@@ -44,7 +44,7 @@ const Success = () => {
 
     useEffect(()=>{setTimeout(() => {
         setValidpay(true)
-    }, "1000");}, [])
+    }, "5000");}, [])
       
 
     // if (validpay) {

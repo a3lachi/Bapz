@@ -1,9 +1,9 @@
 
 rrr() { git add . ; git commit -m "code update"$1 ; git push ;}
 
-i="1"
+i="23"
 
-while [ $i -lt 20 ]
+while [ $i -lt 40 ]
 do
 rrr $i;
 sleep 120;

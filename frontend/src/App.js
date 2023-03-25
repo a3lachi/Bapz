@@ -65,7 +65,7 @@ const App = () => {
 
             <Route path="/cart" element={ <Cart id={user}  />} />
 
-            <Route path="/checkout" element={ cart?.length>0 ? <Checkout prods={cart}  /> : <Navigate to='/' />  } />
+            <Route path="/checkout" element={ <Checkout prods={cart}  /> } />
         </Routes>
       </Router>
     

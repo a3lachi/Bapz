@@ -57,7 +57,11 @@ const Proced = styled.div`
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 `
 
-
+const Containerrr = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`
 
 const Checkout = (products) => {
 
@@ -127,50 +131,64 @@ const Checkout = (products) => {
 
 
             if (!pay) {
-                return (
-                    <>
-                    <Navbar />
-                    
-                    <Container>
-                    <Wrapper>
-                    <div style={{marginBottom:'20px'}}><b>MY ORDER</b></div>
-                    { products?.map((elem,indx)=>(
-                        <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
-                    ))}
-                    
-                    
-                    <Proced >
-                    <div><Input onChange={(e)=>ccCheck(e)} id={"cc"} placeholder="Credit Card" style={{width:'220px'}} /></div>
-                    <div><Input onChange={(e)=>edCheck(e)} id={"cvv"} placeholder="Expiry Date" style={{width:'100px' , marginRight:'76px'}} /><span style={{width:'30px'}}></span> <Input onChange={(e)=>cvvCheck(e)} id={"cvv"} placeholder="CVV" style={{width:'40px'}} /></div>
-                    <ul><button onClick={(e)=> setPay(true)}>PAY</button></ul>
-                    </Proced>
-                    </Wrapper>
-                    </Container>
-                    <Footer />
-                    </>
-                )
+                if (products.length>0) {
+                    return (
+                        <Containerrr>
+                        <Navbar />
+                        
+                        <Container>
+                        <Wrapper>
+                        <div style={{marginBottom:'20px'}}><b>MY ORDER</b></div>
+                        { products?.map((elem,indx)=>(
+                            <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
+                        ))}
+                        
+                        
+                        <Proced >
+                        <div><Input onChange={(e)=>ccCheck(e)} id={"cc"} placeholder="Credit Card" style={{width:'220px'}} /></div>
+                        <div><Input onChange={(e)=>edCheck(e)} id={"cvv"} placeholder="Expiry Date" style={{width:'100px' , marginRight:'76px'}} /><span style={{width:'30px'}}></span> <Input onChange={(e)=>cvvCheck(e)} id={"cvv"} placeholder="CVV" style={{width:'40px'}} /></div>
+                        <ul><button onClick={(e)=> setPay(true)}>PAY</button></ul>
+                        </Proced>
+                        </Wrapper>
+                        </Container>
+                        <Footer />
+                        </Containerrr>
+                    )
+                } else {
+                    return (
+                        <Containerrr>
+                        <Navbar />
+                        
+                        <Container>
+                            <div>TKALMA</div>
+                        </Container>
+                        <Footer />
+                        </Containerrr>
+                        
+                    )
+                }
             }
             else {
                 return(
-                    <>
+                    <Containerrr>
                     <Navbar />
                     <Success />
                     <Footer />
-                    </>
+                    </Containerrr>
                 )
             }
         }
         else {
             return(
-                <>
+                <Containerrr>
                     <Navbar />
                     <Container>
                         <Wrapper>
-                            <div>You have to register or login.</div>
+                            <div>You have to<b> <a style={{color:'#874800'}} href='/register'>register</a></b>  or <b><a  style={{color:'#874800'}} href='/register'>login</a> </b>to checkout.</div>
                         </Wrapper>
                     </Container>
                 
-                <Footer /></>
+                <Footer /></Containerrr>
             )
         }
     
