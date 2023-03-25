@@ -119,7 +119,7 @@ const ProductSmall = ({id,item,cat}) => {
           <Image id={id} src ={ara(0)} />
           <Smta id={id}>
             <Info id={id}>
-                <Link id={id} style={styleLink} to={ cat ? '/apparel/'+cat + "/" +item[0] : '/apparel/prd/' +item[0] }>
+                <Link id={id} style={styleLink} to={ cat ? '/apparel/'+cat + "/" +item[0]+'/'+item[2]  : '/apparel/prd/' +item[0]+'/'+item[2] }>
                   <Icon id={id}> 
                         <SearchOutlined style={{width:'15px'}} />
                   </Icon>

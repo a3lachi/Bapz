@@ -54,7 +54,7 @@ const App = () => {
 
             <Route path="/apparel/:category"  element={<ProductsPage id={user}  />} />
 
-            <Route path="/apparel/:category/:productname"  element={<Product id={user}  />} />
+            <Route path="/apparel/:category/:productname/:id"  element={<Product id={user}  />} />
 
             <Route path="/login" element={  jwt.length>2 ? <Navigate to='/' /> : <Login />  }    />
 

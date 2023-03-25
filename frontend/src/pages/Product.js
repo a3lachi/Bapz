@@ -148,6 +148,10 @@ const Product = (id) => {
   const location = useLocation();
   const name = location.pathname.split("/")[3];
 
+  const iid = location.pathname.split("/")[4];
+
+  console.log('LOOL',iid)
+
   const nospaceName = name.split('%20').join(' ')
   
   const HandleData = (datax) => {
