@@ -169,14 +169,14 @@ def UpdateCommands(request) :
             json_data = json.loads(request.body ) 
             
             user =  json_data['user']
-            cmds  = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] +'|'+json_data['date']
+            cmds  = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] 
 
             usr = Customer.objects.filter(email=user)
             
             usr.update(commands= cmds)
 
 
-            return JsonResponse({'info':"mrboha"}) 
+            return JsonResponse({'info':"mrboha" }) 
             
 
         except :

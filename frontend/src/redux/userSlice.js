@@ -51,7 +51,7 @@ const userSlice = createSlice({
           let year = date.getFullYear();
           const dateE = `${day}${month}${year}`
           axios
-              .post('/api/customer/commands',{user:state.email ,cmds:cemds,date:dateE})
+              .post('/api/customer/commands',{user:state.email ,cmds:cemds})
               .then((res)=> console.log(res.data))
               .catch((err) => console.log('ERR during AXIOS to update commands'))
       } catch (err) {
