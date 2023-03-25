@@ -167,11 +167,12 @@ def UpdateCommands(request) :
     if request.method == 'POST':
         try: 
             json_data = json.loads(request.body ) 
+            print(json_data)
             
-            user =  json_data['user']
-            cmds  = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] 
+            jwwt =  json_data['jwt']
+            cmds  = Customer.objects.get(jwt=jwwt).commands + ' // ' +json_data['cmds'] 
 
-            usr = Customer.objects.filter(email=user)
+            usr = Customer.objects.filter(jwt=jwwt)
             
             usr.update(commands= cmds)
 
