@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar';
 import Announcement from '../components/Announcement';
 import Categories from '../components/Categories';
 import Footer from '../components/Footer';
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from 'react'
 
 import styled from "styled-components"
@@ -148,8 +148,6 @@ const Qtti = styled.div`
 
 const Cart = () => {
     var products = useSelector((state) =>  state.cart.itms) 
-
-    // const dispatch = useDispatch() ;
 
     const [ chkout , setChkout ] = useState(false)
 
