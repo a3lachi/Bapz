@@ -62,8 +62,11 @@ const Profil = () => {
             <Container>
 
                 <Wrapper>
-                    <div>EMAIL : {email}</div>
-                    <button onClick={()=>setSeecmds(true)}>COMMANDS : {cmds}</div>
+                    { seecmds ? <Commands /> : 
+                        <div>EMAIL : {email}</div>
+                        <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
+                    }
+                    
                 </Wrapper>
                 <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button>
             </Container>
