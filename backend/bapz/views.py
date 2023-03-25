@@ -169,7 +169,7 @@ def UpdateCommands(request) :
             json_data = json.loads(request.body ) 
             
             user =  json_data['user']
-            cmds  = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] 
+            cmds  = Customer.objects.get(email=user).commands + ' // ' +json_data['cmds'] +'|'+json_data['date']
 
             usr = Customer.objects.filter(email=user)
             
@@ -192,6 +192,8 @@ def getUserCommandsByJwt(request) :
             cus = Customer.objects.filter(jwt=jwwt)
             if len(cus)>0 :
                 cmds = cus[0].commands
+
+                ids = [  a for a in cmds.split('//') if len(a)>4    ]
                 ids =[ [ int(b.split(',')[-1]) for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
 
                 brb = [ [ b.split(',')[1:-1] for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
