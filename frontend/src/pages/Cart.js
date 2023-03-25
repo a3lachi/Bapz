@@ -144,7 +144,11 @@ const Qtti = styled.div`
     display:flex;
 `
 
-
+const Containerrr = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`
 
 const Cart = () => {
     var products = useSelector((state) =>  state.cart.itms) 
@@ -164,7 +168,7 @@ const Cart = () => {
     }
 
     return (
-        <>
+        <Containerrr>
             <Announcement />
             <Navbar  />
             <Categories />
@@ -192,7 +196,8 @@ const Cart = () => {
 
                 </>
     
-            )) : <></>}
+                )) : <></>
+            }
 
             {!chkout && ( products?.length>0 ? <CartPro><Total><b>TOTAL:</b> US${tots()}</Total><Buttn onClick={(e)=>setChkout(true)}>CHECKOUT</Buttn></CartPro> : 
             <><div style={{marginBottom:"20px"}} ><b>YOUR BAG</b></div><div>Your bag currently is empty.</div></>)}
@@ -202,7 +207,7 @@ const Cart = () => {
             
             
             <Footer />
-        </>
+        </Containerrr>
     )
 
 }

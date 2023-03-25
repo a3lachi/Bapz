@@ -70,6 +70,12 @@ const Button = styled.button`
 
 `;
 
+const Containerrr = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`
+
 const Register = () => {
 
   
@@ -101,7 +107,7 @@ const Register = () => {
   }
 
   return (
-    <>
+    <Containerrr>
     <Navbar></Navbar>
     <Container>
       <Wrapper>
@@ -136,7 +142,7 @@ const Register = () => {
       </Wrapper>
     </Container>
     <Footer></Footer>
-    </>
+    </Containerrr>
   );
 };
 
