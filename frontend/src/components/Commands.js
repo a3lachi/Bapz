@@ -27,7 +27,7 @@ const Commands = (props) => {
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
-            {cmds.map((elem)=>(
+            {cmds?.map((elem)=>(
                 <div>{elem[0][0]}</div>
             ))}
 
