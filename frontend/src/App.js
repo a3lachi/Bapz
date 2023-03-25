@@ -1,9 +1,6 @@
 import './App.css';
-import { Component, useEffect, useState } from 'react';
-import axios from "axios";
 import {
   BrowserRouter as Router,
-  Switch,
   Routes,
   Navigate,
   Route,
@@ -17,17 +14,15 @@ import Login from './pages/Login'
 import Profil from './pages/Profil'
 import Register from './pages/Register'
 import Cart from './pages/Cart'
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector  } from "react-redux";
 import { updateCart } from './redux/cartSlice';
-import { updateUser , setJwt } from './redux/userSlice'
+import {   setJwt } from './redux/userSlice'
 import { store } from './redux/store'
 import Checkout from './pages/Checkout';
 import styled from 'styled-components';
 
 
 const App = () => {
-
-  const dispatch = useDispatch()
 
   const user = useSelector((state) =>  state.user.email) ;
   var cart = useSelector((state) =>  state.cart.itms)
@@ -37,7 +32,7 @@ const App = () => {
   
 
 
-  const maybeJwt = document.cookie.split("; ").map(element => element.split('=')).filter(element => element[0]=='jwt')[0]
+  const maybeJwt = document.cookie.split("; ").map(element => element.split('=')).filter(element => element[0]==='jwt')[0]
   const jwwt = maybeJwt ? maybeJwt[1] : ""
   
   // jwt is found to be equal to "jwt=expiry date" right after deleting the cookie
@@ -46,7 +41,7 @@ const App = () => {
   }
 
   const storedCart =  JSON.parse(window.localStorage.getItem('state')) 
-  if (cart?.length == 0 && storedCart?.length>0) {
+  if (cart?.length === 0 && storedCart?.length>0) {
     store.dispatch(updateCart())
   }
 
