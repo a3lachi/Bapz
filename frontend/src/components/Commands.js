@@ -13,18 +13,9 @@ const Commands = (props) => {
 
     const [ cmds , setCmds] = useState("")
 
-    const dispatch = useDispatch()
-
-    const HandleRes = (data,dispatch,setCmds) => {
-        console.log('RAW',data.data)
-
-       
-        return data.data 
-    
-    } 
 
     cmds.length===0 && axios.post('/api/customer/token',{jwt:jwwt})
-        .then((res)=> setCmds(HandleRes(res.data,dispatch,setCmds)))
+        .then((res)=> setCmds(res.data.data))
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
 
 
@@ -36,7 +27,9 @@ const Commands = (props) => {
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
-            
+            {cmds.map((elem)=>(
+                <div>{elem[0][0]}</div>
+            ))}
 
         </Container>
     )
