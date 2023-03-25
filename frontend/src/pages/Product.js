@@ -151,6 +151,7 @@ const Product = (id) => {
   const nospaceName = name.split('%20').join(' ')
   
   const HandleData = (datax) => {
+    console.log('ZZZZ',datax)
     const data = JSON.parse(datax.data)[0].fields
     
     const sources = datax.src.sort().map(element => '/media/images/'+element )
