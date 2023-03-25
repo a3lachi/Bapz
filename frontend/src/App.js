@@ -53,27 +53,27 @@ const App = () => {
 
   return (
     <Container>
-    <Router>
-      <Routes>
-          <Route exact path="/"  element={<Home id={user} />} />
+      <Router>
+        <Routes>
+            <Route exact path="/"  element={<Home id={user} />} />
 
-          <Route path="/apparel/:category"  element={<ProductsPage id={user}  />} />
+            <Route path="/apparel/:category"  element={<ProductsPage id={user}  />} />
 
-          <Route path="/apparel/:category/:productname"  element={<Product id={user}  />} />
+            <Route path="/apparel/:category/:productname"  element={<Product id={user}  />} />
 
-          <Route path="/login" element={  jwt.length>2 ? <Navigate to='/' /> : <Login />  }    />
+            <Route path="/login" element={  jwt.length>2 ? <Navigate to='/' /> : <Login />  }    />
 
-          <Route path="/profil"  element={  jwt?.length>5 ?   <Profil /> : <Navigate to='/' /> } />
-             
+            <Route path="/profil"  element={  jwt?.length>5 ?   <Profil /> : <Navigate to='/' /> } />
+              
 
-          <Route path="/register" element={ jwt.length>2 ? <Navigate to='/' /> :  <Register />} />
+            <Route path="/register" element={ jwt.length>2 ? <Navigate to='/' /> :  <Register />} />
 
-          <Route path="/cart" element={ <Cart id={user}  />} />
+            <Route path="/cart" element={ <Cart id={user}  />} />
 
-          <Route path="/checkout" element={ cart?.length>0 ? <Checkout prods={cart}  /> : <Navigate to='/' />  } />
+            <Route path="/checkout" element={ cart?.length>0 ? <Checkout prods={cart}  /> : <Navigate to='/' />  } />
 
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
     </Container>
   )
 

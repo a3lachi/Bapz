@@ -149,10 +149,8 @@ const Product = (id) => {
   const name = location.pathname.split("/")[3];
 
   const nospaceName = name.split('%20').join(' ')
+  
   const HandleData = (datax) => {
-    
-    
-    
     const data = JSON.parse(datax.data)[0].fields
     
     const sources = datax.src.sort().map(element => '/media/images/'+element )
@@ -161,14 +159,9 @@ const Product = (id) => {
     setColor(data.color.split(',')[0])
     setSize(data.size.split(',')[0])
     setCurrimg(sources)
-    setApparimg(sources[0])
-    
-    
-    
+    setApparimg(sources[0])  
   }
   useEffect(()=>{
-
-    
       axios
           .post(`/api/bapz/product`,{name:nospaceName} )
           .then((res) =>(HandleData(res.data)))
