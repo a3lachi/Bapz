@@ -193,6 +193,8 @@ def getUserCommandsByJwt(request) :
             if len(cus)>0 :
                 cmds = cus[0].commands
                 ids =[ [ int(b.split(',')[-1]) for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
+
+                brb = [ [ b.split(',')[1:-2] for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
                 
                 src = []
 
@@ -212,7 +214,7 @@ def getUserCommandsByJwt(request) :
                             pass
                     src.append(res)
 
-                return JsonResponse({'user':'yes', 'commands':cmds,'brr':src}) 
+                return JsonResponse({'user':'yes', 'commands':cmds,'brr':brb}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :
