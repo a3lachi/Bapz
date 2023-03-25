@@ -100,20 +100,14 @@ def BapzProduct(request) :
             if cc[:-1] == toAdd : 
                 res.append(filename)
     
-        queryset = Bapz.objects.filter(productname="BAPE STA")[0].id
+        id = Bapz.objects.filter(productname="BAPE STA")[0].id
         # data = serializers.serialize('json', queryset)
     # data = {'toAdd': toAdd, 'results': queryset}
-        return JsonResponse({'info':"new", 'src':res ,'data':queryset})
+        return JsonResponse({'info':"new", 'src':res ,'id':id})
     else :
         return JsonResponse({'lol':"notPOST" })
 
 
-# class BapzViewIds(generics.ListAPIView) :
-#     serializer_class = BapzSerializer
-
-#     def get_queryset(self) : 
-#         id = self.kwargs.get('ids')
-#         return Bapz.objects.filter(id=id)
 
 
 
