@@ -214,6 +214,7 @@ const Product = (id) => {
         setApparimg(currimg[ids-1])
       }
     }
+    console.log('HA DATA',data)
     if(data?.price) {
       
       
