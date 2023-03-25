@@ -27,7 +27,10 @@ def BapzId(request) :
     serializer_class = BapzSerializer
 
     if request.method == 'POST':
-        return JsonResponse({'lol':"post"})
+        id = json.loads(request.body )['id']
+        prod = Bapz.objects.filter(id=id)
+
+        return JsonResponse({'lol':"post",'id':prod['productname']})
     else :
         return JsonResponse({'lol':"notPOST" })    
 
