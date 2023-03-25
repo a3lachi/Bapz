@@ -14,6 +14,8 @@ const Commands = (props) => {
     const [ cmds , setCmds] = useState("")
 
 
+
+
     cmds.length===0 && axios.post('/api/customer/token',{jwt:jwwt})
         .then((res)=> setCmds(res.data.data))
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
@@ -23,13 +25,13 @@ const Commands = (props) => {
         props.snd(false)
     }
 
-
+    console.log('HAMAWSSL',cmds)
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
-            {cmds?.map((elem)=>(
+            {/* {cmds?.length>1 && cmds?.map((elem)=>(
                 <div>{elem[0][0]}</div>
-            ))}
+            ))} */}
 
         </Container>
     )

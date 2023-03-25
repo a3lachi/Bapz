@@ -217,6 +217,8 @@ def getUserCommandsByJwt(request) :
                             pass
                     src.append(res)
 
+                src = [2,3,4,5]
+
                 return JsonResponse({'user':'yes', 'data':src}) 
             else : 
                 return JsonResponse({'user':'no'}) 
