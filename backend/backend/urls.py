@@ -12,6 +12,7 @@ router.register(r'bapz', views.BapzView, 'bapz')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/bapz', views.BapzView.as_view()),
+    path('api/bapz', views.BapzView.as_view()),
     path('api/bapz/<int:ids>/', views.BapzViewIds.as_view()),
     path('api/bapz/apparel', views.BapzCatView ),
     path('api/bapz/product', views.BapzProduct ),
