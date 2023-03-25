@@ -184,18 +184,30 @@ def UpdateCommands(request) :
             return JsonResponse({'info':"error"}) 
 
 @csrf_exempt 
-def getUserJwt(request) :
+def getUserCommandsByJwt(request) :
     if request.method == 'POST':
         try : 
             json_data = json.loads(request.body ) 
             jwwt =  json_data['jwt']
             cus = Customer.objects.filter(jwt=jwwt)
             if len(cus)>0 :
-                em = Customer.objects.get(jwt=jwwt).email
-                cmds = Customer.objects.get(jwt=jwwt).commands
-                return JsonResponse({'user':'yes','email':em , 'commands':cmds}) 
+                cmds = cus[0].commands
+                ids =[ [ int(b.split(',')[-1]) for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
+                
+                src = []
+
+                for idd in ids :
+                    res=[]
+                    for id in idd :
+                        try :
+                            cus = Bapz.objects.filter(id=id)[0].productname
+                            res.append(cus)
+                        except:
+                            print('mabghach')
+                    src.append(res)
+
+                return JsonResponse({'user':'yes', 'commands':cmds,'brr':src}) 
             else : 
                 return JsonResponse({'user':'no'}) 
-
         except :
             return HttpResponseNotFound("Brr") 

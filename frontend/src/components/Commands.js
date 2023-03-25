@@ -1,24 +1,44 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import styled from 'styled-components';
-
+import { useDispatch , useSelector} from 'react-redux';
+import axios from 'axios'
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
 
 `
 
 const Commands = (props) => {
-    const data = props.cmds
+    const jwwt = useSelector((state) =>  state.user.jwt)
+
+    const [ cmds , setCmds] = useState("")
+
+    const dispatch = useDispatch()
+
+    const HandleRes = (data,dispatch,setCmds) => {
+        console.log('RAW',data.brr)
+    
+        const str = data.commands.split('//').map((elem)=>(elem.split('@'))).filter((elem)=>elem.length>1)
+        // console.log('HA----',str)
+       
+        return str 
+    
+    } 
+
+    cmds.length===0 && axios.post('/api/customer/token',{jwt:jwwt})
+        .then((res)=> setCmds(HandleRes(res.data,dispatch,setCmds)))
+        .catch((err) => console.log("Error during fetching customer profil data.",err) )
+
 
     const handleClick = () => {
         props.snd(false)
     }
 
-    console.log('tttt', data.split('//'))
 
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
-            <div> {data} </div>
+            
 
         </Container>
     )

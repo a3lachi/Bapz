@@ -43,17 +43,11 @@ const handleRes = (data,dispatch,setCmds,setEmail) => {
 
 const Profil = () => {
     const dispatch = useDispatch()
-    const jwwt = useSelector((state) =>  state.user.jwt)
-
-    const [ cmds , setCmds ] = useState([])
-    const [ email , setEmail ] = useState("")
+    
 
     const [seecmds , setSeecmds ] = useState(false)
 
-    axios
-        .post('/api/customer/token',{jwt:jwwt})
-        .then((res)=> handleRes(res.data,dispatch,setCmds,setEmail))
-        .catch((err) => console.log("Error during fetching customer profil data.") )
+    
 
     return (
         <div className='col'>
@@ -64,9 +58,9 @@ const Profil = () => {
 
                 <Wrapper>
                     { seecmds 
-                        ? <Commands cmds={cmds} snd={setSeecmds} /> 
+                        ? <Commands snd={setSeecmds} /> 
                         : <>
-                            <div>EMAIL : {email}</div>
+                            <button onClick={()=>setSeecmds(true)}>ACCOUNT</button>
                             <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
                             
                         </>

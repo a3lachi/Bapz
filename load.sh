@@ -1,11 +1,11 @@
 
 rrr() { git add . ; git commit -m "code update"$1 ; git push ;}
 
-i="200"
+i="1999"
 
-while [ $i -lt 230 ]
+while [ $i -lt 2020 ]
 do
 rrr $i;
-sleep 120;
+sleep 170;
 i=$[$i+1]
 done
