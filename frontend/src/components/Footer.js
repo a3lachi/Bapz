@@ -17,6 +17,7 @@ const Container = styled.div`
     padding-left:30px;
     padding-right:20px;
     opacity: 0.9;
+    margin-top: auto;
     display: flex;
     background-color: #874800;
     color:white;
