@@ -56,13 +56,14 @@ def BapzCatView(request):
             data = []
             for lop in queryset :
                 name = lop.productname 
+                id = lop.id
                 nospacename = ''.join(name.split(' '))
                 res=[]
                 for filename in os.listdir(DIR_BASE) :
                     cc = filename.split('.jpg')[0]
                     if cc[:-1] == nospacename : 
                         res.append(filename)
-                data.append([name,sorted(res)[:2]])
+                data.append([name,sorted(res)[:2],id])
                         
             # data = serializers.serialize('json', names)
             
