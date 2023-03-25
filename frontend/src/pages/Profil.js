@@ -64,7 +64,7 @@ const Profil = () => {
 
                 <Wrapper>
                     { seecmds 
-                        ? <Commands cmds={cmds} /> 
+                        ? <Commands cmds={cmds} snd={setSeecmds} /> 
                         : <>
                             <div>EMAIL : {email}</div>
                             <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
