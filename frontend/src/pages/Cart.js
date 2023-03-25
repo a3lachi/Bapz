@@ -149,9 +149,8 @@ const Qtti = styled.div`
 const Cart = () => {
     var products = useSelector((state) =>  state.cart.itms) 
 
-    const emptyCart = (event) =>{
-        store.dispatch(delCart())
-    }
+    // const dispatch = useDispatch() ;
+
     const [ chkout , setChkout ] = useState(false)
 
 
@@ -171,7 +170,7 @@ const Cart = () => {
             <Announcement />
             <Navbar  />
             <Categories />
-            <button onClick={emptyCart}>CLEAR</button>
+            <button onClick={(e)=> store.dispatch(delCart())}>CLEAR</button>
             <Container key="rtret">
                 
                 <Wrapper key="idx" id='wrapp'>
