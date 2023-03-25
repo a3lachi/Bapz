@@ -203,7 +203,7 @@ def getUserCommandsByJwt(request) :
                             cus = Bapz.objects.filter(id=id)[0].productname
                             res.append(cus)
                         except:
-                            print('mabghach')
+                            pass
                     src.append(res)
 
                 return JsonResponse({'user':'yes', 'commands':cmds,'brr':src}) 
