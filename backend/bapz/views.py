@@ -29,10 +29,12 @@ def BapzId(request) :
     if request.method == 'POST':
         id = json.loads(request.body )['id']
         prod = Bapz.objects.filter(id=id)[0]
-
-        return JsonResponse({'lol':"post",'id':prod.productname})
+        if (len(prod)==1) :
+            return JsonResponse({'found':"yes",'id':prod.productname})
+        else :
+            return JsonResponse({'found':"no"})
     else :
-        return JsonResponse({'lol':"notPOST" })    
+        return JsonResponse({'info':"notPOST" })    
 
 @csrf_exempt 
 def BapzCatView(request):
