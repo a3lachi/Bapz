@@ -30,7 +30,13 @@ def BapzId(request) :
         id = json.loads(request.body )['id']
         prod = Bapz.objects.filter(id=id)
         if (len(prod)==1) :
-            return JsonResponse({'found':"yes",'id':''.join(prod[0].productname.split(' '))})
+            name = ''.join(prod[0].productname.split(' '))
+            res = []
+            for filename in os.listdir(DIR_BASE) :
+                cc = filename.split('.jpg')[0]
+                if cc[:-1] == name : 
+                    res.append(filename)
+            return JsonResponse({'found':"yes",'id':res[0]})
         else :
             return JsonResponse({'found':"no"})
     else :
