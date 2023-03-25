@@ -194,15 +194,15 @@ def getUserCommandsByJwt(request) :
                 cmds = cus[0].commands
                 ids =[ [ int(b.split(',')[-1]) for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
 
-                brb = [ [ b.split(',')[1:-2] for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
+                brb = [ [ b.split(',')[1:-1] for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
                 
                 src = []
 
-                for idd in ids :
+                for i in range(len(ids)) :
                     res=[]
-                    for id in idd :
+                    for j in range(len(ids[i])) :
                         try :
-                            cus = Bapz.objects.filter(id=id)[0].productname
+                            cus = Bapz.objects.filter(id=ids[i][j])[0].productname
                             rn = ''.join(cus.split(" "))
                             ch = []
                             for filename in os.listdir(DIR_BASE) :
@@ -212,9 +212,9 @@ def getUserCommandsByJwt(request) :
                             res.append(sorted(ch)[0])
                         except:
                             pass
-                    src.append(res)
+                    src.append(res+brb[i][j])
 
-                return JsonResponse({'user':'yes', 'commands':cmds,'brr':brb}) 
+                return JsonResponse({'user':'yes', 'commands':cmds,'brr':src}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :
