@@ -160,7 +160,7 @@ const Checkout = (products) => {
                         <Navbar />
                         
                         <Container>
-                            <div>TKALMA</div>
+                        <><div style={{marginBottom:"20px"}} ><b>YOUR BAG</b></div><div>Your bag currently is empty.</div></>
                         </Container>
                         <Footer />
                         </Containerrr>
