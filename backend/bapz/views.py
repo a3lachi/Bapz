@@ -201,7 +201,13 @@ def getUserCommandsByJwt(request) :
                     for id in idd :
                         try :
                             cus = Bapz.objects.filter(id=id)[0].productname
-                            res.append(cus)
+                            rn = ''.join(cus.split(" "))
+                            ch = []
+                            for filename in os.listdir(DIR_BASE) :
+                                cc = filename.split('.jpg')[0]
+                                if cc[:-1] == rn : 
+                                    ch.append(filename)
+                            res.append(sorted(ch)[0])
                         except:
                             pass
                     src.append(res)
