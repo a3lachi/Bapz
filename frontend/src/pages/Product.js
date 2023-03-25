@@ -150,8 +150,6 @@ const Product = (id) => {
 
   const iid = location.pathname.split("/")[4];
 
-  console.log('LOOL',iid)
-
   const nospaceName = name.split('%20').join(' ')
   
   const HandleData = (datax) => {
@@ -216,7 +214,6 @@ const Product = (id) => {
         setApparimg(currimg[ids-1])
       }
     }
-    console.log('chhal mn mra')
     if(data?.price) {
       
       
