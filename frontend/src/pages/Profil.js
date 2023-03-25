@@ -47,6 +47,8 @@ const Profil = () => {
     const [ cmds , setCmds ] = useState([])
     const [ email , setEmail ] = useState("")
 
+    const [seecmds , setSeecmds ] = useState(false)
+
     axios
         .post('/api/customer/token',{jwt:jwwt})
         .then((res)=> handleRes(res.data,dispatch,setCmds,setEmail))
@@ -61,7 +63,7 @@ const Profil = () => {
 
                 <Wrapper>
                     <div>EMAIL : {email}</div>
-                    <div>COMMANDS : {cmds}</div>
+                    <button onClick={()=>setSeecmds(true)}>COMMANDS : {cmds}</div>
                 </Wrapper>
                 <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button>
             </Container>
