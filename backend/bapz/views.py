@@ -30,7 +30,7 @@ def BapzId(request) :
         id = json.loads(request.body )['id']
         prod = Bapz.objects.filter(id=id)
         if (len(prod)==1) :
-            return JsonResponse({'found':"yes",'id':prod[0].productname})
+            return JsonResponse({'found':"yes",'id':''.join(prod[0].productname.split(' '))})
         else :
             return JsonResponse({'found':"no"})
     else :
