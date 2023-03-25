@@ -4,7 +4,7 @@ from .models import Customer
 
 
 class BapzAdmin(admin.ModelAdmin):
-    list_display = ('productname', 'category','price', 'color','size')
+    list_display = ('productname','id', 'category','price', 'color','size')
 
 
 class CustomerAdmin(admin.ModelAdmin) :

@@ -28,9 +28,9 @@ def BapzId(request) :
 
     if request.method == 'POST':
         id = json.loads(request.body )['id']
-        prod = Bapz.objects.filter(id=id)
+        prod = Bapz.objects.filter(id=id)[0]
 
-        return JsonResponse({'lol':"post",'id':prod['productname']})
+        return JsonResponse({'lol':"post",'id':prod.productname})
     else :
         return JsonResponse({'lol':"notPOST" })    
 
