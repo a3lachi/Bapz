@@ -180,7 +180,7 @@ const Product = (id) => {
   };
 
     const addToCart = () => {
-      dispatch(addOne({src:apprimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size , ids:data.ids}));
+      dispatch(addOne({src:apprimg, productname:data.productname , price:data.price, quantity:quantity, color:color, size:size , ids:data.id}));
     };
 
 
