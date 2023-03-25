@@ -21,6 +21,16 @@ class BapzView(generics.ListAPIView):
     serializer_class = BapzSerializer
     queryset = Bapz.objects.all()
 
+
+@csrf_exempt 
+def BapzId(request) :
+    serializer_class = BapzSerializer
+
+    if request.method == 'POST':
+        return JsonResponse({'lol':"post"})
+    else :
+        return JsonResponse({'lol':"notPOST" })    
+
 @csrf_exempt 
 def BapzCatView(request):
     serializer_class = BapzSerializer
