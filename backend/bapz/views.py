@@ -194,9 +194,9 @@ def getUserCommandsByJwt(request) :
                 cmds = cus[0].commands
 
                 dates = [  [ b for b in  a.split('|')] for a in cmds.split('//') if len(a)>4    ]
-                print(dates)
+                
                 ids =[ [ int(b.split(',')[-1]) for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
-
+                print(ids)
                 brb = [ [ b.split(',')[1:-1] for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
                 
                 src = []
@@ -217,7 +217,6 @@ def getUserCommandsByJwt(request) :
                             pass
                     src.append(res)
 
-                src = [2,3,4,5]
 
                 return JsonResponse({'user':'yes', 'data':src}) 
             else : 
