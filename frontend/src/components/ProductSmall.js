@@ -12,8 +12,6 @@ const Smta = styled.div`
   top:87.3%;
 `
 
-
-
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -151,7 +149,7 @@ const ProductSmall = ({id,item,cat}) => {
                             ? e.target.style.color="black" 
                             : e.target.style.color="red" }
                       }
-                      style={{width:'15px'}}
+                      style={{width:'15px'}} 
                     />
                 </Icon>
                 
