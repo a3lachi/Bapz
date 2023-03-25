@@ -7,11 +7,11 @@ import { useState } from 'react'
 
 import styled from "styled-components"
 import { mobile } from '../responsive';
-import { Button } from '@mui/material';
+
 import RemoveCircleOutlineIcon  from '@mui/icons-material/RemoveCircleOutline';
-import { Icon } from '@mui/material';
+
 import { store } from '../redux/store'
-import { addOne, delCart  , updateCart , updateQtty } from '../redux/cartSlice';
+import {  delCart  , updateQtty } from '../redux/cartSlice';
 import { Navigate } from 'react-router-dom';
  
 
@@ -25,19 +25,6 @@ const Container = styled.div`
     display:flex;
     flex-direction:column;
     ${mobile({flexDirection:"column" })}
-`
-const Bar = styled.div`
-    position: absolute ;
-    top:10vh;
-    left : 10vw;
-    height:20vh;
-    width:20vw;
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    padding : 20px 10px 10px 10px ;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    
 `
 const Total = styled.div`
     text-align: center;
@@ -161,8 +148,6 @@ const Qtti = styled.div`
 
 const Cart = () => {
     var products = useSelector((state) =>  state.cart.itms) 
-
-    const dispatch = useDispatch() ;
 
     const emptyCart = (event) =>{
         store.dispatch(delCart())
