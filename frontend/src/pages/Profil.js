@@ -5,6 +5,7 @@ import Slider from '../components/Slider';
 import Announcement from '../components/Announcement';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
+import Commands from '../components/Commands';
 
 import styled from 'styled-components';
 import {setJwt , logUser , setCommand}  from '../redux/userSlice';
@@ -62,13 +63,17 @@ const Profil = () => {
             <Container>
 
                 <Wrapper>
-                    { seecmds ? <Commands /> : 
-                        <div>EMAIL : {email}</div>
-                        <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
+                    { seecmds 
+                        ? <Commands cmds={cmds} /> 
+                        : <>
+                            <div>EMAIL : {email}</div>
+                            <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
+                            <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button>
+                        </>
                     }
                     
                 </Wrapper>
-                <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button>
+                
             </Container>
 
             <Announcement />

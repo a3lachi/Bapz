@@ -16,4 +16,4 @@ const Commands = (cmds) => {
 } 
 
 
-eport default Comamnds ;
+export default Commands ;
