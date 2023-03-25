@@ -36,7 +36,7 @@ def BapzId(request) :
                 cc = filename.split('.jpg')[0]
                 if cc[:-1] == name : 
                     res.append(filename)
-            return JsonResponse({'found':"yes",'id':res[0]})
+            return JsonResponse({'found':"yes",'src':res})
         else :
             return JsonResponse({'found':"no"})
     else :

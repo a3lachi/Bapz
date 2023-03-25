@@ -168,7 +168,7 @@ const Product = (id) => {
   }
   useEffect(()=>{
       axios
-          .post(`/api/bapz/product`,{name:nospaceName} )
+          .post(`/api/bapz/id`,{id:iid} )
           .then((res) =>(HandleData(res.data)))
           .then()
           .catch((err) => console.log(err));
