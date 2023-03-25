@@ -11,9 +11,9 @@ router.register(r'bapz', views.BapzView, 'bapz')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/bapz', views.BapzView.as_view()),
-    path('api/bapz/id', views.BapzId),
-    path('api/bapz/<int:ids>/', views.BapzViewIds.as_view()),
+    path('api/bapz', views.BapzView.as_view()), ## Get all data // GET
+    path('api/bapz/id', views.BapzId), ## Get Product infos by ID  // POST
+    # path('api/bapz/<int:ids>/', views.BapzViewIds.as_view()),
     path('api/bapz/apparel', views.BapzCatView ),
     path('api/bapz/product', views.BapzProduct ),
     # path('api/customer', views.PostUser.as_view() ),

@@ -108,12 +108,12 @@ def BapzProduct(request) :
         return JsonResponse({'lol':"notPOST" })
 
 
-class BapzViewIds(generics.ListAPIView) :
-    serializer_class = BapzSerializer
+# class BapzViewIds(generics.ListAPIView) :
+#     serializer_class = BapzSerializer
 
-    def get_queryset(self) : 
-        id = self.kwargs.get('ids')
-        return Bapz.objects.filter(id=id)
+#     def get_queryset(self) : 
+#         id = self.kwargs.get('ids')
+#         return Bapz.objects.filter(id=id)
 
 
 
