@@ -22,6 +22,7 @@ import { updateCart } from './redux/cartSlice';
 import { updateUser , setJwt } from './redux/userSlice'
 import { store } from './redux/store'
 import Checkout from './pages/Checkout';
+import styled from 'styled-components';
 
 
 const App = () => {
@@ -49,8 +50,14 @@ const App = () => {
     store.dispatch(updateCart())
   }
 
+  const Container = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  `
 
   return (
+    <Container>
     <Router>
       <Routes>
           <Route exact path="/"  element={<Home id={user} />} />
@@ -72,6 +79,7 @@ const App = () => {
 
       </Routes>
     </Router>
+    </Container>
   )
 
 }
