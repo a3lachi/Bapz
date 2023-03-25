@@ -100,10 +100,10 @@ def BapzProduct(request) :
             if cc[:-1] == toAdd : 
                 res.append(filename)
     
-        queryset = Bapz.objects.filter(productname=nam)
-        data = serializers.serialize('json', queryset)
+        queryset = Bapz.objects.filter(productname="BAPE STA")[0].id
+        # data = serializers.serialize('json', queryset)
     # data = {'toAdd': toAdd, 'results': queryset}
-        return JsonResponse({'info':"new", 'src':res ,'data':data})
+        return JsonResponse({'info':"new", 'src':res ,'data':queryset})
     else :
         return JsonResponse({'lol':"notPOST" })
 
