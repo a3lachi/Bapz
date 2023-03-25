@@ -88,7 +88,7 @@ const CartPro = styled.div`
     ${mobile({ textAlign: "center" })}
 `
 const Mage = styled.div`
-    display:"inline-block" 
+    display:"inline-block" ;
     width:300px;
 `
 const Image = styled.img`
