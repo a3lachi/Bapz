@@ -45,8 +45,13 @@ const userSlice = createSlice({
         cemds += camds[i].color + ',' + camds[i].size + ',' + camds[i].quantity + ',' + camds[i].ids +'@'
       }
       try {
+          const date = new Date() ;
+          let day = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          const dateE = `${day}${month}${year}`
           axios
-              .post('/api/customer/commands',{user:state.email ,cmds:cemds})
+              .post('/api/customer/commands',{user:state.email ,cmds:cemds, date:dateE})
               .then((res)=> console.log(res.data))
               .catch((err) => console.log('ERR during AXIOS to update commands'))
       } catch (err) {
