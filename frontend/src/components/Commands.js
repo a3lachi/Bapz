@@ -7,17 +7,18 @@ const Container = styled.div`
 `
 
 const Commands = (props) => {
-    const dataStr = props.cmds
+    const data = props.cmds
 
     const handleClick = () => {
         props.snd(false)
     }
 
+    console.log('tttt', data.split('//'))
 
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
-            <div> {dataStr} </div>
+            <div> {data} </div>
 
         </Container>
     )
