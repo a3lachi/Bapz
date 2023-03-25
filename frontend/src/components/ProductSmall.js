@@ -129,7 +129,7 @@ const ProductSmall = ({id,item,cat}) => {
   }
   
   return (
-      <Container id={id} onClick={(e) => navigate('/apparel/'+cat + "/" +item[0])}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
+      <Container id={id} onClick={(e) =>{ cat ? navigate('/apparel/'+cat + "/" +item[0]) : navigate('/apparel/prd/' +item[0]) }}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
           <Text id={id} >{item[0]}</Text>
           <Image id={id} src ={ara(0)} />
           <Smta id={id}>
