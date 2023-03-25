@@ -45,14 +45,10 @@ const App = () => {
     store.dispatch(updateCart())
   }
 
-  const Container = styled.div`
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  `
+
 
   return (
-    <Container>
+
       <Router>
         <Routes>
             <Route exact path="/"  element={<Home id={user} />} />
@@ -71,10 +67,9 @@ const App = () => {
             <Route path="/cart" element={ <Cart id={user}  />} />
 
             <Route path="/checkout" element={ cart?.length>0 ? <Checkout prods={cart}  /> : <Navigate to='/' />  } />
-
         </Routes>
       </Router>
-    </Container>
+    
   )
 
 }
