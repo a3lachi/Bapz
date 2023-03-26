@@ -14,14 +14,14 @@ const Wrapper = styled.div`
 
 const Account = (props) => {
     const handleClick = () => {
-        props.snd(true)
+        props.snd(false)
     }
 
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
             <Wrapper>
-                KUUNT
+                EMAIL : 
 
             </Wrapper>
 
