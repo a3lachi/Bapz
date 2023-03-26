@@ -16,6 +16,9 @@ class Bapz(models.Model):
 class Customer(models.Model) :
     email = models.TextField()
     pwd = models.TextField()
+    frstname = models.TextField()
+    lstname = models.TextField()
+    usrname = = models.TextField()
     commands = models.TextField()
     jwt = models.TextField()
     id  = models.IntegerField(primary_key=True)
