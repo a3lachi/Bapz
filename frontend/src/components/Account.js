@@ -1,8 +1,8 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useState , useSelector} from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
-
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
     
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
 const Account = (props) => {
 
-    const jwwt = useSelector((state) =>  state.user.jwt)
+    const jwwt = useSelector((state) =>  (state.user.jwt)) ;
     console.log(jwwt)
     const handleClick = () => {
         props.snd(false)
