@@ -12,9 +12,9 @@ const Wrapper = styled.div`
 `
 
 
-const Account = () => {
+const Account = (props) => {
     const handleClick = () => {
-
+        props.snd(true)
     }
 
     return(
