@@ -23,8 +23,8 @@ const Account = (props) => {
 
     const [ info , setInfo ] = useState([])
     console.log(info)
-    info.length===5 && axios.post('/api/customer/token',{jwt:jwwt})
-        .then((res)=> setInfo(res.data))
+    info.length===0 && axios.post('/api/customer/token',{jwt:jwwt})
+        .then((res)=> setInfo(res.data.info))
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
 
     return(

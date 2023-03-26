@@ -219,8 +219,8 @@ def getUserCommandsByJwt(request) :
                             pass
                     src.append([dates[i],res])
 
-                email = "@"
-                return JsonResponse({'user':'yes', 'data':src,'info':email}) 
+                
+                return JsonResponse({'user':'yes', 'data':src,'info':cus[0].email}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :
