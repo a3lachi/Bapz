@@ -1,19 +1,13 @@
 import Navbar from '../components/Navbar';
-import Categories from '../components/Categories';
-import Products from '../components/Products';
-import Slider from '../components/Slider';
 import Announcement from '../components/Announcement';
-import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import Commands from '../components/Commands';
 import Account from '../components/Account';
 
 import styled from 'styled-components';
-import {setJwt , logUser , setCommand}  from '../redux/userSlice';
+import {setJwt }  from '../redux/userSlice';
 import { store }  from '../redux/store';
-import { useDispatch , useSelector} from 'react-redux';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 
 const Container = styled.div`
@@ -37,18 +31,8 @@ const Containerr = styled.div`
     display: flex;
     flex-direction: column;
 `
-const handleRes = (data,dispatch,setCmds,setEmail) => {
-    if (data.user == "yes") {
-        store.dispatch(logUser(data.email))
-        store.dispatch(setCommand(data.commands))
-        setCmds(data.commands)
-        setEmail(data.email)
-    }
-}
 
-const Profil = () => {
-    const dispatch = useDispatch()
-    
+const Profil = () => {    
 
     const [seecmds , setSeecmds ] = useState(false)
 
@@ -65,7 +49,7 @@ const Profil = () => {
 
                 <Wrapper>
                     { seecmds || seeaccnt
-                        ? seecmds && <Commands snd={setSeecmds} /> || seeaccnt && <Account snd={setSeeaccnt} />
+                        ? (seecmds && <Commands snd={setSeecmds} />) || (seeaccnt && <Account snd={setSeeaccnt} />)
                         : <>
                             <button onClick={()=>setSeeaccnt(true)}>ACCOUNT</button>
                             <button onClick={()=>setSeecmds(true)}>COMMANDS</button>

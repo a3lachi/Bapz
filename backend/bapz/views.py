@@ -145,11 +145,14 @@ def GetCustomer(request):
             elif len(json_data)>2 :
                 em = json_data['email']
                 pd = json_data['pwd']
+                frstnm = json_data['firstname']
+                lstnm = json_data['lastname']
+                usrnm = json_data['username']
                 if len(Customer.objects.filter(email=em))>0 :
                     return JsonResponse({'info':"exist"}) 
                 else :
                     token = jwt.encode({"email":em , "brr":str(datetime.datetime.now())}, key='secret')
-                    Customer.objects.create(email=em , pwd=pd , jwt=token )
+                    Customer.objects.create(email=em , pwd=pd , jwt=token , frstname=frstnm , lstname=lstnm , usrname=usrnm )
                     
                     return JsonResponse({'info':"new" , 'jwt':token})
 
@@ -195,6 +198,9 @@ def getUserCommandsByJwt(request) :
                 cmds = cus[0].commands
                 em = cus[0].email
                 pwd = cus[0].pwd
+                frnm = cus[0].frstname
+                lstnm = cus[0].lstname
+                usrnm = cus[0].usrname
 
                 dates = [  a.split('|')[1] for a in cmds.split('//') if len(a)>2]    
                 
@@ -222,7 +228,7 @@ def getUserCommandsByJwt(request) :
                     src.append([dates[i],res])
 
                 
-                return JsonResponse({'user':'yes', 'data':src,'info':[em,pwd]}) 
+                return JsonResponse({'user':'yes', 'data':src,'info':[em,pwd,frnm,lstnm,usrnm]}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :

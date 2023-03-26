@@ -54,20 +54,24 @@ const Commands = (props) => {
     }
 
     console.log('HAMAWSSL',cmds)
-    return(
-        <Container>
-            <ArrowBackIcon onClick={()=>handleClick()}/>
-            <Wrapper>
-            {cmds?.length>0 && choseCmd?.length<1 && cmds?.map((elem,indx)=>(
-                <Comand id={indx} onClick={(e)=>(Handleclick(e.target.id))} >
-                   Command passed on {elem[0]} :
-                { elem[1]?.map((el)=>(<img style={{width:'40px' , mixBlendMode: 'multiply'}} src={'/media/images/'+el[1]}/>)) }
-                </Comand>
-            ))}
-            </Wrapper>
-            { choseCmd.length>1 && <Command cmd={choseCmd} />}
-        </Container>
-    )
+    if (cmds?.length>0) {
+        return(
+            <Container>
+                <ArrowBackIcon onClick={()=>handleClick()}/>
+                <Wrapper>
+                {cmds?.length>0 && choseCmd?.length<1 && cmds?.map((elem,indx)=>(
+                    <Comand id={indx} onClick={(e)=>(Handleclick(e.target.id))} >
+                    Command passed on {elem[0]} :
+                    { elem[1]?.map((el)=>(<img style={{width:'40px' , mixBlendMode: 'multiply'}} src={'/media/images/'+el[1]}/>)) }
+                    </Comand>
+                ))}
+                </Wrapper>
+                { choseCmd.length>1 && <Command cmd={choseCmd} />}
+            </Container>
+        )
+    } else {
+        return (<></>)
+    } 
 } 
 
 

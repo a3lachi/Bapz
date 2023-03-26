@@ -27,17 +27,21 @@ const Account = (props) => {
         .then((res)=> setInfo(res.data.info))
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
 
-    return(
-        <Container>
-            <ArrowBackIcon onClick={()=>handleClick()}/>
-            <Wrapper>
-                EMAIL : {info[0]}
-                PASSWORD : {info[1]}
+    if (info.length>1) {
+        return(
+            <Container>
+                <ArrowBackIcon onClick={()=>handleClick()}/>
+                <Wrapper>
+                    EMAIL : {info[0]}
+                    PASSWORD : {info[1]}
 
-            </Wrapper>
+                </Wrapper>
 
-        </Container>
-    )
+            </Container>
+        )
+    } else {
+        return (<></>)
+    }
 }
 
 
