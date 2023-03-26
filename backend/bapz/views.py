@@ -193,6 +193,7 @@ def getUserCommandsByJwt(request) :
             cus = Customer.objects.filter(jwt=jwwt)
             if len(cus)>0 :
                 cmds = cus[0].commands
+                em = cus[0].email
 
                 dates = [  a.split('|')[1] for a in cmds.split('//') if len(a)>2]    
                 
@@ -220,7 +221,7 @@ def getUserCommandsByJwt(request) :
                     src.append([dates[i],res])
 
                 
-                return JsonResponse({'user':'yes', 'data':src,'info':cus[0].email}) 
+                return JsonResponse({'user':'yes', 'data':src,'info':[em,pwd]}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :
