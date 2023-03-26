@@ -17,15 +17,14 @@ const Wrapper = styled.div`
 const Account = (props) => {
 
     const jwwt = useSelector((state) =>  (state.user.jwt)) ;
-    console.log(jwwt)
     const handleClick = () => {
         props.snd(false)
     }
 
     const [ info , setInfo ] = useState([])
-
+    console.log(info)
     info.length===5 && axios.post('/api/customer/token',{jwt:jwwt})
-        .then((res)=> console.log(res.data.info))
+        .then((res)=> setInfo(res.data))
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
 
     return(
