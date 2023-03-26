@@ -1,6 +1,7 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useState } from 'react';
+import { useState , useSelector} from 'react';
 import styled from 'styled-components';
+import axios from 'axios'
 
 
 const Container = styled.div`
@@ -14,6 +15,9 @@ const Wrapper = styled.div`
 
 
 const Account = (props) => {
+
+    const jwwt = useSelector((state) =>  state.user.jwt)
+
     const handleClick = () => {
         props.snd(false)
     }
@@ -21,14 +25,14 @@ const Account = (props) => {
     const [ info , setInfo ] = useState([])
 
     info.length===0 && axios.post('/api/customer/token',{jwt:jwwt})
-        .then((res)=> setCmds(res.data.data))
+        .then((res)=> setInfo(res.data.info))
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
 
     return(
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
             <Wrapper>
-                EMAIL : 
+                EMAIL : {info}
 
             </Wrapper>
 
