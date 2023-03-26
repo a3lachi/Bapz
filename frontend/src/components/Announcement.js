@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+        
         height: 25px;
         background-color : black ;        
-        position:flex;
+        position:relative;
 `
 
 const Text = styled.div`

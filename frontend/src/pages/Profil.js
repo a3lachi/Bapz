@@ -6,6 +6,7 @@ import Announcement from '../components/Announcement';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import Commands from '../components/Commands';
+import Account from '../components/Account';
 
 import styled from 'styled-components';
 import {setJwt , logUser , setCommand}  from '../redux/userSlice';
@@ -19,7 +20,7 @@ const Container = styled.div`
     margin-top : 60px;
     margin-bottom:60px;
     width: 70vw;
-    height: 30vh;
+    height: 100%;
     margin-right: auto;
     margin-left: auto;
     align-items: center;
@@ -31,7 +32,11 @@ const Container = styled.div`
 const Wrapper = styled.div`
 
 `
-
+const Containerr = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`
 const handleRes = (data,dispatch,setCmds,setEmail) => {
     if (data.user == "yes") {
         store.dispatch(logUser(data.email))
@@ -47,20 +52,22 @@ const Profil = () => {
 
     const [seecmds , setSeecmds ] = useState(false)
 
+    const [ seeaccnt ,  setSeeaccnt ] = useState(false)
+
     
 
     return (
-        <div className='col'>
+        <Containerr className='col'>
             <Announcement />
             <Navbar />
 
             <Container>
 
                 <Wrapper>
-                    { seecmds 
-                        ? <Commands snd={setSeecmds} /> 
+                    { seecmds || seeaccnt
+                        ? seecmds && <Commands snd={setSeecmds} /> || seeaccnt && <Account snd={setSeeaccnt} />
                         : <>
-                            <button onClick={()=>setSeecmds(true)}>ACCOUNT</button>
+                            <button onClick={()=>setSeeaccnt(true)}>ACCOUNT</button>
                             <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
                             
                         </>
@@ -70,10 +77,9 @@ const Profil = () => {
                     { seecmds ? <></> : <button onClick={()=>store.dispatch(setJwt("jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"))} >LOG OUT</button> }
             </Container>
 
-            <Announcement />
-            <Newsletter/>
+            
             <Footer />
-        </div>
+        </Containerr>
     )
 }
 

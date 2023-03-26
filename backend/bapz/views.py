@@ -170,7 +170,7 @@ def UpdateCommands(request) :
             print(json_data['date'])
             
             jwwt =  json_data['jwt']
-            cmds  = Customer.objects.get(jwt=jwwt).commands + ' // ' +json_data['cmds'] + '|' + json_data['date']
+            cmds  = Customer.objects.get(jwt=jwwt).commands + '//' +json_data['cmds'] + '|' + json_data['date']
 
             usr = Customer.objects.filter(jwt=jwwt)
             
@@ -194,11 +194,11 @@ def getUserCommandsByJwt(request) :
             if len(cus)>0 :
                 cmds = cus[0].commands
 
-                dates = [  [ b for b in  a.split('|')] for a in cmds.split('//') if len(a)>4    ]
+                dates = [  a.split('|')[1] for a in cmds.split('//') if len(a)>2]    
                 
-                ids =[ [ int(b.split(',')[-1]) for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
-                print(ids)
-                brb = [ [ b.split(',')[1:-1] for b in a.split('@') if len(b)>1] for a in cmds.split('//') if len(a)>4 ]
+                ids =[[ b.split(',')[-1] for b in a.split('@')[:-1] ] for a in  [ a.split('|')[0]  for a in cmds.split('//') if len(a)>2]  ] 
+                # print(ids)
+                brb = [[ b.split(',')[1:-1] for b in a.split('@')[:-1] ] for a in  [ a.split('|')[0]  for a in cmds.split('//') if len(a)>2]  ]
                 
                 src = []
 
@@ -207,20 +207,21 @@ def getUserCommandsByJwt(request) :
                     for j in range(len(ids[i])) :
                         try :
                             cus = Bapz.objects.filter(id=ids[i][j])[0].productname
+                            prc = Bapz.objects.filter(id=ids[i][j])[0].price
                             rn = ''.join(cus.split(" "))
                             ch = []
                             for filename in os.listdir(DIR_BASE) :
                                 cc = filename.split('.jpg')[0]
                                 if cc[:-1] == rn : 
                                     ch.append(filename)
-                            res.append([cus,sorted(ch)[0]]+brb[i][j])
+                            res.append([cus,sorted(ch)[0],prc]+brb[i][j])
                         except:
                             pass
-                    src.append(res)
+                    src.append([dates[i],res])
 
 
                 return JsonResponse({'user':'yes', 'data':src}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :
-            return HttpResponseNotFound("Brr") 
+            return JsonResponse({'info':'couldnt try','data':'-'}) 
