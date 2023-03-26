@@ -8,7 +8,7 @@ class BapzAdmin(admin.ModelAdmin):
 
 
 class CustomerAdmin(admin.ModelAdmin) :
-    list_display = ('email','pwd','id','commands','jwt')
+    list_display = ('email','pwd','frstname','lstname','usrname','id','commands','jwt')
 
 admin.site.register(Bapz, BapzAdmin)
 admin.site.register(Customer, CustomerAdmin)
