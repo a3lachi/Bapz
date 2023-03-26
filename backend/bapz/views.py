@@ -194,6 +194,7 @@ def getUserCommandsByJwt(request) :
             if len(cus)>0 :
                 cmds = cus[0].commands
                 em = cus[0].email
+                pwd = cus[0].pwd
 
                 dates = [  a.split('|')[1] for a in cmds.split('//') if len(a)>2]    
                 

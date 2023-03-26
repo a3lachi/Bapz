@@ -31,7 +31,8 @@ const Account = (props) => {
         <Container>
             <ArrowBackIcon onClick={()=>handleClick()}/>
             <Wrapper>
-                EMAIL : {info}
+                EMAIL : {info[0]}
+                PASSWORD : {info[1]}
 
             </Wrapper>
 
