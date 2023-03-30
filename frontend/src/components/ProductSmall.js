@@ -90,8 +90,6 @@ const styleLink = {
 
 const ProductSmall = ({id,item,cat}) => {
 
-  console.log('----------',item)
-
   const ara = (ch) => {
     if (item[1].length>1) 
       return '/media/images/'+item[1][ch]

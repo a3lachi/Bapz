@@ -63,7 +63,7 @@ def BapzCatView(request):
                     cc = filename.split('.jpg')[0]
                     if cc[:-1] == nospacename : 
                         res.append(filename)
-                data.append([name,sorted(res)[:2],id])
+                data.append([name,sorted(res)[:2],id,int(lop.price.split('$')[1].split('.')[0]) ])
                         
             # data = serializers.serialize('json', names)
             
@@ -80,7 +80,7 @@ def BapzCatView(request):
                     cc = filename.split('.jpg')[0]
                     if cc[:-1] == nospacename : 
                         res.append(filename)
-                data.append([name,sorted(res)[:2],id])
+                data.append([name,sorted(res)[:2],id,lop.price])
 
             
             return JsonResponse({'lol':"notcat",'data':data})
