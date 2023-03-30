@@ -1,8 +1,8 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import styled from 'styled-components';
-import { useDispatch , useSelector} from 'react-redux';
+import {  useSelector} from 'react-redux';
 import axios from 'axios'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Command from './Command'
 
 
@@ -53,6 +53,7 @@ const Commands = (props) => {
             setChoseCmd([])
     }
 
+    
     console.log('HAMAWSSL',cmds)
     if (cmds?.length>0) {
         return(
@@ -62,7 +63,7 @@ const Commands = (props) => {
                 {cmds?.length>0 && choseCmd?.length<1 && cmds?.map((elem,indx)=>(
                     <Comand id={indx} key={indx} onClick={(e)=>(Handleclick(e.target.id))} >
                     Command passed on {elem[0]} :
-                    { elem[1]?.map((el,indx)=>(<img key={indx} style={{width:'40px' , mixBlendMode: 'multiply'}} src={'/media/images/'+el[1]}/>)) }
+                    { elem[1]?.map((el,indx)=>(<img key={indx} alt={""} style={{width:'40px' , mixBlendMode: 'multiply'}} src={'/media/images/'+el[1]}/>)) }
                     </Comand>
                 ))}
                 </Wrapper>

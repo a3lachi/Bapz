@@ -25,6 +25,7 @@ const Container = styled.div`
     ${mobile({ flexDirection: "column" })}
 `;
 
+
 const Left = styled.div`
     flex: 1;
     flex-direction: column;
