@@ -11,13 +11,14 @@ import Footer from '../components/Footer';
 
 
 
-const Home = (id) => {
+const Home = () => {
     return (
         <div className='col'>
             <Announcement />
             <Navbar />
-            {/* <Slider /> */}
             <Categories />
+            <Slider />
+            
             <Products />
             <Announcement />
             <Newsletter/>

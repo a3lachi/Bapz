@@ -5,6 +5,7 @@ import ProductSmall from './ProductSmall';
 
 const Container = styled.div`
     padding: 20px;
+    min-height: 1000px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -16,16 +17,18 @@ const Container = styled.div`
 const Products = ({cat, filters, sort}) =>{
     
     const [data , setData] = useState([])
+
     
-    useEffect(()=>{
-        axios
-            .post(`/api/bapz/apparel`, {cat:cat})
-            .then((res) => setData(res.data.data))
-            .catch((err) => console.log(err));
-    }, [cat])
+        useEffect(()=>{
+                axios
+                    .post(`/api/bapz/apparel`, {cat:cat})
+                    .then((res) => setData(res.data.data))
+                    .catch((err) => console.log(err));
+        },[cat])
+    
+    
     
     if(data) {
-        // window.scrollTo(0, 0);
         return(
             <Container id='brr' className="row">
                 {cat 

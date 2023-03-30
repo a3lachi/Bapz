@@ -73,13 +73,14 @@ def BapzCatView(request):
             data = []
             for lop in queryset :
                 name = lop.productname 
+                id = lop.id 
                 nospacename = ''.join(name.split(' '))
                 res=[]
                 for filename in os.listdir(DIR_BASE) :
                     cc = filename.split('.jpg')[0]
                     if cc[:-1] == nospacename : 
                         res.append(filename)
-                data.append([name,sorted(res)[:2]])
+                data.append([name,sorted(res)[:2],id])
 
             
             return JsonResponse({'lol':"notcat",'data':data})
@@ -91,26 +92,18 @@ def BapzCatView(request):
 @csrf_exempt 
 def BapzProduct(request) :
     serializer_class = BapzSerializer
+    print('hgjfdsgfh-------------',Bapz.objects.filter(category='shoes')[0])
 
     if request.method == 'POST':
-        json_data = json.loads(request.body ) 
-        nam = json_data['name']
-        kk = ' '.join(nam.split('%20'))
-        v = ''.join(kk.split(' '))
-        a = ''.join(v.split('®'))
-        rr = ''.join(a.split('#'))
-        toAdd = ''.join(rr.split('™')) 
-        print('----',nam)
-        res = []
-        for filename in os.listdir(DIR_BASE) :
-            cc = filename.split('.jpg')[0]
-            if cc[:-1] == toAdd : 
-                res.append(filename)
+    #     for filename in os.listdir(DIR_BASE) :
+    #         cc = filename.split('.jpg')[0]
+    #         if cc[:-1] == toAdd : 
+    #             res.append(filename)
     
-        id = Bapz.objects.filter(productname="BAPE STA")[0].id
+    #     id = Bapz.objects.filter(productname="BAPE STA")[0].id
         # data = serializers.serialize('json', queryset)
     # data = {'toAdd': toAdd, 'results': queryset}
-        return JsonResponse({'info':"new", 'src':res ,'id':id})
+        return JsonResponse({'info':"new", 'src':'res' ,'id':'id'})
     else :
         return JsonResponse({'lol':"notPOST" })
 
