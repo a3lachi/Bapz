@@ -23,7 +23,8 @@ const Elem = styled.div`
 const Command = (props) => {
 
     const comnd = props.cmd
-    console.log('-------',comnd)
+
+    const data = comnd[1]
 
 
 
@@ -33,8 +34,8 @@ const Command = (props) => {
             Date : {comnd[0]}
             <Wrapper>
             {
-                comnd[1].map((elem)=>(
-                    <Elem>
+                data.map((elem,indx)=>(
+                    <Elem key={indx} >
                         <div>{elem[0]} </div>
                         <img style={{width:'50px'}} src={'/media/images/'+elem[1]} /> x {elem[4]}   -   Size {elem[3]}  -  {elem[2]}
                         <Divider />

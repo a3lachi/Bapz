@@ -60,9 +60,9 @@ const Commands = (props) => {
                 <ArrowBackIcon onClick={()=>handleClick()}/>
                 <Wrapper>
                 {cmds?.length>0 && choseCmd?.length<1 && cmds?.map((elem,indx)=>(
-                    <Comand id={indx} onClick={(e)=>(Handleclick(e.target.id))} >
+                    <Comand id={indx} key={indx} onClick={(e)=>(Handleclick(e.target.id))} >
                     Command passed on {elem[0]} :
-                    { elem[1]?.map((el)=>(<img style={{width:'40px' , mixBlendMode: 'multiply'}} src={'/media/images/'+el[1]}/>)) }
+                    { elem[1]?.map((el,indx)=>(<img key={indx} style={{width:'40px' , mixBlendMode: 'multiply'}} src={'/media/images/'+el[1]}/>)) }
                     </Comand>
                 ))}
                 </Wrapper>

@@ -184,7 +184,7 @@ const Checkout = (products) => {
                     <Navbar />
                     <Container>
                         <Wrapper>
-                            <div>You have to<b> <a style={{color:'#874800'}} href='/register'>register</a></b>  or <b><a  style={{color:'#874800'}} href='/register'>login</a> </b>to checkout.</div>
+                            <div>You have to<b> <a style={{color:'#874800'}} href='/register'>register</a></b>  or <b><a  style={{color:'#874800'}} href='/login'>login</a> </b>to checkout.</div>
                         </Wrapper>
                     </Container>
                 
