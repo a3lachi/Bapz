@@ -53,7 +53,6 @@ const Commands = (props) => {
             setChoseCmd([])
     }
 
-    
     console.log('HAMAWSSL',cmds)
     if (cmds?.length>0) {
         return(

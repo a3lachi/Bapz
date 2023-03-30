@@ -166,7 +166,7 @@ def UpdateCommands(request) :
             print(json_data['date'])
             
             jwwt =  json_data['jwt']
-            cmds  = Customer.objects.get(jwt=jwwt).commands + '//' +json_data['cmds'] + '|' + json_data['date']
+            cmds  = Customer.objects.get(jwt=jwwt).commands + '//' +json_data['cmds'] + '|' + json_data['date'] + '|' + json_data['adrs']
 
             usr = Customer.objects.filter(jwt=jwwt)
             
@@ -195,7 +195,9 @@ def getUserCommandsByJwt(request) :
                 lstnm = cus[0].lstname
                 usrnm = cus[0].usrname
 
-                dates = [  a.split('|')[1] for a in cmds.split('//') if len(a)>2]    
+                dates = [  a.split('|')[1] for a in cmds.split('//') if len(a)>2]   
+
+                adrs = [  a.split('|')[2] for a in cmds.split('//') if len(a)>2]    
                 
                 ids =[[ b.split(',')[-1] for b in a.split('@')[:-1] ] for a in  [ a.split('|')[0]  for a in cmds.split('//') if len(a)>2]  ] 
                 # print(ids)
@@ -218,10 +220,10 @@ def getUserCommandsByJwt(request) :
                             res.append([cus,sorted(ch)[0],prc]+brb[i][j])
                         except:
                             pass
-                    src.append([dates[i],res])
+                    src.append([dates[i],res,adrs[i]])
 
                 
-                return JsonResponse({'user':'yes', 'data':src,'info':[em,pwd,frnm,lstnm,usrnm]}) 
+                return JsonResponse({'user':'yes', 'data':src, 'info':[em,pwd,frnm,lstnm,usrnm]}) 
             else : 
                 return JsonResponse({'user':'no'}) 
         except :

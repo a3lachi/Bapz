@@ -26,12 +26,15 @@ const Command = (props) => {
 
     const data = comnd[1]
 
+    console.log(props.cmd)
+
 
 
 
     return (
         <Container>
-            Date : {comnd[0]}
+            <div>Date : {comnd[0]}</div>
+            <div>Address : {comnd[2]} </div>
             <Wrapper>
             {
                 data.map((elem,indx)=>(

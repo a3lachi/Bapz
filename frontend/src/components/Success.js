@@ -31,10 +31,11 @@ const Info = styled.div`
     
 `
 
-const Success = () => {
+const Success = (props) => {
 
     const dispatch = useDispatch()
 
+    const address = props.adrs
     
 
     const email = useSelector((state)=>state.user.email)
@@ -51,7 +52,7 @@ const Success = () => {
     //     store.dispatch(delCart())
     // }
     useEffect(()=>{
-        validpay && store.dispatch(addCommand( { user:email , cmds:cart } ))
+        validpay && store.dispatch(addCommand( { user:email , cmds:cart , adrs:address } ))
         validpay && store.dispatch(delCart())
     },[validpay])
     
@@ -62,7 +63,7 @@ const Success = () => {
             <Wrapper >
                 <Info >
         {!validpay && <> <div>WAIT WHILE WE PROCEED YOUR PAYMENT...</div>
-        <img id='scc' src='https://i.stack.imgur.com/ndqUb.gif'  /></>}
+        <img id='scc' alt="sucss" src='https://i.stack.imgur.com/ndqUb.gif'  /></>}
         
         { validpay && <><div>CONGRATULATIONS. YOUR ORDER IS CONFIRMED. </div><div>YOU WILL RECEIVE AN INVOICE IN THIS EMAIL : <b> {email} </b></div></>}
         </Info>

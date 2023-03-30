@@ -51,6 +51,7 @@ const Mag = styled.img`
 
 const Proced = styled.div`
     align-items: center;
+    margin-top: 20px;
     width:300px;
     position:relative;
     padding : 10px 10px 10px 10px;
@@ -68,6 +69,9 @@ const Checkout = (products) => {
     // products = products.prods
 
     const [ pay , setPay ] = useState(false)
+
+    const [ address , setAdress ] = useState("")
+    console.log(address)
     
     const ccCheck = (event) => {
         var texte = event.target.value
@@ -142,12 +146,14 @@ const Checkout = (products) => {
                         { products?.map((elem,indx)=>(
                             <Ellem><b>{elem.productname}</b> <Infos> <Mag src={elem.src} /> {elem.color} - {elem.size} - {elem.price} x{elem.quantity}</Infos><Divider style={{marginBottom:'30px'}} /></Ellem>
                         ))}
-                        
+                        <Proced >
+                            ADDRESS : <div><Input onChange={(e)=>setAdress(e.target.value)} id={"cc"} placeholder="Address" style={{width:'220px'}} /></div>
+                        </Proced>
                         
                         <Proced >
                         <div><Input onChange={(e)=>ccCheck(e)} id={"cc"} placeholder="Credit Card" style={{width:'220px'}} /></div>
                         <div><Input onChange={(e)=>edCheck(e)} id={"cvv"} placeholder="Expiry Date" style={{width:'100px' , marginRight:'76px'}} /><span style={{width:'30px'}}></span> <Input onChange={(e)=>cvvCheck(e)} id={"cvv"} placeholder="CVV" style={{width:'40px'}} /></div>
-                        <ul><button onClick={(e)=> setPay(true)}>PAY</button></ul>
+                        <ul style={{marginTop:'10px'}}><button onClick={(e)=> setPay(true)}>PAY</button></ul>
                         </Proced>
                         </Wrapper>
                         </Container>
@@ -172,7 +178,7 @@ const Checkout = (products) => {
                 return(
                     <Containerrr>
                     <Navbar />
-                    <Success />
+                    <Success adrs={address} />
                     <Footer />
                     </Containerrr>
                 )

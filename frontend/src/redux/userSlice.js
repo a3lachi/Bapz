@@ -40,6 +40,7 @@ const userSlice = createSlice({
       // state.commands = action.payload
       
       const camds = action.payload.cmds
+      const address = action.payload.adrs
       var cemds = ""
       for (let i=0 ; i<camds.length ; i++) {
         cemds += camds[i].color + ',' + camds[i].size + ',' + camds[i].quantity + ',' + camds[i].ids +'@'
@@ -51,7 +52,7 @@ const userSlice = createSlice({
           let year = date.getFullYear();
           const dateE = `${day}/${month}/${year}`
           axios
-              .post('/api/customer/commands',{jwt:state.jwt ,cmds:cemds , date:dateE})
+              .post('/api/customer/commands',{jwt:state.jwt ,cmds:cemds , date:dateE , adrs:address})
               .then((res)=> console.log(res.data))
               .catch((err) => console.log('ERR during AXIOS to update commands'))
       } catch (err) {
