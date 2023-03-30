@@ -1,4 +1,3 @@
-import { width } from '@mui/system';
 import React from 'react';
 import styled from "styled-components";
 import { mobile } from '../responsive';
@@ -34,10 +33,7 @@ const Image = styled.img`
     
 `
 
-const Separator = styled.div `
-    width:30px;
-    display: flex;
-`
+
 const BoxOne = styled.div`
     display: flex;
     flex-direction: row;
