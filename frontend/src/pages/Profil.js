@@ -25,6 +25,8 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
 
+    margin-bottom: 20px;
+
 `
 const Containerr = styled.div`
     min-height: 100vh;
@@ -51,7 +53,7 @@ const Profil = () => {
                     { seecmds || seeaccnt
                         ? (seecmds && <Commands snd={setSeecmds} />) || (seeaccnt && <Account snd={setSeeaccnt} />)
                         : <>
-                            <button onClick={()=>setSeeaccnt(true)}>ACCOUNT</button>
+                            <button onClick={()=>setSeeaccnt(true)}>ACCOUNT</button><br></br><br></br>
                             <button onClick={()=>setSeecmds(true)}>COMMANDS</button>
                             
                         </>

@@ -8,7 +8,6 @@ import Command from './Command'
 
 
 const Container = styled.div`
-    
 
 `
 const Wrapper = styled.div`
@@ -70,7 +69,7 @@ const Commands = (props) => {
             </Container>
         )
     } else {
-        return (<></>)
+        return (<div style={{minHeight:'400px'}}/>)
     } 
 } 
 

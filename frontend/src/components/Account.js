@@ -32,15 +32,19 @@ const Account = (props) => {
             <Container>
                 <ArrowBackIcon onClick={()=>handleClick()}/>
                 <Wrapper>
-                    EMAIL : {info[0]}
-                    PASSWORD : {info[1]}
+                    <div style={{marginBottom:'10px'}} >EMAIL : {info[0]}</div>
+                    <div style={{marginBottom:'10px'}} >PASSWORD : {info[1]}</div>
+                    <div style={{marginBottom:'10px'}} >USERNAME : {info[4]}</div>
+                    <div style={{marginBottom:'10px'}} >FIRST NAME : {info[2]}</div>
+                    <div style={{marginBottom:'10px'}} >LAST NAME : {info[3]}</div>
+
 
                 </Wrapper>
 
             </Container>
         )
     } else {
-        return (<></>)
+        return (<div style={{minHeight:'200px'}}/>)
     }
 }
 
