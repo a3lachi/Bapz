@@ -30,7 +30,7 @@ const Products = ({cat, filters}) =>{
         axios
             .post(`/api/bapz/apparel`, {cat:cat})
             .then((res) => {
-                setData(res.data.data) ;            })
+                setData(res.data.data) ;})
             .catch((err) => console.log(err));
     },[cat])
 

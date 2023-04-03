@@ -16,10 +16,12 @@ import jwt
 import os 
 
 DIR_BASE = './media/images/'
-
-class BapzView(generics.ListAPIView):
+@csrf_exempt 
+def BapzView(request):
     serializer_class = BapzSerializer
-    queryset = Bapz.objects.all()
+    prod = Bapz.objects.filter()
+    return JsonResponse({'found':"yes",'data':serializers.serialize('json', prod[:6])})
+    
 
 
 @csrf_exempt 
@@ -27,18 +29,22 @@ def BapzId(request) :
     serializer_class = BapzSerializer
 
     if request.method == 'POST':
-        id = json.loads(request.body )['id']
-        prod = Bapz.objects.filter(id=id)
-        if (len(prod)==1) :
-            name = ''.join(prod[0].productname.split(' '))
-            res = []
-            for filename in os.listdir(DIR_BASE) :
-                cc = filename.split('.jpg')[0]
-                if cc[:-1] == name : 
-                    res.append(filename)
-            return JsonResponse({'found':"yes",'src':res,'data':serializers.serialize('json', prod)})
-        else :
-            return JsonResponse({'found':"no"})
+        try:
+            print('OUI',request.body)
+            id = json.loads(request.body)['id']
+            prod = Bapz.objects.filter(id=id)
+            if (len(prod)==1) :
+                name = ''.join(prod[0].productname.split(' '))
+                res = []
+                for filename in os.listdir(DIR_BASE) :
+                    cc = filename.split('.jpg')[0]
+                    if cc[:-1] == name : 
+                        res.append(filename)
+                return JsonResponse({'found':"yes",'src':res,'data':serializers.serialize('json', prod)})
+            else :
+                return JsonResponse({'found':"no"})
+        except Exception as err :
+            return JsonResponse({'info':repr(err)})
     else :
         return JsonResponse({'info':"notPOST" })    
 

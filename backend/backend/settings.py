@@ -78,13 +78,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     },
 
-}
+# }
 
 
 # Password validation
@@ -128,16 +128,30 @@ STATIC_URL = 'static/'
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bapz',
+        'USER' : 'hero',
+        'PASSWORD' : 'bapz@123',
+        'HOST' : 'localhost',
+        'PORT' : '5432',
+    }
+}
+
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'bapz',
-#         'USER' : 'hero',
-#         'PASSWORD' : 'bapz@123',
-#         'HOST' : 'localhost',
-#         'PORT' : '5432',
-#     }
+#   'default': {
+#     'ENGINE': 'django.db.backends.postgresql',
+#     'NAME': 'neondb',
+#     'USER': 'a3laxi',
+#     'PASSWORD': 'dYE6JkwLBPn0',
+#     'HOST': 'ep-icy-mountain-203510.eu-central-1.aws.neon.tech',
+#     'PORT': '5432',
+#   }
 # }
+
+
+
 
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
