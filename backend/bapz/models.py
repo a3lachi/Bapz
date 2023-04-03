@@ -21,7 +21,7 @@ class Customer(models.Model) :
     usrname =  models.TextField()
     commands = models.TextField()
     jwt = models.TextField()
-    id  = models.IntegerField(primary_key=True)
+    id  = models.AutoField(primary_key=True)
 
     def _str_(self):
         return self.title

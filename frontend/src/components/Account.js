@@ -1,8 +1,9 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
 import { useSelector } from 'react-redux';
+import {Proxy} from '../components/constants'
 
 const Container = styled.div`
     
@@ -23,11 +24,14 @@ const Account = (props) => {
 
     const [ info , setInfo ] = useState([])
     console.log(info)
-    info.length===0 && axios.post('/api/customer/token',{jwt:jwwt})
+    useEffect(()=>{
+        axios.post(`${Proxy}/api/customer/token`,{jwt:jwwt})
         .then((res)=> setInfo(res.data.info))
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
+    },[])
+    // info?.length===0 && 
 
-    if (info.length>1) {
+    if (info?.length>1) {
         return(
             <Container>
                 <ArrowBackIcon onClick={()=>handleClick()}/>

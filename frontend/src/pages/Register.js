@@ -9,6 +9,7 @@ import { mobile } from "../responsive";
 import {useEffect, useState} from "react";
 
 import axios from 'axios'
+import {Proxy} from '../components/constants'
 
 
 const Container = styled.div`
@@ -94,17 +95,17 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const handleRegister = (data) => {
+    console.log('JWT ADDED',data.jwt)
     store.dispatch( newUser(email) )
+    
     store.dispatch(setJwt(data.jwt))
 
   }
 
   const handleClick = (e) => {
-    console.log('maaaaalk')
-    // e.preventDefault();
     try {
         axios
-            .post('/api/customer',{email:email , pwd:password , firstname:firstname , lastname:lastname , username:username  })
+            .post(`${Proxy}/api/customer`,{email:email , pwd:password , firstname:firstname , lastname:lastname , username:username  })
             .then((res)=> handleRegister(res.data) )
             .catch((err) => store.dispatch(badUser())  )
     } catch (err) {
@@ -115,7 +116,6 @@ const Register = () => {
   useEffect(()=>{
     setPwdmatch(pwd === password)
   },[pwd,password])
-  console.log('HA CHBANLO',pwdmatch)
   return (
     <Containerrr>
     <Navbar></Navbar>

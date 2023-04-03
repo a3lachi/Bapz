@@ -7,6 +7,7 @@ import Footer from '../components/Footer'
 import {useDispatch, useSelector} from "react-redux";
 import { logUser , badUser , setJwt} from "../redux/userSlice";
 import Navbar from '../components/Navbar';
+import {Proxy} from '../components/constants'
 
 
 const Container = styled.div`
@@ -113,7 +114,7 @@ const Login = () => {
       setValidform(false)
       try {
           axios
-              .post('/api/customer',{email:email , pwd:password})
+              .post(`${Proxy}/api/customer`,{email:email , pwd:password})
               .then((res)=> handleLog(res.data))
               .catch((err) => store.dispatch(badUser()) )
       } catch (err) {

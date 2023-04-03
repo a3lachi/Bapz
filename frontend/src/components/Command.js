@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Divider from '@mui/material/Divider';
 
+import {Proxy} from '../components/constants'
 
 
 const Container = styled.div`
@@ -26,9 +27,6 @@ const Command = (props) => {
 
     const data = comnd[1]
 
-    console.log(props.cmd)
-
-
 
 
     return (
@@ -40,7 +38,7 @@ const Command = (props) => {
                 data.map((elem,indx)=>(
                     <Elem key={indx} >
                         <div>{elem[0]} </div>
-                        <img style={{width:'50px'}} alt={""}  src={'/media/images/'+elem[1]} /> x {elem[4]}   -   Size {elem[3]}  -  {elem[2]}
+                        <img style={{width:'50px'}} alt={""}  src={`${Proxy}/media/images/`+elem[1]} /> x {elem[4]}   -   Size {elem[3]}  -  {elem[2]}
                         <Divider />
 
                     </Elem>

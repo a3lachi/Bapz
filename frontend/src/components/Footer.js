@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { mobile } from '../responsive';
 import {Link} from 'react-router-dom';
 
+import {Local} from './constants'
+
 import {
     Facebook,
     Instagram,
@@ -104,7 +106,7 @@ const Footer = () => {
         <Container className='row'>
             <Left>
                 <Link to='/'>
-                    <Logos  src='/media/images/bapelogo.svg' />
+                    <Logos  src={`${Local}/bapelogo.svg`} />
                 </Link>
                 <Desc>
                 © 2023 BAPE Hong Kong Limited

@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import ProductSmall from './ProductSmall';
+import {Proxy} from '../components/constants'
 
 const Container = styled.div`
     padding: 20px;
@@ -28,7 +29,7 @@ const Products = ({cat, filters}) =>{
     
     useEffect(()=>{
         axios
-            .post(`/api/bapz/apparel`, {cat:cat})
+            .post(`${Proxy}/api/bapz/apparel`, {cat:cat})
             .then((res) => {
                 setData(res.data.data) ;})
             .catch((err) => console.log(err));

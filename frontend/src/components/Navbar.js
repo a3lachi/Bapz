@@ -5,6 +5,8 @@ import {   ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import { useSelector } from "react-redux";
 
+import {useLocation} from "react-router-dom";
+import {Local} from './constants'
 
 
 const Container = styled.div`
@@ -75,11 +77,8 @@ const styleLink = {
 const Navbar = () => {
 
     var itms = useSelector((state) =>  state.cart.itms)
-    const jwtExist = useSelector((state) =>  state.user.jwt)
-
+    const jwtExist = useSelector((state) =>  state.user.jwt)    
     
-    
-
     return (
         <Container >
             <Wrapper>
@@ -92,7 +91,7 @@ const Navbar = () => {
                 </Left>
                 <Center>
                     <Link style={styleLink} to='/'>
-                        <Logo  src='/media/images/bapelogo.svg' />
+                        <Logo  src={`${Local}/bapelogo.svg`}/>
                     </Link>
                 </Center>
                 <Right>

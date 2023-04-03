@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { mobile } from '../responsive';
 
+
+
+const proxy = "http://localhost:8000"
+
 const Smta = styled.div`
   position: absolute;
   width: 100%;
@@ -92,9 +96,9 @@ const ProductSmall = ({id,item,cat}) => {
 
   const ara = (ch) => {
     if (item[1].length>1) 
-      return '/media/images/'+item[1][ch]
+      return proxy+'/media/images/'+item[1][ch]
     else 
-      return '/media/images/'+item[1][0]
+      return proxy+'/media/images/'+item[1][0]
   }
 
 
@@ -111,7 +115,6 @@ const ProductSmall = ({id,item,cat}) => {
       }
     })
   }
-  
   return (
       <Container id={id}  onMouseEnter={(e)=> onMe(e,'leave') } onMouseLeave={(e) => { onMe(e,'rr') } }   >
           <Text id={id} >{item[0]}</Text>

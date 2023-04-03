@@ -2,8 +2,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import styled from 'styled-components';
 import {  useSelector} from 'react-redux';
 import axios from 'axios'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Command from './Command'
+import {Proxy} from '../components/constants'
 
 
 
@@ -26,7 +27,10 @@ const Comand = styled.div`
 `
 
 
-
+const EmptyCmds = styled.div`
+    padding: 10px 10px 10px 10px;
+    margin-top:10px;
+`
 
 
 const Commands = (props) => {
@@ -36,14 +40,17 @@ const Commands = (props) => {
 
     const [ choseCmd , setChoseCmd ] = useState([])
 
+    const [ fetching , setFetching ] = useState(true)
+
     const Handleclick = (id) => {
         setChoseCmd(cmds[id])
     }
 
-    cmds.length===0 && axios.post('/api/customer/token',{jwt:jwwt})
-        .then((res)=> setCmds(res.data.data))
+    useEffect(()=>{
+        axios.post(`${Proxy}/api/customer/token`,{jwt:jwwt})
+        .then((res)=> {setCmds(res.data.data);setFetching(false)})
         .catch((err) => console.log("Error during fetching customer profil data.",err) )
-
+    },[])
 
     const handleClick = () => {
         if (choseCmd.length<1)
@@ -53,24 +60,37 @@ const Commands = (props) => {
     }
 
     console.log('HAMAWSSL',cmds)
-    if (cmds?.length>0) {
-        return(
-            <Container>
+    if (fetching ===true) {
+        return (
+            <div style={{minHeight:'400px'}}>
                 <ArrowBackIcon onClick={()=>handleClick()}/>
-                <Wrapper>
-                {cmds?.length>0 && choseCmd?.length<1 && cmds?.map((elem,indx)=>(
-                    <Comand id={indx} key={indx} onClick={(e)=>(Handleclick(e.target.id))} >
-                    Command passed on {elem[0]} :
-                    { elem[1]?.map((el,indx)=>(<img key={indx} alt={""} style={{width:'40px' , mixBlendMode: 'multiply'}} src={'/media/images/'+el[1]}/>)) }
-                    </Comand>
-                ))}
-                </Wrapper>
-                { choseCmd.length>1 && <Command cmd={choseCmd} />}
-            </Container>
+                <EmptyCmds>Fetching</EmptyCmds>
+            </div>
         )
-    } else {
-        return (<div style={{minHeight:'400px'}}/>)
-    } 
+    }
+    else {
+        if (cmds?.length>0) {
+            return(
+                <Container>
+                    <ArrowBackIcon onClick={()=>handleClick()}/>
+                    <Wrapper>
+                    {cmds?.length>0 && choseCmd?.length<1 && cmds?.map((elem,indx)=>(
+                        <Comand id={indx} key={indx} onClick={(e)=>(Handleclick(e.target.id))} >
+                        Command passed on {elem[0]} :
+                        { elem[1]?.map((el,indx)=>(<img key={indx} alt={""} style={{width:'40px' , mixBlendMode: 'multiply'}} src={`${Proxy}/media/images/${el[1]}`}/>)) }
+                        </Comand>
+                    ))}
+                    </Wrapper>
+                    { choseCmd.length>1 && <Command cmd={choseCmd} />}
+                </Container>
+            )
+        } else {
+            return (<div style={{minHeight:'400px'}}>
+                <ArrowBackIcon onClick={()=>handleClick()}/>
+                <EmptyCmds>You have purshased nothing yet.</EmptyCmds>
+                </div>)
+        } 
+    }
 } 
 
 

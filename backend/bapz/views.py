@@ -30,7 +30,6 @@ def BapzId(request) :
 
     if request.method == 'POST':
         try:
-            print('OUI',request.body)
             id = json.loads(request.body)['id']
             prod = Bapz.objects.filter(id=id)
             if (len(prod)==1) :
@@ -53,7 +52,7 @@ def BapzCatView(request):
     serializer_class = BapzSerializer
 
     if request.method == 'POST':
-        json_data = json.loads(request.body ) 
+        json_data = json.loads(request.body) 
 
         try : 
             cat = json_data['cat']
@@ -90,8 +89,8 @@ def BapzCatView(request):
 
             
             return JsonResponse({'lol':"notcat",'data':data})
-    else :
-        return JsonResponse({'lol':"notPOST" })
+    
+    return JsonResponse({'lol':"notPOST" })
 
 
 
@@ -125,15 +124,18 @@ class CustomerForm(forms.Form):
 def GetCustomer(request):
     serializer_class = CustomerSerializer
     if request.method == 'POST':
+        
         try: 
-            json_data = json.loads(request.body ) 
+            json_data = json.loads(request.body) 
 
             ## Login 
+            print("3alah")
             if len(json_data)==2 :
                 em = json_data['email']
                 pd = json_data['pwd']
                 usr = Customer.objects.filter(email=em , pwd=pd)
-                if len(usr)>0 :
+                # usr = Customer.objects.filter()
+                if len(usr)==1 :
                     token = jwt.encode({"email":em , "brr":str(datetime.datetime.now())}, key='secret')  ## added brr to make jwt unique
                     usr.update(jwt= token)
                     return JsonResponse({'isUser':"yes" , "jwt":token})
@@ -142,8 +144,10 @@ def GetCustomer(request):
                 
             ## Register
             elif len(json_data)>2 :
+                
                 em = json_data['email']
                 pd = json_data['pwd']
+                
                 frstnm = json_data['firstname']
                 lstnm = json_data['lastname']
                 usrnm = json_data['username']
@@ -151,12 +155,12 @@ def GetCustomer(request):
                     return JsonResponse({'info':"exist"}) 
                 else :
                     token = jwt.encode({"email":em , "brr":str(datetime.datetime.now())}, key='secret')
-                    Customer.objects.create(email=em , pwd=pd , jwt=token , frstname=frstnm , lstname=lstnm , usrname=usrnm )
-                    
+                    Customer.objects.create(email=em , pwd=pd , jwt=token , frstname=frstnm , lstname=lstnm , usrname=usrnm , commands="" )
+                    # print('-----------------------------',Customer.objects.all()[0].email)
                     return JsonResponse({'info':"new" , 'jwt':token})
 
         except :
-            return HttpResponseNotFound("Brr")  
+            return JsonResponse({'info':"Try Except error"})
     else :
         return HttpResponseNotFound("Brr")    
 
@@ -194,6 +198,7 @@ def getUserCommandsByJwt(request) :
             jwwt =  json_data['jwt']
             cus = Customer.objects.filter(jwt=jwwt)
             if len(cus)>0 :
+                print('LQA USER')
                 cmds = cus[0].commands
                 em = cus[0].email
                 pwd = cus[0].pwd

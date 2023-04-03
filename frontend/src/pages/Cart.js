@@ -177,7 +177,7 @@ const Cart = () => {
                 
                 <Wrapper key="idx" id='wrapp'>
             {!chkout && products ? products.map((item,idx) => ( 
-                <><CartProd key={"rr"+idx} id={'rr'+idx.toString()}  >
+                <CartProd key={"rr"+idx} id={'rr'+idx.toString()}  >
 
                     <Mage ><Image key={idx} src={item?.src} ></Image></Mage>
 
@@ -194,7 +194,7 @@ const Cart = () => {
 
                 </CartProd>
 
-                </>
+                
     
                 )) : <></>
             }

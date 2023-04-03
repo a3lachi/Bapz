@@ -15,6 +15,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 import axios from 'axios'
 
+import {Proxy} from '../components/constants'
 
 const Container = styled.div``;
 
@@ -150,26 +151,29 @@ const Product = (id) => {
 
   const iid = location.pathname.split("/")[4];
 
-  const nospaceName = name.split('%20').join(' ')
+  
+
+  const nospaceName = name.split('%20').join('')
+
   
   const HandleData = (datax) => {
     
-    const data = JSON.parse(datax.data)[0].fields
-    const sources = datax.src.sort().map(element => '/media/images/'+element )
+    const datar = JSON.parse(datax.data)[0].fields
+    const sources = datax.src.sort().map(element => `${Proxy}/media/images/${element}` )
 
-    setData(data)
-    setColor(data.color.split(',')[0])
-    setSize(data.size.split(',')[0])
+    setData(datar)
+    setColor(datar.color.split(',')[0])
+    setSize(datar.size.split(',')[0])
     setCurrimg(sources)
     setApparimg(sources[0])  
   }
   useEffect(()=>{
       axios
-          .post(`/api/bapz/id`,{id:iid} )
+          .post(`${Proxy}/api/bapz/id`,{id:iid} )
           .then((res) =>(HandleData(res.data)))
           .then()
           .catch((err) => console.log(err));
-  }, [nospaceName])
+  }, [])
     
   
 
@@ -214,7 +218,7 @@ const Product = (id) => {
         setApparimg(currimg[ids-1])
       }
     }
-    console.log('HA DATA',data)
+    
     if(data?.price) {
       
       
