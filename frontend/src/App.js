@@ -56,12 +56,12 @@ const App = () => {
 
             <Route path="/apparel/:category/:productname/:id"  element={<Product id={user}  />} />
 
-            <Route path="/login" element={  jwt.length>2 ? <Navigate to='/' /> : <Login />  }    />
+            <Route path="/login" element={  jwt.length>5 ? <Navigate to='/' /> : <Login />  }    />
 
             <Route path="/profil"  element={  jwt?.length>5 ?   <Profil /> : <Navigate to='/' /> } />
               
 
-            <Route path="/register" element={ jwt.length>2 ? <Navigate to='/' /> :  <Register />} />
+            <Route path="/register" element={ jwt.length>5 ? <Navigate to='/' /> :  <Register />} />
 
             <Route path="/cart" element={ <Cart id={user}  />} />
 

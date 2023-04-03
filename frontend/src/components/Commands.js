@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
 
 const Comand = styled.div`
-    padding: 10px 10px 10px 10px;
+    padding-left:20px;
     box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
     margin-bottom:10px;
     &:hover {
@@ -77,11 +77,11 @@ const Commands = (props) => {
                     {cmds?.length>0 && choseCmd?.length<1 && cmds?.map((elem,indx)=>(
                         <Comand id={indx} key={indx} onClick={(e)=>(Handleclick(e.target.id))} >
                         Command passed on {elem[0]} :
-                        { elem[1]?.map((el,indx)=>(<img key={indx} alt={""} style={{width:'40px' , mixBlendMode: 'multiply'}} src={`${Proxy}/media/images/${el[1]}`}/>)) }
+                        { elem[1]?.map((el,indx)=>(<img key={indx} alt={""} style={{width:'65px', height:'auto' , mixBlendMode: 'multiply'}} src={`${Proxy}/media/images/${el[1]}`}/>)) }
                         </Comand>
                     ))}
                     </Wrapper>
-                    { choseCmd.length>1 && <Command cmd={choseCmd} />}
+                    { choseCmd?.length>1 && <Command cmd={choseCmd} />}
                 </Container>
             )
         } else {
