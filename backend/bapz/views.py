@@ -11,6 +11,7 @@ from .models import Bapz
 from .models import Customer
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+from django.http import HttpResponse
 
 import jwt
 import os 
@@ -27,19 +28,31 @@ def BapzView(request):
 @csrf_exempt 
 def BapzId(request) :
     serializer_class = BapzSerializer
+    host = 'http://'+request.get_host()
 
     if request.method == 'POST':
         try:
-            id = json.loads(request.body)['id']
+            try : 
+                ids = request.body
+                ids = int(id['id'])
+                print('-----',ids)
+            except Exception as err :
+                id = json.loads(request.body)['id']
+
             prod = Bapz.objects.filter(id=id)
             if (len(prod)==1) :
+                print('--------ID',id)
+                print('-------')
                 name = ''.join(prod[0].productname.split(' '))
                 res = []
                 for filename in os.listdir(DIR_BASE) :
                     cc = filename.split('.jpg')[0]
                     if cc[:-1] == name : 
-                        res.append(filename)
-                return JsonResponse({'found':"yes",'src':res,'data':serializers.serialize('json', prod)})
+                        res.append(host+'/media/images/'+filename)
+
+                serialized_data = {"productname": prod[0].productname , "price": prod[0].price , "color": prod[0].color , "size": prod[0].size , "id": prod[0].id}
+
+                return JsonResponse({'found':"yes",'src':sorted(res),'data':serialized_data})
             else :
                 return JsonResponse({'found':"no"})
         except Exception as err :
@@ -49,6 +62,8 @@ def BapzId(request) :
 
 @csrf_exempt 
 def BapzCatView(request):
+    host = 'http://'+request.get_host()
+    print('path--------', host)
     serializer_class = BapzSerializer
 
     if request.method == 'POST':
@@ -67,7 +82,7 @@ def BapzCatView(request):
                 for filename in os.listdir(DIR_BASE) :
                     cc = filename.split('.jpg')[0]
                     if cc[:-1] == nospacename : 
-                        res.append(filename)
+                        res.append(host+'/media/images/'+filename) 
                 data.append([name,sorted(res)[:2],id,int(lop.price.split('$')[1].split('.')[0]) ])
                         
             # data = serializers.serialize('json', names)
@@ -83,9 +98,9 @@ def BapzCatView(request):
                 res=[]
                 for filename in os.listdir(DIR_BASE) :
                     cc = filename.split('.jpg')[0]
-                    if cc[:-1] == nospacename : 
-                        res.append(filename)
-                data.append([name,sorted(res)[:2],id,lop.price])
+                    if cc[:-1] == nospacename :
+                        res.append(host+'/media/images/'+filename)
+                data.append([name,res[:2],id,lop.price])
 
             
             return JsonResponse({'lol':"notcat",'data':data})
@@ -197,6 +212,7 @@ def getUserCommandsByJwt(request) :
             json_data = json.loads(request.body ) 
             jwwt =  json_data['jwt']
             cus = Customer.objects.filter(jwt=jwwt)
+            print('h--------',jwwt)
             if len(cus)>0 :
                 print('LQA USER')
                 cmds = cus[0].commands
