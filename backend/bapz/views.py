@@ -139,6 +139,7 @@ class CustomerForm(forms.Form):
 def GetCustomer(request):
     serializer_class = CustomerSerializer
     if request.method == 'POST':
+        print('-------')
         
         try: 
             json_data = json.loads(request.body) 
@@ -162,6 +163,7 @@ def GetCustomer(request):
                 
                 em = json_data['email']
                 pd = json_data['pwd']
+                print(em,pd)
                 
                 frstnm = json_data['firstname']
                 lstnm = json_data['lastname']
@@ -174,8 +176,8 @@ def GetCustomer(request):
                     # print('-----------------------------',Customer.objects.all()[0].email)
                     return JsonResponse({'info':"new" , 'jwt':token})
 
-        except :
-            return JsonResponse({'info':"Try Except error"})
+        except Exception as e :
+            return JsonResponse({'info':str(e)})
     else :
         return HttpResponseNotFound("Brr")    
 
