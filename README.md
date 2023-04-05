@@ -1,8 +1,11 @@
 
 <h1>Bapz</h1>
 
-I love Bape clothing, I built this e-commerce website using Django in the backend and React in the frontend.
+I built this e-commerce website out of liking Bape clothing, I used Django in the backend and React in the frontend.
+
 <br>
+
+I added an Express JS backend with a Swagger.
 <br>
 <h1>Overview</h1>
 Building a nice user experience or UI wasn't my goal. I focused on functionalities. 
