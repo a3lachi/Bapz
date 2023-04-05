@@ -2,11 +2,23 @@
 <h1>Bapz</h1>
 
 I built this e-commerce website out of liking Bape clothing, I used Django in the backend and React in the frontend.
-
+https://bapzfront.vercel.app/
 <br>
 
 I added an Express JS backend with a Swagger.
 <br>
+
+Front End is unfinished and personally i would give it a 4/10, I learnt how React work, the unfinished work is labour work, I'd rather focus on learning than executing, here a list of ideas to add :
+  - When loading products page, containers should envelope the component receiving the fetched data, this way a squelette is fixed and when fetching ends  it gets placed smoothly.
+  
+  - User data management architecture : I choosed to fetch for data when necesseray and store only the JWT in the browser. Redux handle the states        management of the application.
+  
+  - Mobile CSS : add responsive features to the app which is equal to building another design, although some components can be reused a mobile buit app is the go.
+  
+  - CSS : more design and enhanced user experience.
+  
+  - A reliable image storing solution, my backend deployment solution can't handle more than 50mb of generated static build files, the backend on localhost store the images in the public directory and the database contain the products name, I scrapped the images from the official site(you can find the scrapping script in python) and named each of by name of product, I added another layer of time cutting which is to define an object images={A:[ABape..png],B:[BapeShirt...png],C:[CamoMoon..png]...Z:[..]} that also can be more and more optimized, make it recursive enough to cut as much image fetching time request as possible, but, I couldn't deploy this solution and serve it as serveless function to the frontend with Express JS. To resolve this  I wen with imgbb which offers an API for storing images abd returns the url (you can find the API POST script) and then stored the url mapped with the prodcut name. The official website images urls use a redirect that couldn't resolve to image in my Front End.
+  
 <h1>Overview</h1>
 Building a nice user experience or UI wasn't my goal. I focused on functionalities. 
 <br>
